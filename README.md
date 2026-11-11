@@ -24,6 +24,9 @@ Pergunta local (precisa de `OPENROUTER_API_KEY`): `npm run agent:ask -- "sua per
 Eval (T5): `EVAL_MOCK=1 npm run eval` ou `OPENROUTER_API_KEY=… npm run eval`.
 Isolamento C7: `npm run eval:c7`.
 
+Chat (T6): na área autenticada. Em DEV, mock da função com `VITE_AGENT_MOCK=1`
+ou `/?agentMock=answer|draft|error` (não entra no build de produção).
+
 ## Credenciais demo
 
 - E-mail: `demo@confererepasse.app`

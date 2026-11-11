@@ -1,4 +1,5 @@
 import { useAuth } from '../auth/useAuth'
+import { AgentChat } from '../components/chat/AgentChat'
 
 export function AppShell() {
   const { user, signOut } = useAuth()
@@ -21,11 +22,22 @@ export function AppShell() {
         </button>
       </header>
 
-      <main className="flex flex-1 flex-col items-center justify-center px-4 py-12 text-center">
-        <p className="font-display text-2xl font-semibold text-[var(--ink)]">Área autenticada</p>
-        <p className="mt-2 max-w-md text-sm text-[var(--muted)]">
-          Placeholder para o painel de repasse e o chat do agente (tickets seguintes).
-        </p>
+      <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-4 px-4 py-4 sm:px-6 sm:py-6 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(20rem,26rem)] lg:items-stretch lg:gap-6">
+        {/* T7 dashboard slot — intentionally empty for now */}
+        <section
+          aria-label="Painel de repasse"
+          className="flex min-h-[12rem] flex-col justify-center rounded-2xl border border-dashed border-black/15 bg-white/40 px-5 py-8 text-center lg:min-h-0"
+        >
+          <p className="font-display text-xl font-semibold text-[var(--ink)]">
+            Painel de repasse
+          </p>
+          <p className="mx-auto mt-2 max-w-md text-sm text-[var(--muted)]">
+            Espaço reservado para o dashboard (totais por semana e perdas por tipo) no próximo
+            ticket.
+          </p>
+        </section>
+
+        <AgentChat />
       </main>
     </div>
   )
