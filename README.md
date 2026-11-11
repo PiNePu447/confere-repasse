@@ -41,7 +41,7 @@ ou `/?agentMock=answer|draft|error` (não entra no build de produção).
 | | |
 | --- | --- |
 | Model | `mock-tool-answerer` |
-| Date (UTC) | 2026-11-11T02:48:26.709Z |
+| Date (UTC) | 2026-11-11T03:03:07.889Z |
 | Pass count | **30/30** |
 | Value accuracy (answered) | 100.0% |
 | ID accuracy (answered) | 100.0% |

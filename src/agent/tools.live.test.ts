@@ -91,10 +91,20 @@ describe('live tool layer (Supabase RLS)', () => {
     assert.equal(result.total, 25)
     const one = executeTool(data, 'obter_pedidos', {
       pedido_id_ifood: 'DEMO-ANOM-003',
-    }) as { total: number; pedidos: Array<{ status: string; valor_total: number | string }> }
+    }) as {
+      total: number
+      pedidos: Array<{
+        status: string
+        valor_total: number | string
+        pedido_id_ifood: string
+        id?: string
+      }>
+    }
     assert.equal(one.total, 1)
     assert.equal(one.pedidos[0]!.status, 'CANCELADO')
     assert.equal(Number(one.pedidos[0]!.valor_total), 80)
+    assert.equal(one.pedidos[0]!.pedido_id_ifood, 'DEMO-ANOM-003')
+    assert.equal(one.pedidos[0]!.id, undefined)
   })
 
   it('listar_lancamentos filters by pedido and description', () => {
@@ -105,12 +115,23 @@ describe('live tool layer (Supabase RLS)', () => {
       pedido_id_ifood: 'DEMO-ANOM-001',
     }) as {
       total: number
-      lancamentos: Array<{ percentual_taxa: number | string; descricao_lancamento: string }>
+      lancamentos: Array<{
+        percentual_taxa: number | string
+        descricao_lancamento: string
+        lancamento_id: string
+        pedido_id_ifood: string
+        id?: string
+        pedido_id?: string
+      }>
     }
     assert.ok(byPedido.total >= 1)
     const comissao = byPedido.lancamentos.find((l) => l.descricao_lancamento === 'Comissão do iFood')
     assert.ok(comissao)
     assert.equal(Number(comissao!.percentual_taxa), 23)
+    assert.equal(typeof comissao!.lancamento_id, 'string')
+    assert.equal(comissao!.pedido_id_ifood, 'DEMO-ANOM-001')
+    assert.equal(comissao!.id, undefined)
+    assert.equal(comissao!.pedido_id, undefined)
 
     const byDesc = executeTool(data, 'listar_lancamentos', {
       descricao: 'Débito por cancelamento',
@@ -127,6 +148,8 @@ describe('live tool layer (Supabase RLS)', () => {
         diferenca: string
         data_limite: string | null
         prazo_aberto: boolean | null
+        lancamento_ids: string[]
+        pedido_ids?: string[]
       }>
     }
     assert.equal(result.total, 5)
@@ -139,6 +162,10 @@ describe('live tool layer (Supabase RLS)', () => {
     assert.equal(byId['DEMO-ANOM-003']!.prazo_aberto, true)
     assert.equal(byId['DEMO-ANOM-004']!.prazo_aberto, false)
     assert.equal(byId['DEMO-ANOM-001']!.data_limite, null)
+    for (const d of result.divergencias) {
+      assert.ok(Array.isArray(d.lancamento_ids) && d.lancamento_ids.length >= 1)
+      assert.equal(d.pedido_ids, undefined)
+    }
   })
 
   it('obter_totais exposes weeks and perdido_por_tipo', () => {

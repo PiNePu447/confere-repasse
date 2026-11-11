@@ -52,6 +52,7 @@ export function deriveExpected(
 
   const grade = question.grade
   const reais = (grade.expect_reais ?? []).map((sel) => resolveReais(data, sel))
+  // expect_ids are iFood order IDs (pedido_id_ifood), never internal pedido UUIDs.
   const ids = [...(grade.expect_ids ?? [])]
 
   if (grade.expect_lancamento_ids_of) {

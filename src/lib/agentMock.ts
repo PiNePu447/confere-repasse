@@ -33,7 +33,7 @@ export function getMockAgentResponse(pergunta: string): AgentUiResponse {
 
   if (scenario === 'draft') {
     const draft = [
-      'Rascunho de contestação — pedido DEMO-ANOM-003',
+      'Rascunho de contestação — pedido iFood DEMO-ANOM-003',
       'Status do pedido: CANCELADO',
       'Valor do pedido: R$ 80.00',
       '',

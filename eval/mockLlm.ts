@@ -155,7 +155,7 @@ function synthesizeAnswer(pergunta: string, toolPayloads: unknown[]): string {
         const id = String(d.pedido_id_ifood)
         if (pedido && id !== pedido) continue
         const lan = Array.isArray(d.lancamento_ids) ? (d.lancamento_ids as string[]).join(', ') : ''
-        let line = `Divergência ${d.tipo} no pedido ${id}: cobrado R$ ${d.valor_cobrado}, esperado R$ ${d.valor_esperado}, diferença R$ ${d.diferenca}. Lançamentos: ${lan}. Orientação: ${d.orientacao}.`
+        let line = `Divergência ${d.tipo} no pedido iFood ${id}: cobrado R$ ${d.valor_cobrado}, esperado R$ ${d.valor_esperado}, diferença R$ ${d.diferenca}. Lançamentos: ${lan}. Orientação: ${d.orientacao}.`
         if (d.data_limite) {
           line += ` Data limite: ${d.data_limite}. Prazo aberto: ${d.prazo_aberto ? 'sim' : 'não'}.`
         } else {
@@ -171,14 +171,14 @@ function synthesizeAnswer(pergunta: string, toolPayloads: unknown[]): string {
             ? ped.valor_total.toFixed(2)
             : String(ped.valor_total)
         parts.push(
-          `Pedido ${ped.pedido_id_ifood}: status ${ped.status}, valor R$ ${valor}, pagamento ${ped.metodo_pagamento}.`,
+          `Pedido iFood ${ped.pedido_id_ifood}: status ${ped.status}, valor R$ ${valor}, pagamento ${ped.metodo_pagamento}.`,
         )
       }
     }
     if (Array.isArray(p.lancamentos)) {
       for (const l of p.lancamentos as Array<Record<string, unknown>>) {
         parts.push(
-          `Lançamento ${l.id} (${l.descricao_lancamento}) do pedido ${l.pedido_id_ifood}: valor R$ ${l.valor}, percentual ${l.percentual_taxa}.`,
+          `Lançamento ${l.lancamento_id ?? l.id} (${l.descricao_lancamento}) do pedido iFood ${l.pedido_id_ifood}: valor R$ ${l.valor}, percentual ${l.percentual_taxa}.`,
         )
       }
     }
@@ -196,7 +196,7 @@ function synthesizeAnswer(pergunta: string, toolPayloads: unknown[]): string {
       return open
         .map(
           (d) =>
-            `Ainda pode contestar o pedido ${d.pedido_id_ifood} (diferença R$ ${d.diferenca}) até ${d.data_limite}.`,
+            `Ainda pode contestar o pedido iFood ${d.pedido_id_ifood} (diferença R$ ${d.diferenca}) até ${d.data_limite}.`,
         )
         .join(' ')
     }

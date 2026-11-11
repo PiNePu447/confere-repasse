@@ -56,16 +56,17 @@ function gradeAssert(
 
   const valueOk = !details.some((d) => d.startsWith('faltou valor') || d.startsWith('valor não'))
 
+  // expected.ids are iFood order IDs (pedido_id_ifood) and/or lançamento IDs — never internal pedido UUIDs.
   let idOk = true
   for (const id of expected.ids) {
     const present = resposta.includes(id) || (idsCitados ?? []).includes(id)
     if (!present) {
       idOk = false
-      details.push(`faltou ID ${id}`)
+      details.push(`faltou ID iFood/lançamento ${id}`)
     }
   }
 
-  // Wrong IDs = invented identifiers that are not in the live restaurant data.
+  // Wrong IDs = invented iFood-style identifiers that are not in the live restaurant data.
   const demoIds = [...resposta.matchAll(/\b(?:DEMO|PEDIDO)-[A-Z0-9-]+\b/g)].map((m) => m[0])
   for (const id of demoIds) {
     if (!knownIds.has(id)) {
@@ -132,20 +133,18 @@ function gradeAssert(
   }
 }
 
+/** Citeable IDs for grading: iFood order IDs + lançamento IDs (not internal pedido UUIDs). */
 function knownRestaurantIds(data: LoadedRestaurantData): Set<string> {
   const ids = new Set<string>()
   for (const p of data.pedidos) {
     ids.add(p.pedido_id_ifood)
-    ids.add(p.id)
   }
   for (const l of data.lancamentos) {
     ids.add(l.id)
     if (l.pedido_id_ifood) ids.add(l.pedido_id_ifood)
-    if (l.pedido_id) ids.add(l.pedido_id)
   }
   for (const d of data.engine.divergencias) {
     ids.add(d.pedido_id_ifood)
-    for (const id of d.pedido_ids) ids.add(id)
     for (const id of d.lancamento_ids) ids.add(id)
   }
   return ids

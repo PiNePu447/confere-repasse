@@ -1,24 +1,37 @@
 import { centsToReais, reaisToCents, type Divergence } from '../rules/index.ts'
 import type { LoadedRestaurantData } from './db.ts'
 
+/** One-line field docs reused in tool parameter schemas (what the model must cite). */
+const FIELD = {
+  pedido_id_ifood:
+    'ID iFood do pedido (ex.: DEMO-ANOM-003). Cite este ID na resposta; NÃO é UUID interno nem nome da divergência.',
+  semana: 'Título da semana no relatório, ex.: REPASSE-W0',
+  descricao: 'Trecho da descrição do lançamento (case-insensitive)',
+  status: 'Filtro opcional de status do pedido (ex.: CONCLUIDO, CANCELADO)',
+  tipo: 'Tipo de divergência (ex.: cancelamento_debitado, comissao_acima_contrato)',
+} as const
+
 export const TOOL_DEFINITIONS = [
   {
     type: 'function',
     function: {
       name: 'listar_lancamentos',
       description:
-        'Lista lançamentos do relatório de conciliação, com filtros opcionais por semana (titulo), pedido_id_ifood e descrição.',
+        'Lista lançamentos do relatório de conciliação, com filtros opcionais por semana (titulo), pedido_id_ifood e descrição. Retorno: lancamentos[].lancamento_id (ID do lançamento a citar), pedido_id_ifood (ID iFood do pedido a citar), descricao_lancamento, valor, percentual_taxa, titulo/semana. UUIDs internos de pedido NÃO são expostos.',
       parameters: {
         type: 'object',
         properties: {
           semana: {
             type: 'string',
-            description: 'Título da semana, ex.: REPASSE-W0',
+            description: FIELD.semana,
           },
-          pedido_id_ifood: { type: 'string' },
+          pedido_id_ifood: {
+            type: 'string',
+            description: FIELD.pedido_id_ifood,
+          },
           descricao: {
             type: 'string',
-            description: 'Trecho da descrição do lançamento (case-insensitive)',
+            description: FIELD.descricao,
           },
         },
         additionalProperties: false,
@@ -30,15 +43,15 @@ export const TOOL_DEFINITIONS = [
     function: {
       name: 'obter_pedidos',
       description:
-        'Obtém um ou mais pedidos. Sem filtro, retorna todos os pedidos do restaurante.',
+        'Obtém um ou mais pedidos. Sem filtro, retorna todos os pedidos do restaurante. Retorno: pedidos[].pedido_id_ifood (ID iFood a citar), status, valor_total, metodo_pagamento, data_criacao. UUID interno do pedido NÃO é exposto.',
       parameters: {
         type: 'object',
         properties: {
           pedido_id_ifood: {
             type: 'string',
-            description: 'ID iFood do pedido (opcional)',
+            description: FIELD.pedido_id_ifood,
           },
-          status: { type: 'string', description: 'Filtro opcional de status' },
+          status: { type: 'string', description: FIELD.status },
         },
         additionalProperties: false,
       },
@@ -48,7 +61,8 @@ export const TOOL_DEFINITIONS = [
     type: 'function',
     function: {
       name: 'obter_contrato',
-      description: 'Retorna o contrato ativo (comissões e taxas).',
+      description:
+        'Retorna o contrato ativo (comissões e taxas). Retorno: plano, comissao_percentual, taxa_pagamento_online_percentual, taxa_repasse_semanal.',
       parameters: {
         type: 'object',
         properties: {},
@@ -61,12 +75,15 @@ export const TOOL_DEFINITIONS = [
     function: {
       name: 'obter_divergencias',
       description:
-        'Lista divergências detectadas pelo motor de regras (tipo, valores, IDs, orientação e prazo quando houver).',
+        'Lista divergências detectadas pelo motor de regras. Retorno: divergencias[].tipo, pedido_id_ifood (ID iFood do pedido a citar — NÃO é nome da divergência), lancamento_ids (IDs de lançamento a citar), valores, semana, orientacao, data_limite/prazo_aberto quando houver. UUIDs internos de pedido NÃO são expostos.',
       parameters: {
         type: 'object',
         properties: {
-          pedido_id_ifood: { type: 'string' },
-          tipo: { type: 'string' },
+          pedido_id_ifood: {
+            type: 'string',
+            description: FIELD.pedido_id_ifood,
+          },
+          tipo: { type: 'string', description: FIELD.tipo },
         },
         additionalProperties: false,
       },
@@ -90,13 +107,13 @@ export const TOOL_DEFINITIONS = [
     function: {
       name: 'rascunhar_contestacao',
       description:
-        'Gera um rascunho de contestação local a partir dos dados do motor. Não envia nada a ninguém.',
+        'Gera um rascunho de contestação local a partir dos dados do motor. Não envia nada a ninguém. Use pedido_id_ifood (ID iFood). O rascunho cita pedido_id_ifood e lancamento_ids.',
       parameters: {
         type: 'object',
         properties: {
           pedido_id_ifood: {
             type: 'string',
-            description: 'ID iFood do pedido a contestar',
+            description: FIELD.pedido_id_ifood,
           },
         },
         required: ['pedido_id_ifood'],
@@ -110,11 +127,11 @@ function asRecord(args: Record<string, unknown>): Record<string, unknown> {
   return args ?? {}
 }
 
+/** Tool-facing divergence: hide internal pedido UUIDs; keep iFood + lançamento IDs. */
 function formatDivergence(d: Divergence) {
   return {
     tipo: d.tipo,
     pedido_id_ifood: d.pedido_id_ifood,
-    pedido_ids: d.pedido_ids,
     lancamento_ids: d.lancamento_ids,
     valor_cobrado: d.valor_cobrado,
     valor_esperado: d.valor_esperado,
@@ -142,7 +159,7 @@ export function draftContestacao(
 
   const pedido = data.pedidos.find((p) => p.pedido_id_ifood === pedidoIdIfood)
   const linhas: string[] = []
-  linhas.push(`Rascunho de contestação — pedido ${pedidoIdIfood}`)
+  linhas.push(`Rascunho de contestação — pedido iFood ${pedidoIdIfood}`)
   if (pedido) {
     linhas.push(`Status do pedido: ${pedido.status}`)
     linhas.push(`Método de pagamento: ${pedido.metodo_pagamento}`)
@@ -208,7 +225,7 @@ export function executeTool(
       return {
         total: rows.length,
         lancamentos: rows.map((l) => ({
-          id: l.id,
+          lancamento_id: l.id,
           pedido_id_ifood: l.pedido_id_ifood,
           descricao_lancamento: l.descricao_lancamento,
           valor: l.valor,
@@ -232,14 +249,20 @@ export function executeTool(
       }
       return {
         total: rows.length,
-        pedidos: rows,
+        pedidos: rows.map((p) => ({
+          pedido_id_ifood: p.pedido_id_ifood,
+          metodo_pagamento: p.metodo_pagamento,
+          status: p.status,
+          valor_total: p.valor_total,
+          data_criacao: p.data_criacao,
+          motivo_cancelamento: p.motivo_cancelamento ?? null,
+        })),
       }
     }
     case 'obter_contrato': {
       return {
         restaurante: data.restaurante.nome,
         contrato: {
-          id: data.contrato.id,
           plano: data.contrato.plano,
           comissao_percentual: data.contrato.comissao_percentual,
           taxa_pagamento_online_percentual: data.contrato.taxa_pagamento_online_percentual,

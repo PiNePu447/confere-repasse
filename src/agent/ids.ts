@@ -1,6 +1,15 @@
 /** Collect pedido / lançamento IDs that appear in tool results or the final answer. */
 
-const IFOOD_ID_RE = /\b(?:DEMO-[A-Z0-9-]+|ped-[A-Za-z0-9_-]+|lan-[A-Za-z0-9_-]+|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\b/gi
+const IFOOD_ID_RE =
+  /\b(?:DEMO-[A-Z0-9-]+|ped-[A-Za-z0-9_-]+|lan-[A-Za-z0-9_-]+|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\b/gi
+
+/** Keys that hold citeable IDs (iFood order ID or lançamento ID). Internal pedido UUIDs are omitted from tool payloads. */
+const ID_KEYS = new Set([
+  'pedido_id_ifood',
+  'lancamento_id',
+  'lancamento_ids',
+  'id', // lançamento id in some payloads / drafts
+])
 
 export function collectIdsFromUnknown(value: unknown, into: Set<string> = new Set()): Set<string> {
   if (value == null) return into
@@ -17,15 +26,11 @@ export function collectIdsFromUnknown(value: unknown, into: Set<string> = new Se
   }
   if (typeof value === 'object') {
     for (const [key, nested] of Object.entries(value as Record<string, unknown>)) {
-      if (
-        key === 'pedido_id_ifood' ||
-        key === 'id' ||
-        key === 'pedido_id' ||
-        key === 'lancamento_id' ||
-        key.endsWith('_id') ||
-        key === 'lancamento_ids' ||
-        key === 'pedido_ids'
-      ) {
+      // Skip internal pedido UUID fields if they ever appear (uuid_interno / pedido_id / pedido_ids).
+      if (key === 'uuid_interno' || key === 'pedido_id' || key === 'pedido_ids') {
+        continue
+      }
+      if (ID_KEYS.has(key) || key.endsWith('_id') || key.endsWith('_ids')) {
         collectIdsFromUnknown(nested, into)
       } else {
         collectIdsFromUnknown(nested, into)
