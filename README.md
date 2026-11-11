@@ -16,6 +16,8 @@ Schema/seed (T2): aplique no Supabase, nesta ordem,
 `supabase/migrations/20261111000001_init_conciliacao_schema.sql` e depois `supabase/seed.sql`.
 Detalhes das anomalias plantadas: `supabase/SEED.md`.
 
+Rules engine (T3): `src/rules` — TypeScript puro (`analyzeRepasse`). Testes: `npm test`.
+
 ## Credenciais demo
 
 - E-mail: `demo@confererepasse.app`
