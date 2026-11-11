@@ -18,6 +18,9 @@ Detalhes das anomalias plantadas: `supabase/SEED.md`.
 
 Rules engine (T3): `src/rules` — TypeScript puro (`analyzeRepasse`). Testes: `npm test`.
 
+Agent (T4): Edge Function `supabase/functions/agente` + loop compartilhado em `src/agent`.
+Pergunta local (precisa de `OPENROUTER_API_KEY`): `npm run agent:ask -- "sua pergunta"`.
+
 ## Credenciais demo
 
 - E-mail: `demo@confererepasse.app`

@@ -1,0 +1,5 @@
+# Minimal Supabase CLI config for functions. Project already exists remotely.
+project_id = "xzpwtevqxpxtfqxowzsc"
+
+[functions.agente]
+verify_jwt = true
