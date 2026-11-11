@@ -94,7 +94,7 @@ export const TOOL_DEFINITIONS = [
     function: {
       name: 'obter_totais',
       description:
-        'Totais por semana (repassado vs esperado) e total perdido por tipo de divergência, calculados pelo motor de regras.',
+        'Totais por semana (repassado vs esperado) e total perdido por tipo de divergência. Retorno: perdido_por_tipo (totais R$), perdido_por_tipo_casos (por tipo: pedido_id_ifood, diferenca, lancamento_ids a citar), perdido_total, totais_por_semana, totais_gerais.',
       parameters: {
         type: 'object',
         properties: {},
@@ -287,10 +287,40 @@ export function executeTool(
       }
     }
     case 'obter_totais': {
+      const perdido_por_tipo_casos = {
+        comissao_acima_contrato: [] as Array<{
+          pedido_id_ifood: string
+          diferenca: string
+          lancamento_ids: string[]
+        }>,
+        cobranca_duplicada: [] as Array<{
+          pedido_id_ifood: string
+          diferenca: string
+          lancamento_ids: string[]
+        }>,
+        cancelamento_debitado: [] as Array<{
+          pedido_id_ifood: string
+          diferenca: string
+          lancamento_ids: string[]
+        }>,
+        taxa_online_em_pago_na_entrega: [] as Array<{
+          pedido_id_ifood: string
+          diferenca: string
+          lancamento_ids: string[]
+        }>,
+      }
+      for (const d of data.engine.divergencias) {
+        perdido_por_tipo_casos[d.tipo].push({
+          pedido_id_ifood: d.pedido_id_ifood,
+          diferenca: d.diferenca,
+          lancamento_ids: d.lancamento_ids,
+        })
+      }
       return {
         totais_por_semana: data.engine.totais_por_semana,
         totais_gerais: data.engine.totais_gerais,
         perdido_por_tipo: data.engine.perdido_por_tipo,
+        perdido_por_tipo_casos,
         perdido_total: data.engine.perdido_total,
       }
     }

@@ -49,6 +49,7 @@ export async function runAgentSession(
         'não sei: a chave OPENROUTER_API_KEY não está configurada neste ambiente.',
       tool_calls: [],
       ids_citados: [],
+      llm_calls: 0,
     }
   }
 
@@ -67,6 +68,7 @@ export async function runAgentSession(
         resposta: LLM_USER_ERROR,
         tool_calls: [],
         ids_citados: [],
+        llm_calls: 0,
       }
     }
     throw err

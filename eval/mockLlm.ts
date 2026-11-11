@@ -140,6 +140,19 @@ function synthesizeAnswer(pergunta: string, toolPayloads: unknown[]): string {
           `Por tipo: comissão acima R$ ${porTipo.comissao_acima_contrato}, duplicada R$ ${porTipo.cobranca_duplicada}, cancelamento R$ ${porTipo.cancelamento_debitado}, taxa online em entrega R$ ${porTipo.taxa_online_em_pago_na_entrega}.`,
         )
       }
+      const casos = p.perdido_por_tipo_casos as
+        | Record<string, Array<{ pedido_id_ifood: string; diferenca: string; lancamento_ids: string[] }>>
+        | undefined
+      if (casos) {
+        for (const [tipo, list] of Object.entries(casos)) {
+          for (const c of list) {
+            const lan = c.lancamento_ids.join(', ')
+            parts.push(
+              `Caso ${tipo}: pedido iFood ${c.pedido_id_ifood}, diferença R$ ${c.diferenca}, lançamentos ${lan}.`,
+            )
+          }
+        }
+      }
     }
     if (Array.isArray(p.totais_por_semana)) {
       for (const w of p.totais_por_semana as Array<Record<string, string>>) {

@@ -177,6 +177,10 @@ describe('live tool layer (Supabase RLS)', () => {
       }>
       totais_gerais: { diferenca: string; vendas_brutas: string }
       perdido_por_tipo: Record<string, string>
+      perdido_por_tipo_casos: Record<
+        string,
+        Array<{ pedido_id_ifood: string; diferenca: string; lancamento_ids: string[] }>
+      >
       perdido_total: string
     }
     assert.equal(result.totais_por_semana.length, 4)
@@ -188,6 +192,10 @@ describe('live tool layer (Supabase RLS)', () => {
       assert.ok(w.liquido_repassado)
       assert.ok(w.liquido_esperado)
     }
+    assert.equal(result.perdido_por_tipo_casos.cobranca_duplicada[0]!.pedido_id_ifood, 'DEMO-ANOM-002')
+    assert.equal(result.perdido_por_tipo_casos.cobranca_duplicada[0]!.diferenca, '12.00')
+    assert.ok(result.perdido_por_tipo_casos.cobranca_duplicada[0]!.lancamento_ids.length >= 1)
+    assert.equal(result.perdido_por_tipo_casos.taxa_online_em_pago_na_entrega[0]!.pedido_id_ifood, 'DEMO-ANOM-005')
   })
 
   it('rascunhar_contestacao for DEMO-ANOM-003 includes R$ 80.00 and data limite', () => {

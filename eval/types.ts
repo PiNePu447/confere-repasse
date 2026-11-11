@@ -57,4 +57,7 @@ export type QuestionResult = {
   expected?: ResolvedExpected
   error?: string
   latency_ms: number
+  llm_calls?: number
+  /** ISO timestamp when this question was last graded (for merged partial runs). */
+  graded_at?: string
 }

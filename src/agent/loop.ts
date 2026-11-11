@@ -18,10 +18,14 @@ function parseArgs(raw: string): Record<string, unknown> {
  * Single agent loop used by the Edge Function and the Node CLI.
  * Prompt, tools, and dispatch share this one code path.
  */
+/** Default tool-loop budget: keep OpenRouter free-tier spend bounded (~4 LLM calls/question). */
+export const DEFAULT_MAX_ROUNDS = 4
+
 export async function runAgent(options: AgentRunOptions): Promise<AgentResponse> {
-  const maxRounds = options.maxRounds ?? 6
+  const maxRounds = options.maxRounds ?? DEFAULT_MAX_ROUNDS
   const toolCalls: ToolCallRecord[] = []
   const knownIds = new Set<string>()
+  let llmCalls = 0
 
   const messages: ChatMessage[] = [
     { role: 'system', content: options.systemPrompt },
@@ -30,6 +34,7 @@ export async function runAgent(options: AgentRunOptions): Promise<AgentResponse>
 
   for (let round = 0; round < maxRounds; round++) {
     const llmResult = await options.llm.complete(messages, options.toolDefinitions)
+    llmCalls += 1
 
     if (llmResult.tool_calls.length > 0) {
       messages.push({
@@ -38,6 +43,7 @@ export async function runAgent(options: AgentRunOptions): Promise<AgentResponse>
         tool_calls: llmResult.tool_calls,
       })
 
+      // Parallel tool calls in one assistant turn (one LLM round).
       for (const call of llmResult.tool_calls) {
         const args = parseArgs(call.function.arguments)
         toolCalls.push({ name: call.function.name, args })
@@ -68,6 +74,7 @@ export async function runAgent(options: AgentRunOptions): Promise<AgentResponse>
       resposta,
       tool_calls: toolCalls,
       ids_citados: idsCitedInText(resposta, knownIds),
+      llm_calls: llmCalls,
     }
   }
 
@@ -76,5 +83,6 @@ export async function runAgent(options: AgentRunOptions): Promise<AgentResponse>
       'não sei: atingi o limite de etapas ao consultar as ferramentas. Reformule a pergunta.',
     tool_calls: toolCalls,
     ids_citados: [],
+    llm_calls: llmCalls,
   }
 }

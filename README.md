@@ -25,7 +25,12 @@ Fallback em 429/5xx: `LLM_FALLBACK_MODELS` (default `nvidia/nemotron-3.5-super-v
 com backoff ~2s e ~6s por modelo (orçamento total ~20s).
 
 Eval (T5): `EVAL_MOCK=1 npm run eval` ou `OPENROUTER_API_KEY=… npm run eval`.
+Fatia sem gastar o cap diário: `EVAL_ONLY=19-30` (ou `q05,q12`) — faz merge em
+`eval/results/latest.json` e o resumo do README usa o conjunto completo mesclado.
 Isolamento C7: `npm run eval:c7`.
+
+Edge Function bundle: `npm run build:function` → `dist/agente/index.ts` + `deno.json`
+(`@supabase/supabase-js` externo). Redeploy a partir dessa pasta.
 
 Chat (T6): na área autenticada. Em DEV, mock da função com `VITE_AGENT_MOCK=1`
 ou `/?agentMock=answer|draft|error` (não entra no build de produção).
@@ -52,13 +57,15 @@ Cabeçalho e regras em `src/csv/headers.ts`; amostra com anomalia extra em
 | | |
 | --- | --- |
 | Model | `mock-tool-answerer` |
-| Date (UTC) | 2026-11-11T03:05:47.568Z |
+| Date (UTC) | 2026-11-11T03:21:37.825Z |
+| Run dates (merged) | 2026-11-11T03:21:37.825Z |
 | Pass count | **30/30** |
 | Value accuracy (answered) | 100.0% |
 | ID accuracy (answered) | 100.0% |
 | Value accuracy (all 30) | 100.0% |
 | ID accuracy (all 30) | 100.0% |
 | FAIL / ERROR | 0 / 0 |
+| Avg LLM calls / question | 2 |
 
-_Run with `EVAL_MOCK=1` (tool-based mock LLM). Re-run with `OPENROUTER_API_KEY` for the live model._
+_Run with `EVAL_MOCK=1` (tool-based mock LLM). Re-run with `OPENROUTER_API_KEY` for the live model. Partial: `EVAL_ONLY=19-30`._
 <!-- EVAL:END -->

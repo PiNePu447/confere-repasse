@@ -9,6 +9,8 @@ export type AgentResponse = {
   resposta: string
   tool_calls: ToolCallRecord[]
   ids_citados?: string[]
+  /** Number of LLM complete() calls used for this answer (tool rounds + final). */
+  llm_calls?: number
 }
 
 export type ChatMessage = {
