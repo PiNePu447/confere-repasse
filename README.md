@@ -12,6 +12,10 @@ npm run dev
 
 Build: `npm run build`
 
+Schema/seed (T2): aplique no Supabase, nesta ordem,
+`supabase/migrations/20261111000001_init_conciliacao_schema.sql` e depois `supabase/seed.sql`.
+Detalhes das anomalias plantadas: `supabase/SEED.md`.
+
 ## Credenciais demo
 
 - E-mail: `demo@confererepasse.app`
