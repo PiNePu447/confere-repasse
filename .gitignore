@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 
+# Eval outputs (latest.json is committed so README stays in sync after a run)
+# Keep structure; ignore transient debug dumps only
+eval/results/*.log
+
+
 # Env (keep .env.example)
 .env
 .env.*.local

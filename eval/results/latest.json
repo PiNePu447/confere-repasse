@@ -1,0 +1,1167 @@
+{
+  "generated_at": "2026-11-11T02:48:26.709Z",
+  "today": "2026-11-10",
+  "model": "mock-tool-answerer",
+  "mock": true,
+  "totals": {
+    "questions": 30,
+    "pass": 30,
+    "fail": 0,
+    "error": 0,
+    "answered": 30
+  },
+  "accuracy": {
+    "value_answered": 1,
+    "id_answered": 1,
+    "value_all_30": 1,
+    "id_all_30": 1,
+    "pass_count": 30
+  },
+  "results": [
+    {
+      "id": "q01",
+      "categoria": "totais",
+      "pergunta": "No total, quanto eu perdi com as divergências do repasse?",
+      "status": "PASS",
+      "value_ok": true,
+      "id_ok": true,
+      "details": [],
+      "resposta": "Perda total por divergências: R$ 207.50. Por tipo: comissão acima R$ 16.50, duplicada R$ 12.00, cancelamento R$ 175.00, taxa online em entrega R$ 4.00. Semana REPASSE-W3: repassado R$ -175.00, esperado R$ -80.00, diferença R$ 95.00. Semana REPASSE-W2: repassado R$ -127.57, esperado R$ -99.07, diferença R$ 28.50. Semana REPASSE-W1: repassado R$ -55.66, esperado R$ -55.66, diferença R$ 0.00. Semana REPASSE-W0: repassado R$ -161.91, esperado R$ -77.91, diferença R$ 84.00. Divergência comissao_acima_contrato no pedido DEMO-ANOM-001: cobrado R$ 34.50, esperado R$ 18.00, diferença R$ 16.50. Lançamentos: e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cobranca_duplicada no pedido DEMO-ANOM-002: cobrado R$ 12.00, esperado R$ 0.00, diferença R$ 12.00. Lançamentos: 934a099a-2129-4dc9-a076-5e24f1088ee3. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cancelamento_debitado no pedido DEMO-ANOM-003: cobrado R$ 80.00, esperado R$ 0.00, diferença R$ 80.00. Lançamentos: 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Orientação: contestar cancelamento até 2026-11-15 (prazo de 7 dias a partir da data do pedido). Data limite: 2026-11-15. Prazo aberto: sim. Divergência cancelamento_debitado no pedido DEMO-ANOM-004: cobrado R$ 95.00, esperado R$ 0.00, diferença R$ 95.00. Lançamentos: db39be5c-aea1-4508-bfb9-5b823de15269. Orientação: prazo de 7 dias expirado em 2026-10-25; abrir chamado no suporte. Data limite: 2026-10-25. Prazo aberto: não. Divergência taxa_online_em_pago_na_entrega no pedido DEMO-ANOM-005: cobrado R$ 4.00, esperado R$ 0.00, diferença R$ 4.00. Lançamentos: 18c994c5-46f9-4159-823b-e78db4ca5fe2. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada.",
+      "tool_calls": [
+        {
+          "name": "obter_totais",
+          "args": {}
+        },
+        {
+          "name": "obter_divergencias",
+          "args": {}
+        }
+      ],
+      "expected": {
+        "naoSei": false,
+        "reais": [
+          "207.50"
+        ],
+        "ids": [],
+        "texts": [],
+        "textGroups": [],
+        "dataLimite": null,
+        "prazoAberto": null,
+        "forbidDataLimite": false
+      },
+      "latency_ms": 2045
+    },
+    {
+      "id": "q02",
+      "categoria": "totais",
+      "pergunta": "Me mostra o valor perdido separado por tipo de problema.",
+      "status": "PASS",
+      "value_ok": true,
+      "id_ok": true,
+      "details": [],
+      "resposta": "Perda total por divergências: R$ 207.50. Por tipo: comissão acima R$ 16.50, duplicada R$ 12.00, cancelamento R$ 175.00, taxa online em entrega R$ 4.00. Semana REPASSE-W3: repassado R$ -175.00, esperado R$ -80.00, diferença R$ 95.00. Semana REPASSE-W2: repassado R$ -127.57, esperado R$ -99.07, diferença R$ 28.50. Semana REPASSE-W1: repassado R$ -55.66, esperado R$ -55.66, diferença R$ 0.00. Semana REPASSE-W0: repassado R$ -161.91, esperado R$ -77.91, diferença R$ 84.00. Divergência comissao_acima_contrato no pedido DEMO-ANOM-001: cobrado R$ 34.50, esperado R$ 18.00, diferença R$ 16.50. Lançamentos: e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cobranca_duplicada no pedido DEMO-ANOM-002: cobrado R$ 12.00, esperado R$ 0.00, diferença R$ 12.00. Lançamentos: 934a099a-2129-4dc9-a076-5e24f1088ee3. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cancelamento_debitado no pedido DEMO-ANOM-003: cobrado R$ 80.00, esperado R$ 0.00, diferença R$ 80.00. Lançamentos: 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Orientação: contestar cancelamento até 2026-11-15 (prazo de 7 dias a partir da data do pedido). Data limite: 2026-11-15. Prazo aberto: sim. Divergência cancelamento_debitado no pedido DEMO-ANOM-004: cobrado R$ 95.00, esperado R$ 0.00, diferença R$ 95.00. Lançamentos: db39be5c-aea1-4508-bfb9-5b823de15269. Orientação: prazo de 7 dias expirado em 2026-10-25; abrir chamado no suporte. Data limite: 2026-10-25. Prazo aberto: não. Divergência taxa_online_em_pago_na_entrega no pedido DEMO-ANOM-005: cobrado R$ 4.00, esperado R$ 0.00, diferença R$ 4.00. Lançamentos: 18c994c5-46f9-4159-823b-e78db4ca5fe2. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada.",
+      "tool_calls": [
+        {
+          "name": "obter_totais",
+          "args": {}
+        },
+        {
+          "name": "obter_divergencias",
+          "args": {}
+        }
+      ],
+      "expected": {
+        "naoSei": false,
+        "reais": [
+          "16.50",
+          "12.00",
+          "175.00",
+          "4.00"
+        ],
+        "ids": [],
+        "texts": [],
+        "textGroups": [],
+        "dataLimite": null,
+        "prazoAberto": null,
+        "forbidDataLimite": false
+      },
+      "latency_ms": 2447
+    },
+    {
+      "id": "q03",
+      "categoria": "totais",
+      "pergunta": "Quanto foi o prejuízo só das comissões cobradas a mais?",
+      "status": "PASS",
+      "value_ok": true,
+      "id_ok": true,
+      "details": [],
+      "resposta": "Perda total por divergências: R$ 207.50. Por tipo: comissão acima R$ 16.50, duplicada R$ 12.00, cancelamento R$ 175.00, taxa online em entrega R$ 4.00. Semana REPASSE-W3: repassado R$ -175.00, esperado R$ -80.00, diferença R$ 95.00. Semana REPASSE-W2: repassado R$ -127.57, esperado R$ -99.07, diferença R$ 28.50. Semana REPASSE-W1: repassado R$ -55.66, esperado R$ -55.66, diferença R$ 0.00. Semana REPASSE-W0: repassado R$ -161.91, esperado R$ -77.91, diferença R$ 84.00. Divergência comissao_acima_contrato no pedido DEMO-ANOM-001: cobrado R$ 34.50, esperado R$ 18.00, diferença R$ 16.50. Lançamentos: e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cobranca_duplicada no pedido DEMO-ANOM-002: cobrado R$ 12.00, esperado R$ 0.00, diferença R$ 12.00. Lançamentos: 934a099a-2129-4dc9-a076-5e24f1088ee3. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cancelamento_debitado no pedido DEMO-ANOM-003: cobrado R$ 80.00, esperado R$ 0.00, diferença R$ 80.00. Lançamentos: 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Orientação: contestar cancelamento até 2026-11-15 (prazo de 7 dias a partir da data do pedido). Data limite: 2026-11-15. Prazo aberto: sim. Divergência cancelamento_debitado no pedido DEMO-ANOM-004: cobrado R$ 95.00, esperado R$ 0.00, diferença R$ 95.00. Lançamentos: db39be5c-aea1-4508-bfb9-5b823de15269. Orientação: prazo de 7 dias expirado em 2026-10-25; abrir chamado no suporte. Data limite: 2026-10-25. Prazo aberto: não. Divergência taxa_online_em_pago_na_entrega no pedido DEMO-ANOM-005: cobrado R$ 4.00, esperado R$ 0.00, diferença R$ 4.00. Lançamentos: 18c994c5-46f9-4159-823b-e78db4ca5fe2. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada.",
+      "tool_calls": [
+        {
+          "name": "obter_totais",
+          "args": {}
+        },
+        {
+          "name": "obter_divergencias",
+          "args": {}
+        }
+      ],
+      "expected": {
+        "naoSei": false,
+        "reais": [
+          "16.50"
+        ],
+        "ids": [],
+        "texts": [],
+        "textGroups": [],
+        "dataLimite": null,
+        "prazoAberto": null,
+        "forbidDataLimite": false
+      },
+      "latency_ms": 1675
+    },
+    {
+      "id": "q04",
+      "categoria": "totais",
+      "pergunta": "E o total que perdi com cancelamentos debitados no repasse?",
+      "status": "PASS",
+      "value_ok": true,
+      "id_ok": true,
+      "details": [],
+      "resposta": "Perda total por divergências: R$ 207.50. Por tipo: comissão acima R$ 16.50, duplicada R$ 12.00, cancelamento R$ 175.00, taxa online em entrega R$ 4.00. Semana REPASSE-W3: repassado R$ -175.00, esperado R$ -80.00, diferença R$ 95.00. Semana REPASSE-W2: repassado R$ -127.57, esperado R$ -99.07, diferença R$ 28.50. Semana REPASSE-W1: repassado R$ -55.66, esperado R$ -55.66, diferença R$ 0.00. Semana REPASSE-W0: repassado R$ -161.91, esperado R$ -77.91, diferença R$ 84.00. Divergência comissao_acima_contrato no pedido DEMO-ANOM-001: cobrado R$ 34.50, esperado R$ 18.00, diferença R$ 16.50. Lançamentos: e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cobranca_duplicada no pedido DEMO-ANOM-002: cobrado R$ 12.00, esperado R$ 0.00, diferença R$ 12.00. Lançamentos: 934a099a-2129-4dc9-a076-5e24f1088ee3. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cancelamento_debitado no pedido DEMO-ANOM-003: cobrado R$ 80.00, esperado R$ 0.00, diferença R$ 80.00. Lançamentos: 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Orientação: contestar cancelamento até 2026-11-15 (prazo de 7 dias a partir da data do pedido). Data limite: 2026-11-15. Prazo aberto: sim. Divergência cancelamento_debitado no pedido DEMO-ANOM-004: cobrado R$ 95.00, esperado R$ 0.00, diferença R$ 95.00. Lançamentos: db39be5c-aea1-4508-bfb9-5b823de15269. Orientação: prazo de 7 dias expirado em 2026-10-25; abrir chamado no suporte. Data limite: 2026-10-25. Prazo aberto: não. Divergência taxa_online_em_pago_na_entrega no pedido DEMO-ANOM-005: cobrado R$ 4.00, esperado R$ 0.00, diferença R$ 4.00. Lançamentos: 18c994c5-46f9-4159-823b-e78db4ca5fe2. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada.",
+      "tool_calls": [
+        {
+          "name": "obter_totais",
+          "args": {}
+        },
+        {
+          "name": "obter_divergencias",
+          "args": {}
+        }
+      ],
+      "expected": {
+        "naoSei": false,
+        "reais": [
+          "175.00"
+        ],
+        "ids": [],
+        "texts": [],
+        "textGroups": [],
+        "dataLimite": null,
+        "prazoAberto": null,
+        "forbidDataLimite": false
+      },
+      "latency_ms": 1229
+    },
+    {
+      "id": "q05",
+      "categoria": "totais",
+      "pergunta": "Qual o valor perdido por cobrança duplicada?",
+      "status": "PASS",
+      "value_ok": true,
+      "id_ok": true,
+      "details": [],
+      "resposta": "Perda total por divergências: R$ 207.50. Por tipo: comissão acima R$ 16.50, duplicada R$ 12.00, cancelamento R$ 175.00, taxa online em entrega R$ 4.00. Semana REPASSE-W3: repassado R$ -175.00, esperado R$ -80.00, diferença R$ 95.00. Semana REPASSE-W2: repassado R$ -127.57, esperado R$ -99.07, diferença R$ 28.50. Semana REPASSE-W1: repassado R$ -55.66, esperado R$ -55.66, diferença R$ 0.00. Semana REPASSE-W0: repassado R$ -161.91, esperado R$ -77.91, diferença R$ 84.00. Divergência comissao_acima_contrato no pedido DEMO-ANOM-001: cobrado R$ 34.50, esperado R$ 18.00, diferença R$ 16.50. Lançamentos: e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cobranca_duplicada no pedido DEMO-ANOM-002: cobrado R$ 12.00, esperado R$ 0.00, diferença R$ 12.00. Lançamentos: 934a099a-2129-4dc9-a076-5e24f1088ee3. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cancelamento_debitado no pedido DEMO-ANOM-003: cobrado R$ 80.00, esperado R$ 0.00, diferença R$ 80.00. Lançamentos: 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Orientação: contestar cancelamento até 2026-11-15 (prazo de 7 dias a partir da data do pedido). Data limite: 2026-11-15. Prazo aberto: sim. Divergência cancelamento_debitado no pedido DEMO-ANOM-004: cobrado R$ 95.00, esperado R$ 0.00, diferença R$ 95.00. Lançamentos: db39be5c-aea1-4508-bfb9-5b823de15269. Orientação: prazo de 7 dias expirado em 2026-10-25; abrir chamado no suporte. Data limite: 2026-10-25. Prazo aberto: não. Divergência taxa_online_em_pago_na_entrega no pedido DEMO-ANOM-005: cobrado R$ 4.00, esperado R$ 0.00, diferença R$ 4.00. Lançamentos: 18c994c5-46f9-4159-823b-e78db4ca5fe2. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada.",
+      "tool_calls": [
+        {
+          "name": "obter_totais",
+          "args": {}
+        },
+        {
+          "name": "obter_divergencias",
+          "args": {}
+        }
+      ],
+      "expected": {
+        "naoSei": false,
+        "reais": [
+          "12.00"
+        ],
+        "ids": [
+          "DEMO-ANOM-002"
+        ],
+        "texts": [],
+        "textGroups": [],
+        "dataLimite": null,
+        "prazoAberto": null,
+        "forbidDataLimite": false
+      },
+      "latency_ms": 1586
+    },
+    {
+      "id": "q06",
+      "categoria": "totais",
+      "pergunta": "Tem perda por taxa online em pedido pago na entrega? Quanto?",
+      "status": "PASS",
+      "value_ok": true,
+      "id_ok": true,
+      "details": [],
+      "resposta": "Contrato Marketplace: comissão 12%, taxa online 3.2%, taxa de repasse semanal R$ 1.99. Perda total por divergências: R$ 207.50. Por tipo: comissão acima R$ 16.50, duplicada R$ 12.00, cancelamento R$ 175.00, taxa online em entrega R$ 4.00. Semana REPASSE-W3: repassado R$ -175.00, esperado R$ -80.00, diferença R$ 95.00. Semana REPASSE-W2: repassado R$ -127.57, esperado R$ -99.07, diferença R$ 28.50. Semana REPASSE-W1: repassado R$ -55.66, esperado R$ -55.66, diferença R$ 0.00. Semana REPASSE-W0: repassado R$ -161.91, esperado R$ -77.91, diferença R$ 84.00. Divergência comissao_acima_contrato no pedido DEMO-ANOM-001: cobrado R$ 34.50, esperado R$ 18.00, diferença R$ 16.50. Lançamentos: e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cobranca_duplicada no pedido DEMO-ANOM-002: cobrado R$ 12.00, esperado R$ 0.00, diferença R$ 12.00. Lançamentos: 934a099a-2129-4dc9-a076-5e24f1088ee3. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cancelamento_debitado no pedido DEMO-ANOM-003: cobrado R$ 80.00, esperado R$ 0.00, diferença R$ 80.00. Lançamentos: 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Orientação: contestar cancelamento até 2026-11-15 (prazo de 7 dias a partir da data do pedido). Data limite: 2026-11-15. Prazo aberto: sim. Divergência cancelamento_debitado no pedido DEMO-ANOM-004: cobrado R$ 95.00, esperado R$ 0.00, diferença R$ 95.00. Lançamentos: db39be5c-aea1-4508-bfb9-5b823de15269. Orientação: prazo de 7 dias expirado em 2026-10-25; abrir chamado no suporte. Data limite: 2026-10-25. Prazo aberto: não. Divergência taxa_online_em_pago_na_entrega no pedido DEMO-ANOM-005: cobrado R$ 4.00, esperado R$ 0.00, diferença R$ 4.00. Lançamentos: 18c994c5-46f9-4159-823b-e78db4ca5fe2. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Pedido DEMO-PED-W3-N1: status ENTREGUE, valor R$ 74.50, pagamento ONLINE. Pedido DEMO-PED-W3-N2: status ENTREGUE, valor R$ 83.00, pagamento ONLINE. Pedido DEMO-PED-W3-N3: status ENTREGUE, valor R$ 91.50, pagamento PAGO_NA_ENTREGA. Pedido DEMO-PED-W3-N4: status ENTREGUE, valor R$ 100.00, pagamento ONLINE. Pedido DEMO-ANOM-004: status CANCELADO, valor R$ 95.00, pagamento ONLINE. Pedido DEMO-PED-W3-N5: status ENTREGUE, valor R$ 108.50, pagamento ONLINE. Pedido DEMO-PED-W2-N1: status ENTREGUE, valor R$ 67.50, pagamento PAGO_NA_ENTREGA. Pedido DEMO-PED-W2-N2: status ENTREGUE, valor R$ 76.00, pagamento ONLINE. Pedido DEMO-PED-W2-N3: status ENTREGUE, valor R$ 84.50, pagamento ONLINE. Pedido DEMO-ANOM-002: status ENTREGUE, valor R$ 100.00, pagamento ONLINE. Pedido DEMO-PED-W2-N4: status ENTREGUE, valor R$ 93.00, pagamento PAGO_NA_ENTREGA. Pedido DEMO-PED-W2-N5: status ENTREGUE, valor R$ 101.50, pagamento ONLINE. Pedido DEMO-ANOM-001: status ENTREGUE, valor R$ 150.00, pagamento ONLINE. Pedido DEMO-PED-W1-N1: status ENTREGUE, valor R$ 60.50, pagamento ONLINE. Pedido DEMO-PED-W1-N2: status ENTREGUE, valor R$ 69.00, pagamento PAGO_NA_ENTREGA. Pedido DEMO-PED-W1-N3: status ENTREGUE, valor R$ 77.50, pagamento ONLINE. Pedido DEMO-PED-W1-N4: status ENTREGUE, valor R$ 86.00, pagamento ONLINE. Pedido DEMO-PED-W1-N5: status ENTREGUE, valor R$ 94.50, pagamento PAGO_NA_ENTREGA. Pedido DEMO-PED-W0-N1: status ENTREGUE, valor R$ 53.50, pagamento ONLINE. Pedido DEMO-ANOM-005: status ENTREGUE, valor R$ 125.00, pagamento PAGO_NA_ENTREGA. Pedido DEMO-PED-W0-N2: status ENTREGUE, valor R$ 62.00, pagamento ONLINE. Pedido DEMO-PED-W0-N3: status ENTREGUE, valor R$ 70.50, pagamento PAGO_NA_ENTREGA. Pedido DEMO-ANOM-003: status CANCELADO, valor R$ 80.00, pagamento ONLINE. Pedido DEMO-PED-W0-N4: status ENTREGUE, valor R$ 79.00, pagamento ONLINE. Pedido DEMO-PED-W0-N5: status ENTREGUE, valor R$ 87.50, pagamento ONLINE.",
+      "tool_calls": [
+        {
+          "name": "obter_contrato",
+          "args": {}
+        },
+        {
+          "name": "obter_totais",
+          "args": {}
+        },
+        {
+          "name": "obter_divergencias",
+          "args": {}
+        },
+        {
+          "name": "obter_pedidos",
+          "args": {}
+        }
+      ],
+      "expected": {
+        "naoSei": false,
+        "reais": [
+          "4.00"
+        ],
+        "ids": [
+          "DEMO-ANOM-005"
+        ],
+        "texts": [],
+        "textGroups": [],
+        "dataLimite": null,
+        "prazoAberto": null,
+        "forbidDataLimite": false
+      },
+      "latency_ms": 1221
+    },
+    {
+      "id": "q07",
+      "categoria": "semana",
+      "pergunta": "Por que a semana REPASSE-W0 veio mais baixa do que o esperado?",
+      "status": "PASS",
+      "value_ok": true,
+      "id_ok": true,
+      "details": [],
+      "resposta": "Perda total por divergências: R$ 207.50. Por tipo: comissão acima R$ 16.50, duplicada R$ 12.00, cancelamento R$ 175.00, taxa online em entrega R$ 4.00. Semana REPASSE-W0: repassado R$ -161.91, esperado R$ -77.91, diferença R$ 84.00. Divergência comissao_acima_contrato no pedido DEMO-ANOM-001: cobrado R$ 34.50, esperado R$ 18.00, diferença R$ 16.50. Lançamentos: e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cobranca_duplicada no pedido DEMO-ANOM-002: cobrado R$ 12.00, esperado R$ 0.00, diferença R$ 12.00. Lançamentos: 934a099a-2129-4dc9-a076-5e24f1088ee3. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cancelamento_debitado no pedido DEMO-ANOM-003: cobrado R$ 80.00, esperado R$ 0.00, diferença R$ 80.00. Lançamentos: 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Orientação: contestar cancelamento até 2026-11-15 (prazo de 7 dias a partir da data do pedido). Data limite: 2026-11-15. Prazo aberto: sim. Divergência cancelamento_debitado no pedido DEMO-ANOM-004: cobrado R$ 95.00, esperado R$ 0.00, diferença R$ 95.00. Lançamentos: db39be5c-aea1-4508-bfb9-5b823de15269. Orientação: prazo de 7 dias expirado em 2026-10-25; abrir chamado no suporte. Data limite: 2026-10-25. Prazo aberto: não. Divergência taxa_online_em_pago_na_entrega no pedido DEMO-ANOM-005: cobrado R$ 4.00, esperado R$ 0.00, diferença R$ 4.00. Lançamentos: 18c994c5-46f9-4159-823b-e78db4ca5fe2. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada.",
+      "tool_calls": [
+        {
+          "name": "obter_totais",
+          "args": {}
+        },
+        {
+          "name": "obter_divergencias",
+          "args": {}
+        }
+      ],
+      "expected": {
+        "naoSei": false,
+        "reais": [
+          "84.00",
+          "80.00",
+          "4.00"
+        ],
+        "ids": [
+          "DEMO-ANOM-003",
+          "DEMO-ANOM-005"
+        ],
+        "texts": [],
+        "textGroups": [],
+        "dataLimite": null,
+        "prazoAberto": null,
+        "forbidDataLimite": false
+      },
+      "latency_ms": 844
+    },
+    {
+      "id": "q08",
+      "categoria": "semana",
+      "pergunta": "Na REPASSE-W2, quanto deixei de receber por causa das divergências?",
+      "status": "PASS",
+      "value_ok": true,
+      "id_ok": true,
+      "details": [],
+      "resposta": "Perda total por divergências: R$ 207.50. Por tipo: comissão acima R$ 16.50, duplicada R$ 12.00, cancelamento R$ 175.00, taxa online em entrega R$ 4.00. Semana REPASSE-W2: repassado R$ -127.57, esperado R$ -99.07, diferença R$ 28.50. Divergência comissao_acima_contrato no pedido DEMO-ANOM-001: cobrado R$ 34.50, esperado R$ 18.00, diferença R$ 16.50. Lançamentos: e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cobranca_duplicada no pedido DEMO-ANOM-002: cobrado R$ 12.00, esperado R$ 0.00, diferença R$ 12.00. Lançamentos: 934a099a-2129-4dc9-a076-5e24f1088ee3. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cancelamento_debitado no pedido DEMO-ANOM-003: cobrado R$ 80.00, esperado R$ 0.00, diferença R$ 80.00. Lançamentos: 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Orientação: contestar cancelamento até 2026-11-15 (prazo de 7 dias a partir da data do pedido). Data limite: 2026-11-15. Prazo aberto: sim. Divergência cancelamento_debitado no pedido DEMO-ANOM-004: cobrado R$ 95.00, esperado R$ 0.00, diferença R$ 95.00. Lançamentos: db39be5c-aea1-4508-bfb9-5b823de15269. Orientação: prazo de 7 dias expirado em 2026-10-25; abrir chamado no suporte. Data limite: 2026-10-25. Prazo aberto: não. Divergência taxa_online_em_pago_na_entrega no pedido DEMO-ANOM-005: cobrado R$ 4.00, esperado R$ 0.00, diferença R$ 4.00. Lançamentos: 18c994c5-46f9-4159-823b-e78db4ca5fe2. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada.",
+      "tool_calls": [
+        {
+          "name": "obter_totais",
+          "args": {}
+        },
+        {
+          "name": "obter_divergencias",
+          "args": {}
+        }
+      ],
+      "expected": {
+        "naoSei": false,
+        "reais": [
+          "28.50"
+        ],
+        "ids": [],
+        "texts": [],
+        "textGroups": [],
+        "dataLimite": null,
+        "prazoAberto": null,
+        "forbidDataLimite": false
+      },
+      "latency_ms": 1621
+    },
+    {
+      "id": "q09",
+      "categoria": "semana",
+      "pergunta": "A semana REPASSE-W1 teve alguma perda por divergência?",
+      "status": "PASS",
+      "value_ok": true,
+      "id_ok": true,
+      "details": [],
+      "resposta": "Perda total por divergências: R$ 207.50. Por tipo: comissão acima R$ 16.50, duplicada R$ 12.00, cancelamento R$ 175.00, taxa online em entrega R$ 4.00. Semana REPASSE-W1: repassado R$ -55.66, esperado R$ -55.66, diferença R$ 0.00. Divergência comissao_acima_contrato no pedido DEMO-ANOM-001: cobrado R$ 34.50, esperado R$ 18.00, diferença R$ 16.50. Lançamentos: e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cobranca_duplicada no pedido DEMO-ANOM-002: cobrado R$ 12.00, esperado R$ 0.00, diferença R$ 12.00. Lançamentos: 934a099a-2129-4dc9-a076-5e24f1088ee3. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cancelamento_debitado no pedido DEMO-ANOM-003: cobrado R$ 80.00, esperado R$ 0.00, diferença R$ 80.00. Lançamentos: 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Orientação: contestar cancelamento até 2026-11-15 (prazo de 7 dias a partir da data do pedido). Data limite: 2026-11-15. Prazo aberto: sim. Divergência cancelamento_debitado no pedido DEMO-ANOM-004: cobrado R$ 95.00, esperado R$ 0.00, diferença R$ 95.00. Lançamentos: db39be5c-aea1-4508-bfb9-5b823de15269. Orientação: prazo de 7 dias expirado em 2026-10-25; abrir chamado no suporte. Data limite: 2026-10-25. Prazo aberto: não. Divergência taxa_online_em_pago_na_entrega no pedido DEMO-ANOM-005: cobrado R$ 4.00, esperado R$ 0.00, diferença R$ 4.00. Lançamentos: 18c994c5-46f9-4159-823b-e78db4ca5fe2. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada.",
+      "tool_calls": [
+        {
+          "name": "obter_totais",
+          "args": {}
+        },
+        {
+          "name": "obter_divergencias",
+          "args": {}
+        }
+      ],
+      "expected": {
+        "naoSei": false,
+        "reais": [
+          "0.00"
+        ],
+        "ids": [],
+        "texts": [],
+        "textGroups": [],
+        "dataLimite": null,
+        "prazoAberto": null,
+        "forbidDataLimite": false
+      },
+      "latency_ms": 1222
+    },
+    {
+      "id": "q10",
+      "categoria": "prazo",
+      "pergunta": "Ainda dá tempo de contestar o cancelamento do pedido DEMO-ANOM-003? Qual a data limite?",
+      "status": "PASS",
+      "value_ok": true,
+      "id_ok": true,
+      "details": [],
+      "resposta": "Divergência cancelamento_debitado no pedido DEMO-ANOM-003: cobrado R$ 80.00, esperado R$ 0.00, diferença R$ 80.00. Lançamentos: 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Orientação: contestar cancelamento até 2026-11-15 (prazo de 7 dias a partir da data do pedido). Data limite: 2026-11-15. Prazo aberto: sim. Pedido DEMO-ANOM-003: status CANCELADO, valor R$ 80.00, pagamento ONLINE.",
+      "tool_calls": [
+        {
+          "name": "obter_divergencias",
+          "args": {
+            "pedido_id_ifood": "DEMO-ANOM-003"
+          }
+        },
+        {
+          "name": "obter_pedidos",
+          "args": {
+            "pedido_id_ifood": "DEMO-ANOM-003"
+          }
+        }
+      ],
+      "expected": {
+        "naoSei": false,
+        "reais": [
+          "80.00"
+        ],
+        "ids": [
+          "DEMO-ANOM-003"
+        ],
+        "texts": [],
+        "textGroups": [],
+        "dataLimite": "2026-11-15",
+        "prazoAberto": true,
+        "forbidDataLimite": false
+      },
+      "latency_ms": 1280
+    },
+    {
+      "id": "q11",
+      "categoria": "prazo",
+      "pergunta": "O cancelamento DEMO-ANOM-004 ainda está dentro dos 7 dias?",
+      "status": "PASS",
+      "value_ok": true,
+      "id_ok": true,
+      "details": [],
+      "resposta": "Divergência cancelamento_debitado no pedido DEMO-ANOM-004: cobrado R$ 95.00, esperado R$ 0.00, diferença R$ 95.00. Lançamentos: db39be5c-aea1-4508-bfb9-5b823de15269. Orientação: prazo de 7 dias expirado em 2026-10-25; abrir chamado no suporte. Data limite: 2026-10-25. Prazo aberto: não. Pedido DEMO-ANOM-004: status CANCELADO, valor R$ 95.00, pagamento ONLINE.",
+      "tool_calls": [
+        {
+          "name": "obter_divergencias",
+          "args": {
+            "pedido_id_ifood": "DEMO-ANOM-004"
+          }
+        },
+        {
+          "name": "obter_pedidos",
+          "args": {
+            "pedido_id_ifood": "DEMO-ANOM-004"
+          }
+        }
+      ],
+      "expected": {
+        "naoSei": false,
+        "reais": [
+          "95.00"
+        ],
+        "ids": [
+          "DEMO-ANOM-004"
+        ],
+        "texts": [],
+        "textGroups": [],
+        "dataLimite": "2026-10-25",
+        "prazoAberto": false,
+        "forbidDataLimite": false
+      },
+      "latency_ms": 867
+    },
+    {
+      "id": "q12",
+      "categoria": "prazo",
+      "pergunta": "Quais cancelamentos eu ainda posso contestar agora?",
+      "status": "PASS",
+      "value_ok": true,
+      "id_ok": true,
+      "details": [],
+      "resposta": "Ainda pode contestar o pedido DEMO-ANOM-003 (diferença R$ 80.00) até 2026-11-15.",
+      "tool_calls": [
+        {
+          "name": "obter_totais",
+          "args": {}
+        },
+        {
+          "name": "obter_divergencias",
+          "args": {}
+        }
+      ],
+      "expected": {
+        "naoSei": false,
+        "reais": [
+          "80.00"
+        ],
+        "ids": [
+          "DEMO-ANOM-003"
+        ],
+        "texts": [],
+        "textGroups": [],
+        "dataLimite": "2026-11-15",
+        "prazoAberto": true,
+        "forbidDataLimite": false
+      },
+      "latency_ms": 1641
+    },
+    {
+      "id": "q13",
+      "categoria": "prazo",
+      "pergunta": "Me confirma a data limite para reclamar do débito de cancelamento do DEMO-ANOM-003.",
+      "status": "PASS",
+      "value_ok": true,
+      "id_ok": true,
+      "details": [],
+      "resposta": "Divergência cancelamento_debitado no pedido DEMO-ANOM-003: cobrado R$ 80.00, esperado R$ 0.00, diferença R$ 80.00. Lançamentos: 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Orientação: contestar cancelamento até 2026-11-15 (prazo de 7 dias a partir da data do pedido). Data limite: 2026-11-15. Prazo aberto: sim. Pedido DEMO-ANOM-003: status CANCELADO, valor R$ 80.00, pagamento ONLINE.",
+      "tool_calls": [
+        {
+          "name": "obter_divergencias",
+          "args": {
+            "pedido_id_ifood": "DEMO-ANOM-003"
+          }
+        },
+        {
+          "name": "obter_pedidos",
+          "args": {
+            "pedido_id_ifood": "DEMO-ANOM-003"
+          }
+        }
+      ],
+      "expected": {
+        "naoSei": false,
+        "reais": [],
+        "ids": [
+          "DEMO-ANOM-003"
+        ],
+        "texts": [],
+        "textGroups": [],
+        "dataLimite": "2026-11-15",
+        "prazoAberto": true,
+        "forbidDataLimite": false
+      },
+      "latency_ms": 1286
+    },
+    {
+      "id": "q14",
+      "categoria": "sem_prazo",
+      "pergunta": "A comissão a mais do DEMO-ANOM-001 tem prazo de 7 dias para contestar?",
+      "status": "PASS",
+      "value_ok": true,
+      "id_ok": true,
+      "details": [],
+      "resposta": "Contrato Marketplace: comissão 12%, taxa online 3.2%, taxa de repasse semanal R$ 1.99. Divergência comissao_acima_contrato no pedido DEMO-ANOM-001: cobrado R$ 34.50, esperado R$ 18.00, diferença R$ 16.50. Lançamentos: e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Pedido DEMO-ANOM-001: status ENTREGUE, valor R$ 150.00, pagamento ONLINE.",
+      "tool_calls": [
+        {
+          "name": "obter_contrato",
+          "args": {}
+        },
+        {
+          "name": "obter_divergencias",
+          "args": {
+            "pedido_id_ifood": "DEMO-ANOM-001"
+          }
+        },
+        {
+          "name": "obter_pedidos",
+          "args": {
+            "pedido_id_ifood": "DEMO-ANOM-001"
+          }
+        }
+      ],
+      "expected": {
+        "naoSei": false,
+        "reais": [
+          "16.50"
+        ],
+        "ids": [
+          "DEMO-ANOM-001"
+        ],
+        "texts": [
+          "abrir chamado no suporte, sem prazo documentado"
+        ],
+        "textGroups": [],
+        "dataLimite": null,
+        "prazoAberto": null,
+        "forbidDataLimite": true
+      },
+      "latency_ms": 1160
+    },
+    {
+      "id": "q15",
+      "categoria": "sem_prazo",
+      "pergunta": "No caso da cobrança duplicada, existe data limite de contestação?",
+      "status": "PASS",
+      "value_ok": true,
+      "id_ok": true,
+      "details": [],
+      "resposta": "Perda total por divergências: R$ 207.50. Por tipo: comissão acima R$ 16.50, duplicada R$ 12.00, cancelamento R$ 175.00, taxa online em entrega R$ 4.00. Semana REPASSE-W3: repassado R$ -175.00, esperado R$ -80.00, diferença R$ 95.00. Semana REPASSE-W2: repassado R$ -127.57, esperado R$ -99.07, diferença R$ 28.50. Semana REPASSE-W1: repassado R$ -55.66, esperado R$ -55.66, diferença R$ 0.00. Semana REPASSE-W0: repassado R$ -161.91, esperado R$ -77.91, diferença R$ 84.00. Divergência comissao_acima_contrato no pedido DEMO-ANOM-001: cobrado R$ 34.50, esperado R$ 18.00, diferença R$ 16.50. Lançamentos: e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cobranca_duplicada no pedido DEMO-ANOM-002: cobrado R$ 12.00, esperado R$ 0.00, diferença R$ 12.00. Lançamentos: 934a099a-2129-4dc9-a076-5e24f1088ee3. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cancelamento_debitado no pedido DEMO-ANOM-003: cobrado R$ 80.00, esperado R$ 0.00, diferença R$ 80.00. Lançamentos: 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Orientação: contestar cancelamento até 2026-11-15 (prazo de 7 dias a partir da data do pedido). Data limite: 2026-11-15. Prazo aberto: sim. Divergência cancelamento_debitado no pedido DEMO-ANOM-004: cobrado R$ 95.00, esperado R$ 0.00, diferença R$ 95.00. Lançamentos: db39be5c-aea1-4508-bfb9-5b823de15269. Orientação: prazo de 7 dias expirado em 2026-10-25; abrir chamado no suporte. Data limite: 2026-10-25. Prazo aberto: não. Divergência taxa_online_em_pago_na_entrega no pedido DEMO-ANOM-005: cobrado R$ 4.00, esperado R$ 0.00, diferença R$ 4.00. Lançamentos: 18c994c5-46f9-4159-823b-e78db4ca5fe2. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada.",
+      "tool_calls": [
+        {
+          "name": "obter_totais",
+          "args": {}
+        },
+        {
+          "name": "obter_divergencias",
+          "args": {}
+        }
+      ],
+      "expected": {
+        "naoSei": false,
+        "reais": [],
+        "ids": [
+          "DEMO-ANOM-002"
+        ],
+        "texts": [
+          "abrir chamado no suporte, sem prazo documentado"
+        ],
+        "textGroups": [],
+        "dataLimite": null,
+        "prazoAberto": null,
+        "forbidDataLimite": true
+      },
+      "latency_ms": 1765
+    },
+    {
+      "id": "q16",
+      "categoria": "sem_prazo",
+      "pergunta": "A taxa online cobrada no pedido pago na entrega tem prazo documentado?",
+      "status": "PASS",
+      "value_ok": true,
+      "id_ok": true,
+      "details": [],
+      "resposta": "Contrato Marketplace: comissão 12%, taxa online 3.2%, taxa de repasse semanal R$ 1.99. Divergência comissao_acima_contrato no pedido DEMO-ANOM-001: cobrado R$ 34.50, esperado R$ 18.00, diferença R$ 16.50. Lançamentos: e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cobranca_duplicada no pedido DEMO-ANOM-002: cobrado R$ 12.00, esperado R$ 0.00, diferença R$ 12.00. Lançamentos: 934a099a-2129-4dc9-a076-5e24f1088ee3. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cancelamento_debitado no pedido DEMO-ANOM-003: cobrado R$ 80.00, esperado R$ 0.00, diferença R$ 80.00. Lançamentos: 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Orientação: contestar cancelamento até 2026-11-15 (prazo de 7 dias a partir da data do pedido). Data limite: 2026-11-15. Prazo aberto: sim. Divergência cancelamento_debitado no pedido DEMO-ANOM-004: cobrado R$ 95.00, esperado R$ 0.00, diferença R$ 95.00. Lançamentos: db39be5c-aea1-4508-bfb9-5b823de15269. Orientação: prazo de 7 dias expirado em 2026-10-25; abrir chamado no suporte. Data limite: 2026-10-25. Prazo aberto: não. Divergência taxa_online_em_pago_na_entrega no pedido DEMO-ANOM-005: cobrado R$ 4.00, esperado R$ 0.00, diferença R$ 4.00. Lançamentos: 18c994c5-46f9-4159-823b-e78db4ca5fe2. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Pedido DEMO-PED-W3-N1: status ENTREGUE, valor R$ 74.50, pagamento ONLINE. Pedido DEMO-PED-W3-N2: status ENTREGUE, valor R$ 83.00, pagamento ONLINE. Pedido DEMO-PED-W3-N3: status ENTREGUE, valor R$ 91.50, pagamento PAGO_NA_ENTREGA. Pedido DEMO-PED-W3-N4: status ENTREGUE, valor R$ 100.00, pagamento ONLINE. Pedido DEMO-ANOM-004: status CANCELADO, valor R$ 95.00, pagamento ONLINE. Pedido DEMO-PED-W3-N5: status ENTREGUE, valor R$ 108.50, pagamento ONLINE. Pedido DEMO-PED-W2-N1: status ENTREGUE, valor R$ 67.50, pagamento PAGO_NA_ENTREGA. Pedido DEMO-PED-W2-N2: status ENTREGUE, valor R$ 76.00, pagamento ONLINE. Pedido DEMO-PED-W2-N3: status ENTREGUE, valor R$ 84.50, pagamento ONLINE. Pedido DEMO-ANOM-002: status ENTREGUE, valor R$ 100.00, pagamento ONLINE. Pedido DEMO-PED-W2-N4: status ENTREGUE, valor R$ 93.00, pagamento PAGO_NA_ENTREGA. Pedido DEMO-PED-W2-N5: status ENTREGUE, valor R$ 101.50, pagamento ONLINE. Pedido DEMO-ANOM-001: status ENTREGUE, valor R$ 150.00, pagamento ONLINE. Pedido DEMO-PED-W1-N1: status ENTREGUE, valor R$ 60.50, pagamento ONLINE. Pedido DEMO-PED-W1-N2: status ENTREGUE, valor R$ 69.00, pagamento PAGO_NA_ENTREGA. Pedido DEMO-PED-W1-N3: status ENTREGUE, valor R$ 77.50, pagamento ONLINE. Pedido DEMO-PED-W1-N4: status ENTREGUE, valor R$ 86.00, pagamento ONLINE. Pedido DEMO-PED-W1-N5: status ENTREGUE, valor R$ 94.50, pagamento PAGO_NA_ENTREGA. Pedido DEMO-PED-W0-N1: status ENTREGUE, valor R$ 53.50, pagamento ONLINE. Pedido DEMO-ANOM-005: status ENTREGUE, valor R$ 125.00, pagamento PAGO_NA_ENTREGA. Pedido DEMO-PED-W0-N2: status ENTREGUE, valor R$ 62.00, pagamento ONLINE. Pedido DEMO-PED-W0-N3: status ENTREGUE, valor R$ 70.50, pagamento PAGO_NA_ENTREGA. Pedido DEMO-ANOM-003: status CANCELADO, valor R$ 80.00, pagamento ONLINE. Pedido DEMO-PED-W0-N4: status ENTREGUE, valor R$ 79.00, pagamento ONLINE. Pedido DEMO-PED-W0-N5: status ENTREGUE, valor R$ 87.50, pagamento ONLINE.",
+      "tool_calls": [
+        {
+          "name": "obter_contrato",
+          "args": {}
+        },
+        {
+          "name": "obter_divergencias",
+          "args": {}
+        },
+        {
+          "name": "obter_pedidos",
+          "args": {}
+        }
+      ],
+      "expected": {
+        "naoSei": false,
+        "reais": [],
+        "ids": [
+          "DEMO-ANOM-005"
+        ],
+        "texts": [
+          "abrir chamado no suporte, sem prazo documentado"
+        ],
+        "textGroups": [],
+        "dataLimite": null,
+        "prazoAberto": null,
+        "forbidDataLimite": true
+      },
+      "latency_ms": 1793
+    },
+    {
+      "id": "q17",
+      "categoria": "rascunho",
+      "pergunta": "Monta um rascunho de contestação pro cancelamento DEMO-ANOM-003, por favor.",
+      "status": "PASS",
+      "value_ok": true,
+      "id_ok": true,
+      "details": [],
+      "resposta": "Rascunho de contestação — pedido DEMO-ANOM-003\nStatus do pedido: CANCELADO\nMétodo de pagamento: ONLINE\nValor do pedido: R$ 80.00\nData do pedido: 2026-11-08\n\nTipo: cancelamento_debitado\nValor cobrado: R$ 80.00\nValor esperado: R$ 0.00\nDiferença: R$ 80.00\nIDs dos lançamentos: 966f1736-1c42-44d1-8ce2-6f4bb10f97cf\nSemana: REPASSE-W0\nData limite para contestação: 2026-11-15\nPrazo aberto: sim\nOrientação: contestar cancelamento até 2026-11-15 (prazo de 7 dias a partir da data do pedido)\n\nEste texto é apenas um rascunho local. Nada foi enviado a suporte ou a qualquer canal externo.",
+      "tool_calls": [
+        {
+          "name": "obter_divergencias",
+          "args": {
+            "pedido_id_ifood": "DEMO-ANOM-003"
+          }
+        },
+        {
+          "name": "obter_pedidos",
+          "args": {
+            "pedido_id_ifood": "DEMO-ANOM-003"
+          }
+        },
+        {
+          "name": "rascunhar_contestacao",
+          "args": {
+            "pedido_id_ifood": "DEMO-ANOM-003"
+          }
+        }
+      ],
+      "expected": {
+        "naoSei": false,
+        "reais": [
+          "80.00"
+        ],
+        "ids": [
+          "DEMO-ANOM-003",
+          "966f1736-1c42-44d1-8ce2-6f4bb10f97cf"
+        ],
+        "texts": [],
+        "textGroups": [],
+        "dataLimite": "2026-11-15",
+        "prazoAberto": true,
+        "forbidDataLimite": false
+      },
+      "latency_ms": 1267
+    },
+    {
+      "id": "q18",
+      "categoria": "rascunho",
+      "pergunta": "Preciso de um texto de contestação do pedido DEMO-ANOM-001 (comissão errada).",
+      "status": "PASS",
+      "value_ok": true,
+      "id_ok": true,
+      "details": [],
+      "resposta": "Rascunho de contestação — pedido DEMO-ANOM-001\nStatus do pedido: ENTREGUE\nMétodo de pagamento: ONLINE\nValor do pedido: R$ 150.00\nData do pedido: 2026-10-26\n\nTipo: comissao_acima_contrato\nValor cobrado: R$ 34.50\nValor esperado: R$ 18.00\nDiferença: R$ 16.50\nIDs dos lançamentos: e7558abe-78dd-42a3-8e49-7c9c9b0ab024\nSemana: REPASSE-W2\nData limite: não se aplica\nOrientação: abrir chamado no suporte, sem prazo documentado\n\nEste texto é apenas um rascunho local. Nada foi enviado a suporte ou a qualquer canal externo.",
+      "tool_calls": [
+        {
+          "name": "obter_contrato",
+          "args": {}
+        },
+        {
+          "name": "obter_divergencias",
+          "args": {
+            "pedido_id_ifood": "DEMO-ANOM-001"
+          }
+        },
+        {
+          "name": "obter_pedidos",
+          "args": {
+            "pedido_id_ifood": "DEMO-ANOM-001"
+          }
+        },
+        {
+          "name": "rascunhar_contestacao",
+          "args": {
+            "pedido_id_ifood": "DEMO-ANOM-001"
+          }
+        }
+      ],
+      "expected": {
+        "naoSei": false,
+        "reais": [
+          "16.50"
+        ],
+        "ids": [
+          "DEMO-ANOM-001",
+          "e7558abe-78dd-42a3-8e49-7c9c9b0ab024"
+        ],
+        "texts": [
+          "abrir chamado no suporte, sem prazo documentado"
+        ],
+        "textGroups": [],
+        "dataLimite": null,
+        "prazoAberto": null,
+        "forbidDataLimite": true
+      },
+      "latency_ms": 1672
+    },
+    {
+      "id": "q19",
+      "categoria": "rascunho",
+      "pergunta": "Gera o rascunho pra eu reclamar da taxa indevida no DEMO-ANOM-005.",
+      "status": "PASS",
+      "value_ok": true,
+      "id_ok": true,
+      "details": [],
+      "resposta": "Rascunho de contestação — pedido DEMO-ANOM-005\nStatus do pedido: ENTREGUE\nMétodo de pagamento: PAGO_NA_ENTREGA\nValor do pedido: R$ 125.00\nData do pedido: 2026-11-06\n\nTipo: taxa_online_em_pago_na_entrega\nValor cobrado: R$ 4.00\nValor esperado: R$ 0.00\nDiferença: R$ 4.00\nIDs dos lançamentos: 18c994c5-46f9-4159-823b-e78db4ca5fe2\nSemana: REPASSE-W0\nData limite: não se aplica\nOrientação: abrir chamado no suporte, sem prazo documentado\n\nEste texto é apenas um rascunho local. Nada foi enviado a suporte ou a qualquer canal externo.",
+      "tool_calls": [
+        {
+          "name": "obter_contrato",
+          "args": {}
+        },
+        {
+          "name": "obter_divergencias",
+          "args": {
+            "pedido_id_ifood": "DEMO-ANOM-005"
+          }
+        },
+        {
+          "name": "obter_pedidos",
+          "args": {
+            "pedido_id_ifood": "DEMO-ANOM-005"
+          }
+        },
+        {
+          "name": "rascunhar_contestacao",
+          "args": {
+            "pedido_id_ifood": "DEMO-ANOM-005"
+          }
+        }
+      ],
+      "expected": {
+        "naoSei": false,
+        "reais": [
+          "4.00"
+        ],
+        "ids": [
+          "DEMO-ANOM-005",
+          "18c994c5-46f9-4159-823b-e78db4ca5fe2"
+        ],
+        "texts": [],
+        "textGroups": [],
+        "dataLimite": null,
+        "prazoAberto": null,
+        "forbidDataLimite": false
+      },
+      "latency_ms": 2110
+    },
+    {
+      "id": "q20",
+      "categoria": "contrato",
+      "pergunta": "Qual é a comissão do meu contrato com a plataforma?",
+      "status": "PASS",
+      "value_ok": true,
+      "id_ok": true,
+      "details": [],
+      "resposta": "Contrato Marketplace: comissão 12%, taxa online 3.2%, taxa de repasse semanal R$ 1.99.",
+      "tool_calls": [
+        {
+          "name": "obter_contrato",
+          "args": {}
+        }
+      ],
+      "expected": {
+        "naoSei": false,
+        "reais": [],
+        "ids": [],
+        "texts": [
+          "12%"
+        ],
+        "textGroups": [],
+        "dataLimite": null,
+        "prazoAberto": null,
+        "forbidDataLimite": false
+      },
+      "latency_ms": 1295
+    },
+    {
+      "id": "q21",
+      "categoria": "contrato",
+      "pergunta": "Me lembra as taxas: comissão, pagamento online e repasse semanal.",
+      "status": "PASS",
+      "value_ok": true,
+      "id_ok": true,
+      "details": [],
+      "resposta": "Contrato Marketplace: comissão 12%, taxa online 3.2%, taxa de repasse semanal R$ 1.99. Perda total por divergências: R$ 207.50. Por tipo: comissão acima R$ 16.50, duplicada R$ 12.00, cancelamento R$ 175.00, taxa online em entrega R$ 4.00. Semana REPASSE-W3: repassado R$ -175.00, esperado R$ -80.00, diferença R$ 95.00. Semana REPASSE-W2: repassado R$ -127.57, esperado R$ -99.07, diferença R$ 28.50. Semana REPASSE-W1: repassado R$ -55.66, esperado R$ -55.66, diferença R$ 0.00. Semana REPASSE-W0: repassado R$ -161.91, esperado R$ -77.91, diferença R$ 84.00. Divergência comissao_acima_contrato no pedido DEMO-ANOM-001: cobrado R$ 34.50, esperado R$ 18.00, diferença R$ 16.50. Lançamentos: e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cobranca_duplicada no pedido DEMO-ANOM-002: cobrado R$ 12.00, esperado R$ 0.00, diferença R$ 12.00. Lançamentos: 934a099a-2129-4dc9-a076-5e24f1088ee3. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cancelamento_debitado no pedido DEMO-ANOM-003: cobrado R$ 80.00, esperado R$ 0.00, diferença R$ 80.00. Lançamentos: 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Orientação: contestar cancelamento até 2026-11-15 (prazo de 7 dias a partir da data do pedido). Data limite: 2026-11-15. Prazo aberto: sim. Divergência cancelamento_debitado no pedido DEMO-ANOM-004: cobrado R$ 95.00, esperado R$ 0.00, diferença R$ 95.00. Lançamentos: db39be5c-aea1-4508-bfb9-5b823de15269. Orientação: prazo de 7 dias expirado em 2026-10-25; abrir chamado no suporte. Data limite: 2026-10-25. Prazo aberto: não. Divergência taxa_online_em_pago_na_entrega no pedido DEMO-ANOM-005: cobrado R$ 4.00, esperado R$ 0.00, diferença R$ 4.00. Lançamentos: 18c994c5-46f9-4159-823b-e78db4ca5fe2. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada.",
+      "tool_calls": [
+        {
+          "name": "obter_contrato",
+          "args": {}
+        },
+        {
+          "name": "obter_totais",
+          "args": {}
+        },
+        {
+          "name": "obter_divergencias",
+          "args": {}
+        }
+      ],
+      "expected": {
+        "naoSei": false,
+        "reais": [
+          "1.99"
+        ],
+        "ids": [],
+        "texts": [
+          "12%"
+        ],
+        "textGroups": [
+          [
+            "3,2%",
+            "3.2%",
+            "3.20",
+            "3,20"
+          ]
+        ],
+        "dataLimite": null,
+        "prazoAberto": null,
+        "forbidDataLimite": false
+      },
+      "latency_ms": 2012
+    },
+    {
+      "id": "q22",
+      "categoria": "contrato",
+      "pergunta": "Estou no plano Marketplace mesmo?",
+      "status": "PASS",
+      "value_ok": true,
+      "id_ok": true,
+      "details": [],
+      "resposta": "Contrato Marketplace: comissão 12%, taxa online 3.2%, taxa de repasse semanal R$ 1.99.",
+      "tool_calls": [
+        {
+          "name": "obter_contrato",
+          "args": {}
+        }
+      ],
+      "expected": {
+        "naoSei": false,
+        "reais": [],
+        "ids": [],
+        "texts": [
+          "Marketplace"
+        ],
+        "textGroups": [],
+        "dataLimite": null,
+        "prazoAberto": null,
+        "forbidDataLimite": false
+      },
+      "latency_ms": 1227
+    },
+    {
+      "id": "q23",
+      "categoria": "lookup",
+      "pergunta": "O que aconteceu com o pedido DEMO-ANOM-002? Quanto cobraram a mais?",
+      "status": "PASS",
+      "value_ok": true,
+      "id_ok": true,
+      "details": [],
+      "resposta": "Divergência cobranca_duplicada no pedido DEMO-ANOM-002: cobrado R$ 12.00, esperado R$ 0.00, diferença R$ 12.00. Lançamentos: 934a099a-2129-4dc9-a076-5e24f1088ee3. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Pedido DEMO-ANOM-002: status ENTREGUE, valor R$ 100.00, pagamento ONLINE.",
+      "tool_calls": [
+        {
+          "name": "obter_divergencias",
+          "args": {
+            "pedido_id_ifood": "DEMO-ANOM-002"
+          }
+        },
+        {
+          "name": "obter_pedidos",
+          "args": {
+            "pedido_id_ifood": "DEMO-ANOM-002"
+          }
+        }
+      ],
+      "expected": {
+        "naoSei": false,
+        "reais": [
+          "12.00"
+        ],
+        "ids": [
+          "DEMO-ANOM-002",
+          "934a099a-2129-4dc9-a076-5e24f1088ee3"
+        ],
+        "texts": [],
+        "textGroups": [],
+        "dataLimite": null,
+        "prazoAberto": null,
+        "forbidDataLimite": false
+      },
+      "latency_ms": 892
+    },
+    {
+      "id": "q24",
+      "categoria": "lookup",
+      "pergunta": "Consulta o status e o valor do pedido DEMO-ANOM-004 pra mim.",
+      "status": "PASS",
+      "value_ok": true,
+      "id_ok": true,
+      "details": [],
+      "resposta": "Divergência cancelamento_debitado no pedido DEMO-ANOM-004: cobrado R$ 95.00, esperado R$ 0.00, diferença R$ 95.00. Lançamentos: db39be5c-aea1-4508-bfb9-5b823de15269. Orientação: prazo de 7 dias expirado em 2026-10-25; abrir chamado no suporte. Data limite: 2026-10-25. Prazo aberto: não. Pedido DEMO-ANOM-004: status CANCELADO, valor R$ 95.00, pagamento ONLINE.",
+      "tool_calls": [
+        {
+          "name": "obter_divergencias",
+          "args": {
+            "pedido_id_ifood": "DEMO-ANOM-004"
+          }
+        },
+        {
+          "name": "obter_pedidos",
+          "args": {
+            "pedido_id_ifood": "DEMO-ANOM-004"
+          }
+        }
+      ],
+      "expected": {
+        "naoSei": false,
+        "reais": [
+          "95.00"
+        ],
+        "ids": [
+          "DEMO-ANOM-004"
+        ],
+        "texts": [
+          "CANCELADO"
+        ],
+        "textGroups": [],
+        "dataLimite": null,
+        "prazoAberto": null,
+        "forbidDataLimite": false
+      },
+      "latency_ms": 894
+    },
+    {
+      "id": "q25",
+      "categoria": "lookup",
+      "pergunta": "Lista os lançamentos do pedido DEMO-ANOM-001 e diz a porcentagem da comissão cobrada.",
+      "status": "PASS",
+      "value_ok": true,
+      "id_ok": true,
+      "details": [],
+      "resposta": "Contrato Marketplace: comissão 12%, taxa online 3.2%, taxa de repasse semanal R$ 1.99. Divergência comissao_acima_contrato no pedido DEMO-ANOM-001: cobrado R$ 34.50, esperado R$ 18.00, diferença R$ 16.50. Lançamentos: e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Pedido DEMO-ANOM-001: status ENTREGUE, valor R$ 150.00, pagamento ONLINE. Lançamento e7558abe-78dd-42a3-8e49-7c9c9b0ab024 (Comissão do iFood) do pedido DEMO-ANOM-001: valor R$ -34.5, percentual 23. Lançamento 745a8f62-ef95-4566-9472-83fa2daeca2d (Taxa de pagamento online) do pedido DEMO-ANOM-001: valor R$ -4.8, percentual 3.2.",
+      "tool_calls": [
+        {
+          "name": "obter_contrato",
+          "args": {}
+        },
+        {
+          "name": "obter_divergencias",
+          "args": {
+            "pedido_id_ifood": "DEMO-ANOM-001"
+          }
+        },
+        {
+          "name": "obter_pedidos",
+          "args": {
+            "pedido_id_ifood": "DEMO-ANOM-001"
+          }
+        },
+        {
+          "name": "listar_lancamentos",
+          "args": {
+            "pedido_id_ifood": "DEMO-ANOM-001"
+          }
+        }
+      ],
+      "expected": {
+        "naoSei": false,
+        "reais": [
+          "34.50",
+          "16.50"
+        ],
+        "ids": [
+          "DEMO-ANOM-001",
+          "e7558abe-78dd-42a3-8e49-7c9c9b0ab024"
+        ],
+        "texts": [
+          "23"
+        ],
+        "textGroups": [],
+        "dataLimite": null,
+        "prazoAberto": null,
+        "forbidDataLimite": false
+      },
+      "latency_ms": 1269
+    },
+    {
+      "id": "q26",
+      "categoria": "lookup",
+      "pergunta": "Tem lançamento de 'Débito por cancelamento'? Em quais pedidos?",
+      "status": "PASS",
+      "value_ok": true,
+      "id_ok": true,
+      "details": [],
+      "resposta": "Perda total por divergências: R$ 207.50. Por tipo: comissão acima R$ 16.50, duplicada R$ 12.00, cancelamento R$ 175.00, taxa online em entrega R$ 4.00. Semana REPASSE-W3: repassado R$ -175.00, esperado R$ -80.00, diferença R$ 95.00. Semana REPASSE-W2: repassado R$ -127.57, esperado R$ -99.07, diferença R$ 28.50. Semana REPASSE-W1: repassado R$ -55.66, esperado R$ -55.66, diferença R$ 0.00. Semana REPASSE-W0: repassado R$ -161.91, esperado R$ -77.91, diferença R$ 84.00. Divergência comissao_acima_contrato no pedido DEMO-ANOM-001: cobrado R$ 34.50, esperado R$ 18.00, diferença R$ 16.50. Lançamentos: e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cobranca_duplicada no pedido DEMO-ANOM-002: cobrado R$ 12.00, esperado R$ 0.00, diferença R$ 12.00. Lançamentos: 934a099a-2129-4dc9-a076-5e24f1088ee3. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cancelamento_debitado no pedido DEMO-ANOM-003: cobrado R$ 80.00, esperado R$ 0.00, diferença R$ 80.00. Lançamentos: 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Orientação: contestar cancelamento até 2026-11-15 (prazo de 7 dias a partir da data do pedido). Data limite: 2026-11-15. Prazo aberto: sim. Divergência cancelamento_debitado no pedido DEMO-ANOM-004: cobrado R$ 95.00, esperado R$ 0.00, diferença R$ 95.00. Lançamentos: db39be5c-aea1-4508-bfb9-5b823de15269. Orientação: prazo de 7 dias expirado em 2026-10-25; abrir chamado no suporte. Data limite: 2026-10-25. Prazo aberto: não. Divergência taxa_online_em_pago_na_entrega no pedido DEMO-ANOM-005: cobrado R$ 4.00, esperado R$ 0.00, diferença R$ 4.00. Lançamentos: 18c994c5-46f9-4159-823b-e78db4ca5fe2. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Pedido DEMO-PED-W3-N1: status ENTREGUE, valor R$ 74.50, pagamento ONLINE. Pedido DEMO-PED-W3-N2: status ENTREGUE, valor R$ 83.00, pagamento ONLINE. Pedido DEMO-PED-W3-N3: status ENTREGUE, valor R$ 91.50, pagamento PAGO_NA_ENTREGA. Pedido DEMO-PED-W3-N4: status ENTREGUE, valor R$ 100.00, pagamento ONLINE. Pedido DEMO-ANOM-004: status CANCELADO, valor R$ 95.00, pagamento ONLINE. Pedido DEMO-PED-W3-N5: status ENTREGUE, valor R$ 108.50, pagamento ONLINE. Pedido DEMO-PED-W2-N1: status ENTREGUE, valor R$ 67.50, pagamento PAGO_NA_ENTREGA. Pedido DEMO-PED-W2-N2: status ENTREGUE, valor R$ 76.00, pagamento ONLINE. Pedido DEMO-PED-W2-N3: status ENTREGUE, valor R$ 84.50, pagamento ONLINE. Pedido DEMO-ANOM-002: status ENTREGUE, valor R$ 100.00, pagamento ONLINE. Pedido DEMO-PED-W2-N4: status ENTREGUE, valor R$ 93.00, pagamento PAGO_NA_ENTREGA. Pedido DEMO-PED-W2-N5: status ENTREGUE, valor R$ 101.50, pagamento ONLINE. Pedido DEMO-ANOM-001: status ENTREGUE, valor R$ 150.00, pagamento ONLINE. Pedido DEMO-PED-W1-N1: status ENTREGUE, valor R$ 60.50, pagamento ONLINE. Pedido DEMO-PED-W1-N2: status ENTREGUE, valor R$ 69.00, pagamento PAGO_NA_ENTREGA. Pedido DEMO-PED-W1-N3: status ENTREGUE, valor R$ 77.50, pagamento ONLINE. Pedido DEMO-PED-W1-N4: status ENTREGUE, valor R$ 86.00, pagamento ONLINE. Pedido DEMO-PED-W1-N5: status ENTREGUE, valor R$ 94.50, pagamento PAGO_NA_ENTREGA. Pedido DEMO-PED-W0-N1: status ENTREGUE, valor R$ 53.50, pagamento ONLINE. Pedido DEMO-ANOM-005: status ENTREGUE, valor R$ 125.00, pagamento PAGO_NA_ENTREGA. Pedido DEMO-PED-W0-N2: status ENTREGUE, valor R$ 62.00, pagamento ONLINE. Pedido DEMO-PED-W0-N3: status ENTREGUE, valor R$ 70.50, pagamento PAGO_NA_ENTREGA. Pedido DEMO-ANOM-003: status CANCELADO, valor R$ 80.00, pagamento ONLINE. Pedido DEMO-PED-W0-N4: status ENTREGUE, valor R$ 79.00, pagamento ONLINE. Pedido DEMO-PED-W0-N5: status ENTREGUE, valor R$ 87.50, pagamento ONLINE. Lançamento db39be5c-aea1-4508-bfb9-5b823de15269 (Débito por cancelamento) do pedido DEMO-ANOM-004: valor R$ -95, percentual null. Lançamento 966f1736-1c42-44d1-8ce2-6f4bb10f97cf (Débito por cancelamento) do pedido DEMO-ANOM-003: valor R$ -80, percentual null.",
+      "tool_calls": [
+        {
+          "name": "obter_totais",
+          "args": {}
+        },
+        {
+          "name": "obter_divergencias",
+          "args": {}
+        },
+        {
+          "name": "obter_pedidos",
+          "args": {}
+        },
+        {
+          "name": "listar_lancamentos",
+          "args": {
+            "descricao": "Débito por cancelamento"
+          }
+        }
+      ],
+      "expected": {
+        "naoSei": false,
+        "reais": [
+          "80.00",
+          "95.00"
+        ],
+        "ids": [
+          "DEMO-ANOM-003",
+          "DEMO-ANOM-004"
+        ],
+        "texts": [],
+        "textGroups": [],
+        "dataLimite": null,
+        "prazoAberto": null,
+        "forbidDataLimite": false
+      },
+      "latency_ms": 876
+    },
+    {
+      "id": "q27",
+      "categoria": "nao_sei",
+      "pergunta": "Como está o pedido DEMO-ANOM-999 no meu repasse?",
+      "status": "PASS",
+      "value_ok": true,
+      "id_ok": true,
+      "details": [],
+      "resposta": "não sei: isso não está nos dados disponíveis do restaurante.",
+      "tool_calls": [
+        {
+          "name": "obter_totais",
+          "args": {}
+        },
+        {
+          "name": "obter_divergencias",
+          "args": {
+            "pedido_id_ifood": "DEMO-ANOM-999"
+          }
+        },
+        {
+          "name": "obter_pedidos",
+          "args": {
+            "pedido_id_ifood": "DEMO-ANOM-999"
+          }
+        }
+      ],
+      "expected": {
+        "naoSei": true,
+        "reais": [],
+        "ids": [],
+        "texts": [],
+        "textGroups": [],
+        "dataLimite": null,
+        "prazoAberto": null,
+        "forbidDataLimite": false
+      },
+      "latency_ms": 1318
+    },
+    {
+      "id": "q28",
+      "categoria": "nao_sei",
+      "pergunta": "Quanto o Restaurante Central da esquina perdeu esse mês?",
+      "status": "PASS",
+      "value_ok": true,
+      "id_ok": true,
+      "details": [],
+      "resposta": "não sei: só tenho dados do restaurante autenticado; não há informações de outro restaurante.",
+      "tool_calls": [
+        {
+          "name": "obter_totais",
+          "args": {}
+        }
+      ],
+      "expected": {
+        "naoSei": true,
+        "reais": [],
+        "ids": [],
+        "texts": [],
+        "textGroups": [],
+        "dataLimite": null,
+        "prazoAberto": null,
+        "forbidDataLimite": false
+      },
+      "latency_ms": 899
+    },
+    {
+      "id": "q29",
+      "categoria": "nao_sei",
+      "pergunta": "Me mostra o fechamento da semana REPASSE-W9, que ainda nem começou.",
+      "status": "PASS",
+      "value_ok": true,
+      "id_ok": true,
+      "details": [],
+      "resposta": "não sei: a semana REPASSE-W9 não está nos dados.",
+      "tool_calls": [
+        {
+          "name": "obter_totais",
+          "args": {}
+        },
+        {
+          "name": "obter_divergencias",
+          "args": {}
+        }
+      ],
+      "expected": {
+        "naoSei": true,
+        "reais": [],
+        "ids": [],
+        "texts": [],
+        "textGroups": [],
+        "dataLimite": null,
+        "prazoAberto": null,
+        "forbidDataLimite": false
+      },
+      "latency_ms": 849
+    },
+    {
+      "id": "q30",
+      "categoria": "nao_sei",
+      "pergunta": "Qual foi o valor do pedido PEDIDO-INEXISTENTE-42?",
+      "status": "PASS",
+      "value_ok": true,
+      "id_ok": true,
+      "details": [],
+      "resposta": "não sei: isso não está nos dados disponíveis do restaurante.",
+      "tool_calls": [
+        {
+          "name": "obter_pedidos",
+          "args": {
+            "pedido_id_ifood": "PEDIDO-INEXISTENTE-42"
+          }
+        }
+      ],
+      "expected": {
+        "naoSei": true,
+        "reais": [],
+        "ids": [],
+        "texts": [],
+        "textGroups": [],
+        "dataLimite": null,
+        "prazoAberto": null,
+        "forbidDataLimite": false
+      },
+      "latency_ms": 913
+    }
+  ]
+}

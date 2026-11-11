@@ -8,8 +8,10 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "typecheck": "tsc -b --pretty false",
-    "test": "node --experimental-strip-types --test src/rules/**/*.test.ts src/agent/**/*.test.ts",
+    "test": "node --experimental-strip-types --test src/rules/**/*.test.ts src/agent/**/*.test.ts eval/c7.test.ts",
     "agent:ask": "node --experimental-strip-types -- scripts/agent-ask.ts",
+    "eval": "node --experimental-strip-types eval/run.ts",
+    "eval:c7": "node --experimental-strip-types eval/check-c7.ts",
     "preview": "vite preview"
   },
   "dependencies": {

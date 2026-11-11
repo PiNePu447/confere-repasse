@@ -1,0 +1,323 @@
+[
+  {
+    "id": "q01",
+    "categoria": "totais",
+    "pergunta": "No total, quanto eu perdi com as divergências do repasse?",
+    "grade": {
+      "mode": "assert",
+      "expect_reais": [{ "engine": "perdido_total" }],
+      "expect_ids": []
+    }
+  },
+  {
+    "id": "q02",
+    "categoria": "totais",
+    "pergunta": "Me mostra o valor perdido separado por tipo de problema.",
+    "grade": {
+      "mode": "assert",
+      "expect_reais": [
+        { "engine": "perdido_por_tipo", "key": "comissao_acima_contrato" },
+        { "engine": "perdido_por_tipo", "key": "cobranca_duplicada" },
+        { "engine": "perdido_por_tipo", "key": "cancelamento_debitado" },
+        { "engine": "perdido_por_tipo", "key": "taxa_online_em_pago_na_entrega" }
+      ],
+      "expect_ids": []
+    }
+  },
+  {
+    "id": "q03",
+    "categoria": "totais",
+    "pergunta": "Quanto foi o prejuízo só das comissões cobradas a mais?",
+    "grade": {
+      "mode": "assert",
+      "expect_reais": [{ "engine": "perdido_por_tipo", "key": "comissao_acima_contrato" }],
+      "expect_ids": []
+    }
+  },
+  {
+    "id": "q04",
+    "categoria": "totais",
+    "pergunta": "E o total que perdi com cancelamentos debitados no repasse?",
+    "grade": {
+      "mode": "assert",
+      "expect_reais": [{ "engine": "perdido_por_tipo", "key": "cancelamento_debitado" }],
+      "expect_ids": []
+    }
+  },
+  {
+    "id": "q05",
+    "categoria": "totais",
+    "pergunta": "Qual o valor perdido por cobrança duplicada?",
+    "grade": {
+      "mode": "assert",
+      "expect_reais": [{ "engine": "perdido_por_tipo", "key": "cobranca_duplicada" }],
+      "expect_ids": ["DEMO-ANOM-002"]
+    }
+  },
+  {
+    "id": "q06",
+    "categoria": "totais",
+    "pergunta": "Tem perda por taxa online em pedido pago na entrega? Quanto?",
+    "grade": {
+      "mode": "assert",
+      "expect_reais": [{ "engine": "perdido_por_tipo", "key": "taxa_online_em_pago_na_entrega" }],
+      "expect_ids": ["DEMO-ANOM-005"]
+    }
+  },
+  {
+    "id": "q07",
+    "categoria": "semana",
+    "pergunta": "Por que a semana REPASSE-W0 veio mais baixa do que o esperado?",
+    "grade": {
+      "mode": "assert",
+      "expect_reais": [
+        { "engine": "semana", "semana": "REPASSE-W0", "field": "diferenca" },
+        { "divergencia": "DEMO-ANOM-003", "field": "diferenca" },
+        { "divergencia": "DEMO-ANOM-005", "field": "diferenca" }
+      ],
+      "expect_ids": ["DEMO-ANOM-003", "DEMO-ANOM-005"]
+    }
+  },
+  {
+    "id": "q08",
+    "categoria": "semana",
+    "pergunta": "Na REPASSE-W2, quanto deixei de receber por causa das divergências?",
+    "grade": {
+      "mode": "assert",
+      "expect_reais": [{ "engine": "semana", "semana": "REPASSE-W2", "field": "diferenca" }],
+      "expect_ids": []
+    }
+  },
+  {
+    "id": "q09",
+    "categoria": "semana",
+    "pergunta": "A semana REPASSE-W1 teve alguma perda por divergência?",
+    "grade": {
+      "mode": "assert",
+      "expect_reais": [{ "engine": "semana", "semana": "REPASSE-W1", "field": "diferenca" }],
+      "expect_ids": []
+    }
+  },
+  {
+    "id": "q10",
+    "categoria": "prazo",
+    "pergunta": "Ainda dá tempo de contestar o cancelamento do pedido DEMO-ANOM-003? Qual a data limite?",
+    "grade": {
+      "mode": "assert",
+      "expect_reais": [{ "divergencia": "DEMO-ANOM-003", "field": "diferenca" }],
+      "expect_ids": ["DEMO-ANOM-003"],
+      "expect_data_limite_of": "DEMO-ANOM-003",
+      "expect_prazo_aberto": true
+    }
+  },
+  {
+    "id": "q11",
+    "categoria": "prazo",
+    "pergunta": "O cancelamento DEMO-ANOM-004 ainda está dentro dos 7 dias?",
+    "grade": {
+      "mode": "assert",
+      "expect_reais": [{ "divergencia": "DEMO-ANOM-004", "field": "diferenca" }],
+      "expect_ids": ["DEMO-ANOM-004"],
+      "expect_data_limite_of": "DEMO-ANOM-004",
+      "expect_prazo_aberto": false
+    }
+  },
+  {
+    "id": "q12",
+    "categoria": "prazo",
+    "pergunta": "Quais cancelamentos eu ainda posso contestar agora?",
+    "grade": {
+      "mode": "assert",
+      "expect_reais": [{ "divergencia": "DEMO-ANOM-003", "field": "diferenca" }],
+      "expect_ids": ["DEMO-ANOM-003"],
+      "expect_data_limite_of": "DEMO-ANOM-003",
+      "expect_prazo_aberto": true
+    }
+  },
+  {
+    "id": "q13",
+    "categoria": "prazo",
+    "pergunta": "Me confirma a data limite para reclamar do débito de cancelamento do DEMO-ANOM-003.",
+    "grade": {
+      "mode": "assert",
+      "expect_ids": ["DEMO-ANOM-003"],
+      "expect_data_limite_of": "DEMO-ANOM-003"
+    }
+  },
+  {
+    "id": "q14",
+    "categoria": "sem_prazo",
+    "pergunta": "A comissão a mais do DEMO-ANOM-001 tem prazo de 7 dias para contestar?",
+    "grade": {
+      "mode": "assert",
+      "expect_reais": [{ "divergencia": "DEMO-ANOM-001", "field": "diferenca" }],
+      "expect_ids": ["DEMO-ANOM-001"],
+      "expect_texts": ["abrir chamado no suporte, sem prazo documentado"],
+      "forbid_data_limite": true
+    }
+  },
+  {
+    "id": "q15",
+    "categoria": "sem_prazo",
+    "pergunta": "No caso da cobrança duplicada, existe data limite de contestação?",
+    "grade": {
+      "mode": "assert",
+      "expect_ids": ["DEMO-ANOM-002"],
+      "expect_texts": ["abrir chamado no suporte, sem prazo documentado"],
+      "forbid_data_limite": true
+    }
+  },
+  {
+    "id": "q16",
+    "categoria": "sem_prazo",
+    "pergunta": "A taxa online cobrada no pedido pago na entrega tem prazo documentado?",
+    "grade": {
+      "mode": "assert",
+      "expect_ids": ["DEMO-ANOM-005"],
+      "expect_texts": ["abrir chamado no suporte, sem prazo documentado"],
+      "forbid_data_limite": true
+    }
+  },
+  {
+    "id": "q17",
+    "categoria": "rascunho",
+    "pergunta": "Monta um rascunho de contestação pro cancelamento DEMO-ANOM-003, por favor.",
+    "grade": {
+      "mode": "assert",
+      "expect_reais": [{ "divergencia": "DEMO-ANOM-003", "field": "diferenca" }],
+      "expect_ids": ["DEMO-ANOM-003"],
+      "expect_data_limite_of": "DEMO-ANOM-003",
+      "expect_lancamento_ids_of": "DEMO-ANOM-003"
+    }
+  },
+  {
+    "id": "q18",
+    "categoria": "rascunho",
+    "pergunta": "Preciso de um texto de contestação do pedido DEMO-ANOM-001 (comissão errada).",
+    "grade": {
+      "mode": "assert",
+      "expect_reais": [{ "divergencia": "DEMO-ANOM-001", "field": "diferenca" }],
+      "expect_ids": ["DEMO-ANOM-001"],
+      "expect_texts": ["abrir chamado no suporte, sem prazo documentado"],
+      "forbid_data_limite": true,
+      "expect_lancamento_ids_of": "DEMO-ANOM-001"
+    }
+  },
+  {
+    "id": "q19",
+    "categoria": "rascunho",
+    "pergunta": "Gera o rascunho pra eu reclamar da taxa indevida no DEMO-ANOM-005.",
+    "grade": {
+      "mode": "assert",
+      "expect_reais": [{ "divergencia": "DEMO-ANOM-005", "field": "diferenca" }],
+      "expect_ids": ["DEMO-ANOM-005"],
+      "expect_lancamento_ids_of": "DEMO-ANOM-005"
+    }
+  },
+  {
+    "id": "q20",
+    "categoria": "contrato",
+    "pergunta": "Qual é a comissão do meu contrato com a plataforma?",
+    "grade": {
+      "mode": "assert",
+      "expect_texts": ["12%"],
+      "expect_ids": []
+    }
+  },
+  {
+    "id": "q21",
+    "categoria": "contrato",
+    "pergunta": "Me lembra as taxas: comissão, pagamento online e repasse semanal.",
+    "grade": {
+      "mode": "assert",
+      "expect_reais": [{ "contrato": "taxa_repasse_semanal" }],
+      "expect_texts": ["12%"],
+      "expect_text_groups": [["3,2%", "3.2%", "3.20", "3,20"]],
+      "expect_ids": []
+    }
+  },
+  {
+    "id": "q22",
+    "categoria": "contrato",
+    "pergunta": "Estou no plano Marketplace mesmo?",
+    "grade": {
+      "mode": "assert",
+      "expect_texts": ["Marketplace"],
+      "expect_ids": []
+    }
+  },
+  {
+    "id": "q23",
+    "categoria": "lookup",
+    "pergunta": "O que aconteceu com o pedido DEMO-ANOM-002? Quanto cobraram a mais?",
+    "grade": {
+      "mode": "assert",
+      "expect_reais": [{ "divergencia": "DEMO-ANOM-002", "field": "diferenca" }],
+      "expect_ids": ["DEMO-ANOM-002"],
+      "expect_lancamento_ids_of": "DEMO-ANOM-002"
+    }
+  },
+  {
+    "id": "q24",
+    "categoria": "lookup",
+    "pergunta": "Consulta o status e o valor do pedido DEMO-ANOM-004 pra mim.",
+    "grade": {
+      "mode": "assert",
+      "expect_reais": [{ "pedido": "DEMO-ANOM-004", "field": "valor_total" }],
+      "expect_ids": ["DEMO-ANOM-004"],
+      "expect_texts": ["CANCELADO"]
+    }
+  },
+  {
+    "id": "q25",
+    "categoria": "lookup",
+    "pergunta": "Lista os lançamentos do pedido DEMO-ANOM-001 e diz a porcentagem da comissão cobrada.",
+    "grade": {
+      "mode": "assert",
+      "expect_reais": [
+        { "divergencia": "DEMO-ANOM-001", "field": "valor_cobrado" },
+        { "divergencia": "DEMO-ANOM-001", "field": "diferenca" }
+      ],
+      "expect_ids": ["DEMO-ANOM-001"],
+      "expect_texts": ["23"],
+      "expect_lancamento_ids_of": "DEMO-ANOM-001"
+    }
+  },
+  {
+    "id": "q26",
+    "categoria": "lookup",
+    "pergunta": "Tem lançamento de 'Débito por cancelamento'? Em quais pedidos?",
+    "grade": {
+      "mode": "assert",
+      "expect_reais": [
+        { "divergencia": "DEMO-ANOM-003", "field": "diferenca" },
+        { "divergencia": "DEMO-ANOM-004", "field": "diferenca" }
+      ],
+      "expect_ids": ["DEMO-ANOM-003", "DEMO-ANOM-004"]
+    }
+  },
+  {
+    "id": "q27",
+    "categoria": "nao_sei",
+    "pergunta": "Como está o pedido DEMO-ANOM-999 no meu repasse?",
+    "grade": { "mode": "nao_sei" }
+  },
+  {
+    "id": "q28",
+    "categoria": "nao_sei",
+    "pergunta": "Quanto o Restaurante Central da esquina perdeu esse mês?",
+    "grade": { "mode": "nao_sei" }
+  },
+  {
+    "id": "q29",
+    "categoria": "nao_sei",
+    "pergunta": "Me mostra o fechamento da semana REPASSE-W9, que ainda nem começou.",
+    "grade": { "mode": "nao_sei" }
+  },
+  {
+    "id": "q30",
+    "categoria": "nao_sei",
+    "pergunta": "Qual foi o valor do pedido PEDIDO-INEXISTENTE-42?",
+    "grade": { "mode": "nao_sei" }
+  }
+]
