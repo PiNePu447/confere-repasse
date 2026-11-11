@@ -4,7 +4,15 @@ export { buildSystemPrompt } from './prompt.ts'
 export { TOOL_DEFINITIONS, executeTool, draftContestacao, createToolExecutor } from './tools.ts'
 export { loadRestaurantData } from './db.ts'
 export type { LoadedRestaurantData, AgentSupabase } from './db.ts'
-export { createOpenRouterClient, DEFAULT_LLM_MODEL, OpenRouterError } from './openrouter.ts'
+export {
+  createOpenRouterClient,
+  DEFAULT_LLM_MODEL,
+  DEFAULT_LLM_FALLBACK_MODELS,
+  LLM_USER_ERROR,
+  OpenRouterError,
+  parseFallbackModels,
+  isLlmFailureResposta,
+} from './openrouter.ts'
 export { todayInSaoPaulo } from './dates.ts'
 export type {
   AgentResponse,

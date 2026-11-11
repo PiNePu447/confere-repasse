@@ -2,7 +2,13 @@ import type { AgentSupabase } from './db.ts'
 import { loadRestaurantData } from './db.ts'
 import { todayInSaoPaulo } from './dates.ts'
 import { runAgent } from './loop.ts'
-import { createOpenRouterClient, DEFAULT_LLM_MODEL, OpenRouterError } from './openrouter.ts'
+import {
+  createOpenRouterClient,
+  DEFAULT_LLM_MODEL,
+  LLM_USER_ERROR,
+  OpenRouterError,
+  parseFallbackModels,
+} from './openrouter.ts'
 import { buildSystemPrompt } from './prompt.ts'
 import { TOOL_DEFINITIONS, createToolExecutor } from './tools.ts'
 import type { AgentResponse, LlmClient } from './types.ts'
@@ -15,6 +21,8 @@ export type RunAgentSessionOptions = {
   llm?: LlmClient
   openRouterApiKey?: string
   llmModel?: string
+  /** Comma list or array; defaults to DEFAULT_LLM_FALLBACK_MODELS. */
+  llmFallbackModels?: string | string[]
 }
 
 /**
@@ -32,6 +40,7 @@ export async function runAgentSession(
     createOpenRouterClient({
       apiKey: options.openRouterApiKey ?? '',
       model: options.llmModel ?? DEFAULT_LLM_MODEL,
+      fallbackModels: parseFallbackModels(options.llmFallbackModels),
     })
 
   if (!options.llm && !options.openRouterApiKey) {
@@ -55,9 +64,7 @@ export async function runAgentSession(
   } catch (err) {
     if (err instanceof OpenRouterError) {
       return {
-        resposta: err.message.startsWith('Falha')
-          ? err.message
-          : `Falha ao consultar o modelo de linguagem. Tente novamente em instantes.`,
+        resposta: LLM_USER_ERROR,
         tool_calls: [],
         ids_citados: [],
       }

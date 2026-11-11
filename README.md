@@ -20,6 +20,9 @@ Rules engine (T3): `src/rules` — TypeScript puro (`analyzeRepasse`). Testes: `
 
 Agent (T4): Edge Function `supabase/functions/agente` + loop compartilhado em `src/agent`.
 Pergunta local (precisa de `OPENROUTER_API_KEY`): `npm run agent:ask -- "sua pergunta"`.
+Modelo padrão: `LLM_MODEL=nvidia/nemotron-3-ultra-550b-a55b:free`.
+Fallback em 429/5xx: `LLM_FALLBACK_MODELS` (default `nvidia/nemotron-3.5-super-vl:free`),
+com backoff ~2s e ~6s por modelo (orçamento total ~20s).
 
 Eval (T5): `EVAL_MOCK=1 npm run eval` ou `OPENROUTER_API_KEY=… npm run eval`.
 Isolamento C7: `npm run eval:c7`.

@@ -10,7 +10,11 @@ import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { loadRestaurantData } from '../src/agent/db.ts'
 import { todayInSaoPaulo } from '../src/agent/dates.ts'
-import { DEFAULT_LLM_MODEL, OpenRouterError, createOpenRouterClient } from '../src/agent/openrouter.ts'
+import {
+  DEFAULT_LLM_MODEL,
+  createOpenRouterClient,
+  isLlmFailureResposta,
+} from '../src/agent/openrouter.ts'
 import { runAgentSession } from '../src/agent/run.ts'
 import type { AgentResponse, LlmClient } from '../src/agent/types.ts'
 import { gradeAnswer } from './grade.ts'
@@ -85,27 +89,11 @@ async function signInDemo() {
   return supabase
 }
 
-function createRetryingLlm(base: LlmClient): LlmClient {
-  return {
-    async complete(messages, tools) {
-      try {
-        return await base.complete(messages, tools)
-      } catch (err) {
-        const status = err instanceof OpenRouterError ? err.status : null
-        if (status === 429 || (status != null && status >= 500)) {
-          await sleep(2000)
-          return await base.complete(messages, tools)
-        }
-        throw err
-      }
-    },
-  }
-}
-
 async function main(): Promise<void> {
   const mock = process.env.EVAL_MOCK === '1' || process.env.EVAL_MOCK === 'true'
   const delayMs = Number(process.env.EVAL_DELAY_MS ?? (mock ? '0' : '4000'))
   const model = process.env.LLM_MODEL ?? DEFAULT_LLM_MODEL
+  const fallbackModels = process.env.LLM_FALLBACK_MODELS
   const apiKey = process.env.OPENROUTER_API_KEY ?? ''
 
   if (!mock && !apiKey) {
@@ -135,13 +123,12 @@ async function main(): Promise<void> {
 
     const llm: LlmClient = mock
       ? createEvalMockLlm()
-      : createRetryingLlm(
-          createOpenRouterClient({
-            apiKey,
-            model,
-            sleep,
-          }),
-        )
+      : createOpenRouterClient({
+          apiKey,
+          model,
+          fallbackModels,
+          sleep,
+        })
 
     let response: AgentResponse | null = null
     let error: string | undefined
@@ -154,9 +141,10 @@ async function main(): Promise<void> {
         llm,
         openRouterApiKey: mock ? 'mock' : apiKey,
         llmModel: mock ? 'mock-tool-answerer' : model,
+        llmFallbackModels: fallbackModels,
       })
-      // OpenRouter soft-fail returns Portuguese error in resposta — treat as ERROR
-      if (!mock && response.resposta.startsWith('Falha ao consultar o modelo')) {
+      // Soft-fail LLM errors (clean PT message) → ERROR, not FAIL
+      if (!mock && isLlmFailureResposta(response.resposta)) {
         error = response.resposta
         response = null
       }

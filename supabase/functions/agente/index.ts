@@ -75,6 +75,7 @@ Deno.serve(async (req) => {
 
   const openRouterApiKey = Deno.env.get('OPENROUTER_API_KEY') ?? ''
   const llmModel = Deno.env.get('LLM_MODEL') ?? DEFAULT_LLM_MODEL
+  const llmFallbackModels = Deno.env.get('LLM_FALLBACK_MODELS')
   const today = todayInSaoPaulo()
 
   try {
@@ -84,13 +85,14 @@ Deno.serve(async (req) => {
       today,
       openRouterApiKey,
       llmModel,
+      llmFallbackModels,
     })
     return jsonResponse(result)
   } catch (err) {
-    const message = err instanceof Error ? err.message : 'erro interno'
+    console.error('[agente] unhandled error', err)
     return jsonResponse(
       {
-        resposta: `não sei: falha ao processar a pergunta (${message}).`,
+        resposta: 'Falha ao consultar o modelo de linguagem. Tente novamente em instantes.',
         tool_calls: [],
         ids_citados: [],
       },

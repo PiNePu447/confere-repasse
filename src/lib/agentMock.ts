@@ -25,7 +25,7 @@ export function getMockAgentResponse(pergunta: string): AgentUiResponse {
   if (scenario === 'error') {
     return {
       resposta:
-        'Falha ao consultar o modelo de linguagem (HTTP 429). Tente novamente em instantes.',
+        'Falha ao consultar o modelo de linguagem. Tente novamente em instantes.',
       tool_calls: [],
       ids_citados: [],
     }
