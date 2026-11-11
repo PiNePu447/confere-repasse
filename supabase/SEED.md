@@ -15,7 +15,8 @@ Restaurante: **Restaurante Demo** · user auth `05ebcbde-1c83-4768-9b26-c28a7a2a
 ## Como aplicar (no projeto Supabase)
 
 1. `supabase/migrations/20261111000001_init_conciliacao_schema.sql`
-2. `supabase/seed.sql` (idempotente; pode reexecutar)
+2. `supabase/migrations/20261111000002_csv_upload_and_reseed.sql` (escrita CSV + `reseed_own_restaurant`)
+3. `supabase/seed.sql` — chama `reseed_restaurant_for_user` (fonte única do seed)
 
 Não aplique `supabase/local_auth_stub.sql` no projeto hospedado — ele só existe para o teste local em Postgres 17 (`scripts/verify-t2-local.sh`).
 

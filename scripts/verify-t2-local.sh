@@ -17,8 +17,9 @@ run() {
 echo "==> local_auth_stub.sql"
 run -f "${ROOT}/supabase/local_auth_stub.sql"
 
-echo "==> migration"
+echo "==> migrations"
 run -f "${ROOT}/supabase/migrations/20261111000001_init_conciliacao_schema.sql"
+run -f "${ROOT}/supabase/migrations/20261111000002_csv_upload_and_reseed.sql"
 
 echo "==> seed.sql (first run)"
 run -f "${ROOT}/supabase/seed.sql"

@@ -11,6 +11,7 @@ import {
   loadDashboardData,
   type DashboardData,
 } from '../../lib/loadDashboardData'
+import { CsvUploadPanel } from './CsvUploadPanel'
 
 function Money({ value, className = '' }: { value: string; className?: string }) {
   return <span className={`tabular-nums ${className}`}>{formatReaisBr(value)}</span>
@@ -112,6 +113,7 @@ export function RepasseDashboard() {
   const [data, setData] = useState<DashboardData | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
+  const [reloadToken, setReloadToken] = useState(0)
 
   useEffect(() => {
     let cancelled = false
@@ -131,7 +133,7 @@ export function RepasseDashboard() {
     return () => {
       cancelled = true
     }
-  }, [])
+  }, [reloadToken])
 
   if (loading) {
     return (
@@ -176,6 +178,8 @@ export function RepasseDashboard() {
           Valores do motor de regras sobre os dados do restaurante (RLS). Hoje: {today}.
         </p>
       </header>
+
+      <CsvUploadPanel onDataChanged={() => setReloadToken((n) => n + 1)} />
 
       <div className="rounded-xl bg-[linear-gradient(135deg,#fff7f5,transparent_55%),radial-gradient(circle_at_top_right,rgba(234,29,44,0.12),transparent_45%)] p-4">
         <p className="text-xs font-medium uppercase tracking-wide text-[var(--muted)]">

@@ -34,6 +34,13 @@ Dashboard (T7): no shell autenticado, ao lado do chat. Totais por semana
 (vendas brutas / repassado líquido / esperado líquido), perdas por tipo e prazos
 abertos — tudo via `analyzeRepasse` no browser sobre as linhas RLS do usuário.
 
+CSV upload (T8): no painel, envie um Relatório de Conciliação (`;` / números BR).
+Cabeçalho e regras em `src/csv/headers.ts`; amostra com anomalia extra em
+`samples/relatorio-com-anomalia.csv`. Migração de escrita/reseed:
+`supabase/migrations/20261111000002_csv_upload_and_reseed.sql`
+(prova local: `npm run verify:t8`). "Restaurar dados demo" chama
+`reseed_own_restaurant()`.
+
 ## Credenciais demo
 
 - E-mail: `demo@confererepasse.app`
