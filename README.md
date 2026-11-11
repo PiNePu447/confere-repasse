@@ -30,6 +30,10 @@ Isolamento C7: `npm run eval:c7`.
 Chat (T6): na área autenticada. Em DEV, mock da função com `VITE_AGENT_MOCK=1`
 ou `/?agentMock=answer|draft|error` (não entra no build de produção).
 
+Dashboard (T7): no shell autenticado, ao lado do chat. Totais por semana
+(vendas brutas / repassado líquido / esperado líquido), perdas por tipo e prazos
+abertos — tudo via `analyzeRepasse` no browser sobre as linhas RLS do usuário.
+
 ## Credenciais demo
 
 - E-mail: `demo@confererepasse.app`
@@ -41,7 +45,7 @@ ou `/?agentMock=answer|draft|error` (não entra no build de produção).
 | | |
 | --- | --- |
 | Model | `mock-tool-answerer` |
-| Date (UTC) | 2026-11-11T03:03:07.889Z |
+| Date (UTC) | 2026-11-11T03:05:47.568Z |
 | Pass count | **30/30** |
 | Value accuracy (answered) | 100.0% |
 | ID accuracy (answered) | 100.0% |

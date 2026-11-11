@@ -327,6 +327,34 @@ describe('full seed fixture', () => {
     for (const week of result.totais_por_semana) {
       assert.equal(week.diferenca_centavos, week.esperado_centavos - week.repassado_centavos)
       assert.ok(week.diferenca_centavos >= 0)
+      // Net payout = gross − deductions (repassado/esperado are signed fee sums).
+      assert.equal(
+        week.liquido_repassado_centavos,
+        week.vendas_brutas_centavos + week.repassado_centavos,
+      )
+      assert.equal(
+        week.liquido_esperado_centavos,
+        week.vendas_brutas_centavos + week.esperado_centavos,
+      )
+      assert.equal(
+        week.liquido_esperado_centavos - week.liquido_repassado_centavos,
+        week.diferenca_centavos,
+      )
+      assert.ok(week.vendas_brutas_centavos > 0)
     }
+
+    assert.equal(
+      result.totais_gerais.diferenca_centavos,
+      result.perdido_total_centavos,
+    )
+    assert.equal(result.totais_gerais.diferenca, '207.50')
+    assert.equal(
+      result.totais_gerais.liquido_repassado_centavos,
+      result.totais_gerais.vendas_brutas_centavos + result.totais_gerais.repassado_centavos,
+    )
+    assert.equal(
+      result.totais_gerais.liquido_esperado_centavos,
+      result.totais_gerais.vendas_brutas_centavos + result.totais_gerais.esperado_centavos,
+    )
   })
 })

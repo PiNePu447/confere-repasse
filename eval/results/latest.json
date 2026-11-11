@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-11T03:03:07.889Z",
+  "generated_at": "2026-11-11T03:05:47.568Z",
   "today": "2026-11-11",
   "model": "mock-tool-answerer",
   "mock": true,
@@ -49,7 +49,7 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 2100
+      "latency_ms": 1306
     },
     {
       "id": "q02",
@@ -85,7 +85,7 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 1265
+      "latency_ms": 1657
     },
     {
       "id": "q03",
@@ -118,7 +118,7 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 1241
+      "latency_ms": 2019
     },
     {
       "id": "q04",
@@ -151,7 +151,7 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 2105
+      "latency_ms": 2329
     },
     {
       "id": "q05",
@@ -186,7 +186,7 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 899
+      "latency_ms": 1660
     },
     {
       "id": "q06",
@@ -229,7 +229,7 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 1238
+      "latency_ms": 1715
     },
     {
       "id": "q07",
@@ -267,7 +267,7 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 1283
+      "latency_ms": 2452
     },
     {
       "id": "q08",
@@ -300,7 +300,7 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 1230
+      "latency_ms": 1634
     },
     {
       "id": "q09",
@@ -333,7 +333,7 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 1307
+      "latency_ms": 1246
     },
     {
       "id": "q10",
@@ -372,7 +372,7 @@
         "prazoAberto": true,
         "forbidDataLimite": false
       },
-      "latency_ms": 859
+      "latency_ms": 877
     },
     {
       "id": "q11",
@@ -411,7 +411,7 @@
         "prazoAberto": false,
         "forbidDataLimite": false
       },
-      "latency_ms": 1217
+      "latency_ms": 1707
     },
     {
       "id": "q12",
@@ -446,7 +446,7 @@
         "prazoAberto": true,
         "forbidDataLimite": false
       },
-      "latency_ms": 1311
+      "latency_ms": 1809
     },
     {
       "id": "q13",
@@ -483,7 +483,7 @@
         "prazoAberto": true,
         "forbidDataLimite": false
       },
-      "latency_ms": 836
+      "latency_ms": 1307
     },
     {
       "id": "q14",
@@ -528,7 +528,7 @@
         "prazoAberto": null,
         "forbidDataLimite": true
       },
-      "latency_ms": 1645
+      "latency_ms": 1209
     },
     {
       "id": "q15",
@@ -563,7 +563,7 @@
         "prazoAberto": null,
         "forbidDataLimite": true
       },
-      "latency_ms": 1519
+      "latency_ms": 1233
     },
     {
       "id": "q16",
@@ -602,7 +602,7 @@
         "prazoAberto": null,
         "forbidDataLimite": true
       },
-      "latency_ms": 1266
+      "latency_ms": 1289
     },
     {
       "id": "q17",
@@ -648,7 +648,7 @@
         "prazoAberto": true,
         "forbidDataLimite": false
       },
-      "latency_ms": 1249
+      "latency_ms": 1768
     },
     {
       "id": "q18",
@@ -700,7 +700,7 @@
         "prazoAberto": null,
         "forbidDataLimite": true
       },
-      "latency_ms": 865
+      "latency_ms": 934
     },
     {
       "id": "q19",
@@ -750,7 +750,7 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 886
+      "latency_ms": 1233
     },
     {
       "id": "q20",
@@ -779,7 +779,7 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 848
+      "latency_ms": 1265
     },
     {
       "id": "q21",
@@ -825,7 +825,7 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 888
+      "latency_ms": 923
     },
     {
       "id": "q22",
@@ -854,7 +854,7 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 834
+      "latency_ms": 845
     },
     {
       "id": "q23",
@@ -894,7 +894,7 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 853
+      "latency_ms": 951
     },
     {
       "id": "q24",
@@ -935,7 +935,7 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 857
+      "latency_ms": 1633
     },
     {
       "id": "q25",
@@ -988,7 +988,7 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 897
+      "latency_ms": 870
     },
     {
       "id": "q26",
@@ -1035,7 +1035,7 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 880
+      "latency_ms": 953
     },
     {
       "id": "q27",
@@ -1074,7 +1074,7 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 1282
+      "latency_ms": 1365
     },
     {
       "id": "q28",
@@ -1101,7 +1101,7 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 887
+      "latency_ms": 894
     },
     {
       "id": "q29",
@@ -1132,7 +1132,7 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 1254
+      "latency_ms": 923
     },
     {
       "id": "q30",
@@ -1161,7 +1161,7 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 1010
+      "latency_ms": 905
     }
   ]
 }

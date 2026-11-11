@@ -2,6 +2,7 @@ export { analyzeRepasse } from './engine.ts'
 export { expectedChargesForOrder } from './expected.ts'
 export type { ExpectedOrderCharges } from './expected.ts'
 export { reaisToCents, centsToReais, percentOfCents } from './money.ts'
+export { addDays, daysBetween, isOnOrBefore } from './dates.ts'
 export {
   ORIENTACAO_SEM_PRAZO,
   PRAZO_CANCELAMENTO_DIAS,
@@ -19,5 +20,6 @@ export type {
   Divergence,
   DivergenceType,
   WeekTotal,
+  TotaisGerais,
   MetodoPagamento,
 } from './types.ts'

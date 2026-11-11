@@ -107,7 +107,16 @@ export function collectAllowedReaisCents(data: LoadedRestaurantData): Set<number
     add(w.repassado)
     add(w.esperado)
     add(w.diferenca)
+    add(w.vendas_brutas)
+    add(w.liquido_repassado)
+    add(w.liquido_esperado)
   }
+  add(data.engine.totais_gerais.vendas_brutas)
+  add(data.engine.totais_gerais.repassado)
+  add(data.engine.totais_gerais.esperado)
+  add(data.engine.totais_gerais.diferenca)
+  add(data.engine.totais_gerais.liquido_repassado)
+  add(data.engine.totais_gerais.liquido_esperado)
   for (const d of data.engine.divergencias) {
     add(d.valor_cobrado)
     add(d.valor_esperado)

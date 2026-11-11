@@ -71,20 +71,53 @@ export type WeekTotal = {
   semana: string
   data_apuracao_inicio: string
   data_apuracao_fim: string
-  /** Sum of impacting lançamentos (actual payout composition). */
+  /**
+   * Sum of impacting lançamentos (fee/debit lines; usually negative).
+   * Kept for the agent/eval — not the net payout.
+   */
   repassado: string
   repassado_centavos: number
-  /** What the week should have netted after removing overcharges. */
+  /**
+   * Expected fee/debit sum after removing overcharges (usually negative).
+   * Kept for the agent/eval — not the net payout.
+   */
   esperado: string
   esperado_centavos: number
   /** esperado - repassado (positive ⇒ restaurant was underpaid). */
   diferenca: string
   diferenca_centavos: number
+  /** Gross sales: sum of pedidos.valor_total attributed to this week. */
+  vendas_brutas: string
+  vendas_brutas_centavos: number
+  /** Net payout actual = vendas_brutas − |deductions| (= vendas_brutas + repassado). */
+  liquido_repassado: string
+  liquido_repassado_centavos: number
+  /** Net payout expected = vendas_brutas − |expected deductions| (= vendas_brutas + esperado). */
+  liquido_esperado: string
+  liquido_esperado_centavos: number
+}
+
+/** Cross-week totals derived only from WeekTotal rows (no extra money math). */
+export type TotaisGerais = {
+  vendas_brutas: string
+  vendas_brutas_centavos: number
+  /** Sum of fee/debit lines (usually negative). */
+  repassado: string
+  repassado_centavos: number
+  esperado: string
+  esperado_centavos: number
+  diferenca: string
+  diferenca_centavos: number
+  liquido_repassado: string
+  liquido_repassado_centavos: number
+  liquido_esperado: string
+  liquido_esperado_centavos: number
 }
 
 export type AnalyzeResult = {
   divergencias: Divergence[]
   totais_por_semana: WeekTotal[]
+  totais_gerais: TotaisGerais
   perdido_por_tipo: Record<DivergenceType, string>
   perdido_por_tipo_centavos: Record<DivergenceType, number>
   perdido_total: string

@@ -170,13 +170,24 @@ describe('live tool layer (Supabase RLS)', () => {
 
   it('obter_totais exposes weeks and perdido_por_tipo', () => {
     const result = executeTool(data, 'obter_totais', {}) as {
-      totais_por_semana: unknown[]
+      totais_por_semana: Array<{
+        vendas_brutas: string
+        liquido_repassado: string
+        liquido_esperado: string
+      }>
+      totais_gerais: { diferenca: string; vendas_brutas: string }
       perdido_por_tipo: Record<string, string>
       perdido_total: string
     }
     assert.equal(result.totais_por_semana.length, 4)
     assert.equal(result.perdido_por_tipo.comissao_acima_contrato, '16.50')
     assert.equal(result.perdido_total, '207.50')
+    assert.equal(result.totais_gerais.diferenca, '207.50')
+    for (const w of result.totais_por_semana) {
+      assert.ok(Number(w.vendas_brutas) > 0)
+      assert.ok(w.liquido_repassado)
+      assert.ok(w.liquido_esperado)
+    }
   })
 
   it('rascunhar_contestacao for DEMO-ANOM-003 includes R$ 80.00 and data limite', () => {

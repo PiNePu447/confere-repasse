@@ -289,6 +289,7 @@ export function executeTool(
     case 'obter_totais': {
       return {
         totais_por_semana: data.engine.totais_por_semana,
+        totais_gerais: data.engine.totais_gerais,
         perdido_por_tipo: data.engine.perdido_por_tipo,
         perdido_total: data.engine.perdido_total,
       }

@@ -187,7 +187,8 @@ export function analyzeRepasse(input: AnalyzeInput): AnalyzeResult {
     return a.tipo.localeCompare(b.tipo)
   })
 
-  const totais_por_semana = buildWeekTotals(lancamentos, recoveredByWeek)
+  const totais_por_semana = buildWeekTotals(lancamentos, pedidos, recoveredByWeek)
+  const totais_gerais = summarizeWeekTotals(totais_por_semana)
   const perdido_por_tipo_centavos = emptyLostByType()
   for (const d of divergencias) {
     perdido_por_tipo_centavos[d.tipo] += d.diferenca_centavos
@@ -210,6 +211,7 @@ export function analyzeRepasse(input: AnalyzeInput): AnalyzeResult {
   return {
     divergencias,
     totais_por_semana,
+    totais_gerais,
     perdido_por_tipo,
     perdido_por_tipo_centavos,
     perdido_total: centsToReais(perdido_total_centavos),
@@ -219,6 +221,7 @@ export function analyzeRepasse(input: AnalyzeInput): AnalyzeResult {
 
 function buildWeekTotals(
   lancamentos: LancamentoInput[],
+  pedidos: PedidoInput[],
   recoveredByWeek: Map<string, number>,
 ): WeekTotal[] {
   type Acc = {
@@ -226,6 +229,7 @@ function buildWeekTotals(
     data_apuracao_inicio: string
     data_apuracao_fim: string
     repassado_centavos: number
+    vendas_brutas_centavos: number
   }
 
   const byWeek = new Map<string, Acc>()
@@ -249,17 +253,41 @@ function buildWeekTotals(
         data_apuracao_inicio: l.data_apuracao_inicio,
         data_apuracao_fim: l.data_apuracao_fim,
         repassado_centavos: valor,
+        vendas_brutas_centavos: 0,
       })
     }
+  }
+
+  // Attribute each pedido's gross once, to the earliest lançamento week that mentions it.
+  const pedidoWeek = new Map<string, { semana: string; inicio: string }>()
+  for (const l of lancamentos) {
+    if (!l.pedido_id_ifood) continue
+    const semana = weekKey(l)
+    const prev = pedidoWeek.get(l.pedido_id_ifood)
+    if (!prev || l.data_apuracao_inicio < prev.inicio) {
+      pedidoWeek.set(l.pedido_id_ifood, { semana, inicio: l.data_apuracao_inicio })
+    }
+  }
+
+  for (const pedido of pedidos) {
+    const mapped = pedidoWeek.get(pedido.pedido_id_ifood)
+    if (!mapped) continue
+    const acc = byWeek.get(mapped.semana)
+    if (!acc) continue
+    acc.vendas_brutas_centavos += reaisToCents(pedido.valor_total)
   }
 
   const rows: WeekTotal[] = []
   for (const acc of byWeek.values()) {
     const recovered = recoveredByWeek.get(acc.semana) ?? 0
     // Overcharges are negative in repassado; adding recovered cents yields the
-    // net the restaurant should have kept for that week.
+    // expected fee/debit sum for that week (still usually negative).
     const esperado_centavos = acc.repassado_centavos + recovered
     const diferenca_centavos = esperado_centavos - acc.repassado_centavos
+    // Net payout: gross sales minus actual/expected deductions.
+    // repassado/esperado are signed fee sums (negative ⇒ deduction).
+    const liquido_repassado_centavos = acc.vendas_brutas_centavos + acc.repassado_centavos
+    const liquido_esperado_centavos = acc.vendas_brutas_centavos + esperado_centavos
     rows.push({
       semana: acc.semana,
       data_apuracao_inicio: acc.data_apuracao_inicio,
@@ -270,9 +298,46 @@ function buildWeekTotals(
       esperado_centavos,
       diferenca: centsToReais(diferenca_centavos),
       diferenca_centavos,
+      vendas_brutas: centsToReais(acc.vendas_brutas_centavos),
+      vendas_brutas_centavos: acc.vendas_brutas_centavos,
+      liquido_repassado: centsToReais(liquido_repassado_centavos),
+      liquido_repassado_centavos,
+      liquido_esperado: centsToReais(liquido_esperado_centavos),
+      liquido_esperado_centavos,
     })
   }
 
   rows.sort((a, b) => a.data_apuracao_inicio.localeCompare(b.data_apuracao_inicio))
   return rows
+}
+
+function summarizeWeekTotals(weeks: WeekTotal[]): AnalyzeResult['totais_gerais'] {
+  let vendas = 0
+  let repassado = 0
+  let esperado = 0
+  let diferenca = 0
+  let liquidoRepassado = 0
+  let liquidoEsperado = 0
+  for (const w of weeks) {
+    vendas += w.vendas_brutas_centavos
+    repassado += w.repassado_centavos
+    esperado += w.esperado_centavos
+    diferenca += w.diferenca_centavos
+    liquidoRepassado += w.liquido_repassado_centavos
+    liquidoEsperado += w.liquido_esperado_centavos
+  }
+  return {
+    vendas_brutas: centsToReais(vendas),
+    vendas_brutas_centavos: vendas,
+    repassado: centsToReais(repassado),
+    repassado_centavos: repassado,
+    esperado: centsToReais(esperado),
+    esperado_centavos: esperado,
+    diferenca: centsToReais(diferenca),
+    diferenca_centavos: diferenca,
+    liquido_repassado: centsToReais(liquidoRepassado),
+    liquido_repassado_centavos: liquidoRepassado,
+    liquido_esperado: centsToReais(liquidoEsperado),
+    liquido_esperado_centavos: liquidoEsperado,
+  }
 }
