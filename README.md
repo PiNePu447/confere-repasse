@@ -1,55 +1,61 @@
 # Confere Repasse
 
-Demo de portfólio (iFood GenAI — AI Engineer): agente que confere o repasse de um restaurante parceiro. Dados fictícios.
+Demo de portfólio (candidato AI Engineer — iFood GenAI): um assistente que **confere o repasse** de um restaurante parceiro a partir do Relatório de Conciliação.
 
-## Rodar local
+> **Dados 100% fictícios.** Nada aqui é dado real de iFood, restaurante ou pessoa.
 
-```bash
-cp .env.example .env   # já contém as chaves públicas do Supabase
-npm install
-npm run dev
+<!-- DEMO:URL -->
+**Demo pública:** _URL a publicar (T9/T10)._
+
+<!-- DEMO:GIF -->
+**GIF do fluxo:** _placeholder — gravar depois do deploy estável._
+
+## O problema
+
+Parceiros Marketplace veem o repasse semanal e, com frequência, não conseguem responder rápido:
+
+- quanto deixaram de receber por divergências;
+- se um cancelamento ainda está no prazo de contestação;
+- quais IDs e valores citar no chamado.
+
+O Confere Repasse mostra um painel com os totais do motor de regras e um chat que **só afirma o que as ferramentas devolveram**.
+
+## Como funciona
+
+1. Login com o usuário demo (RLS no Supabase).
+2. O **painel** carrega pedidos/lançamentos via `supabase-js` e roda `analyzeRepasse` no browser.
+3. O **agente** (Edge Function) usa o mesmo loop e as mesmas tools; o LLM orquestra tools e redige a resposta.
+4. Opcional: upload de CSV no formato do relatório (substitui as semanas do arquivo) ou **Restaurar dados demo**.
+
+## Arquitetura
+
+| Camada | O quê |
+| --- | --- |
+| Frontend | React + Vite + Tailwind (`src/`) |
+| Auth / dados | Supabase Auth + Postgres + RLS |
+| Motor de regras | TypeScript puro em `src/rules` (`analyzeRepasse`) |
+| Agente | Loop compartilhado `src/agent` + Edge Function `agente` |
+| LLM | OpenRouter (tools); default Nemotron Ultra free + fallback |
+| Eval | 30 perguntas em `eval/` (mock ou live) |
+
+```
+Browser (painel + chat)
+   │ RLS (anon key + JWT)
+   ├─► Supabase tables (pedidos, lançamentos, …)
+   └─► Edge Function agente ──► OpenRouter (tool calls)
+              │
+              └─► mesmo src/agent + src/rules
 ```
 
-Build: `npm run build`
+## Motor de regras (e por que o LLM não calcula dinheiro)
 
-Schema/seed (T2): aplique no Supabase, nesta ordem,
-`supabase/migrations/20261111000001_init_conciliacao_schema.sql` e depois `supabase/seed.sql`.
-Detalhes das anomalias plantadas: `supabase/SEED.md`.
+Toda cifra em R$ e todo prazo de cancelamento vêm de `analyzeRepasse` (centavos inteiros, `today` injetado). O LLM **não** soma comissão, **não** inventa data limite e **não** estima diferença: a system prompt e as tools exigem citar só o que a ferramenta retornou (`pedido_id_ifood`, `diferenca`, `lancamento_ids`, etc.).
 
-Rules engine (T3): `src/rules` — TypeScript puro (`analyzeRepasse`). Testes: `npm test`.
+Isso separa “orquestração em linguagem natural” de “verdade contábil da demo”.
 
-Agent (T4): Edge Function `supabase/functions/agente` + loop compartilhado em `src/agent`.
-Pergunta local (precisa de `OPENROUTER_API_KEY`): `npm run agent:ask -- "sua pergunta"`.
-Modelo padrão: `LLM_MODEL=nvidia/nemotron-3-ultra-550b-a55b:free`.
-Fallback em 429/5xx: `LLM_FALLBACK_MODELS` (default `nvidia/nemotron-3.5-super-vl:free`),
-com backoff ~2s e ~6s por modelo (orçamento total ~20s).
+## Eval
 
-Eval (T5): `EVAL_MOCK=1 npm run eval` ou `OPENROUTER_API_KEY=… npm run eval`.
-Fatia sem gastar o cap diário: `EVAL_ONLY=19-30` (ou `q05,q12`) — faz merge em
-`eval/results/latest.json` e o resumo do README usa o conjunto completo mesclado.
-Isolamento C7: `npm run eval:c7`.
-
-Edge Function bundle: `npm run build:function` → `dist/agente/index.ts` + `deno.json`
-(`@supabase/supabase-js` externo). Redeploy a partir dessa pasta.
-
-Chat (T6): na área autenticada. Em DEV, mock da função com `VITE_AGENT_MOCK=1`
-ou `/?agentMock=answer|draft|error` (não entra no build de produção).
-
-Dashboard (T7): no shell autenticado, ao lado do chat. Totais por semana
-(vendas brutas / repassado líquido / esperado líquido), perdas por tipo e prazos
-abertos — tudo via `analyzeRepasse` no browser sobre as linhas RLS do usuário.
-
-CSV upload (T8): no painel, envie um Relatório de Conciliação (`;` / números BR).
-Cabeçalho e regras em `src/csv/headers.ts`; amostra com anomalia extra em
-`samples/relatorio-com-anomalia.csv`. Migração de escrita/reseed:
-`supabase/migrations/20261111000002_csv_upload_and_reseed.sql`
-(prova local: `npm run verify:t8`). "Restaurar dados demo" chama
-`reseed_own_restaurant()`.
-
-## Credenciais demo
-
-- E-mail: `demo@confererepasse.app`
-- Senha: `demo-repasse-2026`
+A tabela abaixo é atualizada pelo harness (`npm run eval`). Não edite à mão o bloco entre os marcadores.
 
 <!-- EVAL:START -->
 ## Eval (T5)
@@ -69,3 +75,62 @@ Cabeçalho e regras em `src/csv/headers.ts`; amostra com anomalia extra em
 
 _Run with `EVAL_MOCK=1` (tool-based mock LLM). Re-run with `OPENROUTER_API_KEY` for the live model. Partial: `EVAL_ONLY=19-30`._
 <!-- EVAL:END -->
+
+Comandos úteis:
+
+```bash
+EVAL_MOCK=1 npm run eval
+OPENROUTER_API_KEY=… npm run eval
+EVAL_ONLY=19-30 OPENROUTER_API_KEY=… npm run eval   # merge em latest.json
+npm run eval:c7
+```
+
+## Rodar local
+
+```bash
+cp .env.example .env   # URL/anon do Supabase + opcional OPENROUTER_API_KEY
+npm install
+npm run dev
+```
+
+Build do front: `npm run build`  
+Testes: `npm test`
+
+### Schema / seed (Supabase)
+
+Aplique nesta ordem:
+
+1. `supabase/migrations/20261111000001_init_conciliacao_schema.sql`
+2. `supabase/migrations/20261111000002_csv_upload_and_reseed.sql`
+3. `supabase/migrations/20261111000003_tighten_reseed_grants.sql`
+4. `supabase/seed.sql` (chama `reseed_restaurant_for_user`)
+
+Detalhes das anomalias: `supabase/SEED.md`. Prova local Postgres 17: `npm run verify:t8`.
+
+### Agente local e Edge Function
+
+```bash
+npm run agent:ask -- "sua pergunta"   # precisa de OPENROUTER_API_KEY
+npm run build:function                # → dist/agente/ (gitignored)
+```
+
+**Deploy da função:** publique o conteúdo de `dist/agente/` (`index.ts` + `deno.json`). No Supabase, use **`import_map_path=deno.json`** (o SDK `@supabase/supabase-js` fica externo, mapeado no import map).
+
+Modelo padrão: `LLM_MODEL=nvidia/nemotron-3-ultra-550b-a55b:free`  
+Fallback: `LLM_FALLBACK_MODELS` (default Super-VL free), backoff ~2s/~6s, orçamento ~20s.
+
+### CSV (T8)
+
+No painel autenticado: upload do Relatório de Conciliação (`;` / `-12,00`). Cabeçalho em `src/csv/headers.ts`. Amostra: `samples/relatorio-com-anomalia.csv`. “Restaurar dados demo” → RPC `reseed_own_restaurant()` (só o restaurante do caller).
+
+## Credenciais demo
+
+- E-mail: `demo@confererepasse.app`
+- Senha: `demo-repasse-2026`
+
+## Limites e avisos
+
+- Demo de portfólio: escopo pequeno, seed determinístico, sem envio real de contestação.
+- LLM free-tier (OpenRouter) tem cota diária; use `EVAL_MOCK=1` / `EVAL_ONLY` para poupar requests.
+- Upload CSV no projeto hospedado exige as migrações T8/T8-fix acima.
+- Não use dados reais de produção nesta base.
