@@ -53,6 +53,8 @@ export async function runAgentSession(
     }
   }
 
+  const emptyAnswerFallbackModels = parseFallbackModels(options.llmFallbackModels)
+
   try {
     return await runAgent({
       pergunta: options.pergunta,
@@ -61,6 +63,7 @@ export async function runAgentSession(
       executeTool,
       toolDefinitions: [...TOOL_DEFINITIONS],
       systemPrompt: buildSystemPrompt(today),
+      emptyAnswerFallbackModels,
     })
   } catch (err) {
     if (err instanceof OpenRouterError) {

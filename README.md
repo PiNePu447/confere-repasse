@@ -63,8 +63,8 @@ A tabela abaixo é atualizada pelo harness (`npm run eval`). Não edite à mão 
 | | |
 | --- | --- |
 | Model | `mock-tool-answerer` |
-| Date (UTC) | 2026-11-11T03:21:37.825Z |
-| Run dates (merged) | 2026-11-11T03:21:37.825Z |
+| Date (UTC) | 2026-11-12T21:56:45.641Z |
+| Run dates (merged) | 2026-11-12T21:56:45.641Z |
 | Pass count | **30/30** |
 | Value accuracy (answered) | 100.0% |
 | ID accuracy (answered) | 100.0% |

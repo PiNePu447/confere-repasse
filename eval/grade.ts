@@ -14,6 +14,31 @@ function includesIgnoreCase(haystack: string, needle: string): boolean {
   return haystack.toLowerCase().includes(needle.toLowerCase())
 }
 
+/** Accept ISO `yyyy-mm-dd` or Brazilian `dd/mm/yyyy` for the same calendar day. */
+export function textContainsIsoDate(text: string, isoDate: string): boolean {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(isoDate)) {
+    return text.includes(isoDate)
+  }
+  if (text.includes(isoDate)) return true
+  const [y, m, d] = isoDate.split('-')
+  const br = `${d}/${m}/${y}`
+  return text.includes(br)
+}
+
+const PRAZO_ABERTO_RE =
+  /prazo\s+aberto:\s*sim|prazo\s+aberto\b|ainda\s+est[aá]\s+aberto|em\s+aberto|ainda\s+pode\s+contestar|ainda\s+d[aá]\s+tempo|ainda\s+dentro|dentro\s+do\s+prazo|contestar\s+at[eé]/i
+
+const PRAZO_EXPIRADO_RE =
+  /expirou|expirad|venceu|prazo\s+encerrado|fora\s+do\s+prazo|prazo\s+.*(?:encerrou|passou)|prazo\s+aberto:\s*n[aã]o|n[aã]o\s+(?:d[aá]|est[aá])\s+mais/i
+
+export function indicatesPrazoAberto(resposta: string): boolean {
+  return PRAZO_ABERTO_RE.test(resposta)
+}
+
+export function indicatesPrazoExpirado(resposta: string): boolean {
+  return PRAZO_EXPIRADO_RE.test(resposta)
+}
+
 function gradeNaoSei(
   resposta: string,
   allowed: Set<number>,
@@ -87,26 +112,18 @@ function gradeAssert(
   }
 
   if (expected.dataLimite) {
-    if (!resposta.includes(expected.dataLimite)) {
+    if (!textContainsIsoDate(resposta, expected.dataLimite)) {
       details.push(`faltou data limite ${expected.dataLimite}`)
     }
   }
 
   if (expected.prazoAberto === true) {
-    if (
-      !/(prazo\s+aberto:\s*sim|prazo\s+aberto\b|ainda\s+pode\s+contestar|ainda\s+d[aá]\s+tempo|ainda\s+dentro|dentro\s+do\s+prazo|contestar\s+at[eé])/i.test(
-        resposta,
-      )
-    ) {
+    if (!indicatesPrazoAberto(resposta)) {
       details.push('esperava indicação de prazo ainda aberto')
     }
   }
   if (expected.prazoAberto === false) {
-    if (
-      !/(expirad|fora\s+do\s+prazo|prazo\s+.*(?:encerrou|passou)|prazo\s+aberto:\s*n[aã]o|n[aã]o\s+(?:d[aá]|est[aá])\s+mais)/i.test(
-        resposta,
-      )
-    ) {
+    if (!indicatesPrazoExpirado(resposta)) {
       details.push('esperava indicação de prazo expirado')
     }
   }

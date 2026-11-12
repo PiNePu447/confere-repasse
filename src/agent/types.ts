@@ -36,8 +36,20 @@ export type LlmResult = {
   tool_calls: LlmToolCall[]
 }
 
+/** Optional overrides for a single complete() call (empty-answer recovery). */
+export type LlmCompleteOptions = {
+  /** Use only this model id (skip the normal primary→fallback chain). */
+  forceModel?: string
+  /** Cap HTTP attempts for this call (use 1 for a single empty-answer fallback try). */
+  maxAttempts?: number
+}
+
 export type LlmClient = {
-  complete(messages: ChatMessage[], tools: unknown[]): Promise<LlmResult>
+  complete(
+    messages: ChatMessage[],
+    tools: unknown[],
+    options?: LlmCompleteOptions,
+  ): Promise<LlmResult>
 }
 
 export type AgentRunOptions = {
@@ -48,4 +60,6 @@ export type AgentRunOptions = {
   toolDefinitions: unknown[]
   systemPrompt: string
   maxRounds?: number
+  /** Tried once if the final answer is still empty after a same-model retry. */
+  emptyAnswerFallbackModels?: string[]
 }

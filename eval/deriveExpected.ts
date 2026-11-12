@@ -75,7 +75,7 @@ export function deriveExpected(
       throw new Error(`data_limite missing for ${grade.expect_data_limite_of}`)
     }
     dataLimite = d.data_limite
-    prazoAberto = d.prazo_aberto
+    // Do not imply a prazo-open/expired phrase check unless expect_prazo_aberto is set.
   }
 
   if (grade.expect_prazo_aberto != null) {

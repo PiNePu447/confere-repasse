@@ -1,4 +1,4 @@
-export { runAgent, DEFAULT_MAX_ROUNDS } from './loop.ts'
+export { runAgent, DEFAULT_MAX_ROUNDS, EMPTY_MODEL_REPLY } from './loop.ts'
 export { runAgentSession } from './run.ts'
 export { buildSystemPrompt } from './prompt.ts'
 export { TOOL_DEFINITIONS, executeTool, draftContestacao, createToolExecutor } from './tools.ts'

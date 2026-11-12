@@ -1,4 +1,10 @@
-import type { ChatMessage, LlmClient, LlmResult, LlmToolCall } from './types.ts'
+import type {
+  ChatMessage,
+  LlmClient,
+  LlmCompleteOptions,
+  LlmResult,
+  LlmToolCall,
+} from './types.ts'
 
 const OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions'
 
@@ -79,13 +85,22 @@ export function createOpenRouterClient(options: OpenRouterOptions): LlmClient {
   const models = modelChain(primary, fallbacks)
 
   return {
-    async complete(messages: ChatMessage[], tools: unknown[]): Promise<LlmResult> {
+    async complete(
+      messages: ChatMessage[],
+      tools: unknown[],
+      completeOpts?: LlmCompleteOptions,
+    ): Promise<LlmResult> {
       const started = now()
       const deadline = started + TOTAL_BUDGET_MS
       let lastStatus: number | null = null
+      const chain = completeOpts?.forceModel
+        ? [completeOpts.forceModel]
+        : models
+      const maxAttempts =
+        completeOpts?.maxAttempts ?? RETRY_BACKOFFS_MS.length + 1
 
-      for (const model of models) {
-        for (let attempt = 0; attempt <= RETRY_BACKOFFS_MS.length; attempt++) {
+      for (const model of chain) {
+        for (let attempt = 0; attempt < maxAttempts; attempt++) {
           const remaining = deadline - now()
           if (remaining <= 0) break
 
@@ -115,7 +130,7 @@ export function createOpenRouterClient(options: OpenRouterOptions): LlmClient {
               }`,
             )
             lastStatus = null
-            if (attempt < RETRY_BACKOFFS_MS.length) {
+            if (attempt < maxAttempts - 1 && attempt < RETRY_BACKOFFS_MS.length) {
               const wait = Math.min(RETRY_BACKOFFS_MS[attempt]!, Math.max(0, deadline - now()))
               if (wait <= 0) break
               await sleep(wait)
@@ -171,13 +186,13 @@ export function createOpenRouterClient(options: OpenRouterOptions): LlmClient {
             throw new OpenRouterError(LLM_USER_ERROR, response.status)
           }
 
-          if (attempt < RETRY_BACKOFFS_MS.length) {
+          if (attempt < maxAttempts - 1 && attempt < RETRY_BACKOFFS_MS.length) {
             const wait = Math.min(RETRY_BACKOFFS_MS[attempt]!, Math.max(0, deadline - now()))
             if (wait <= 0) break
             await sleep(wait)
             continue
           }
-          // Exhausted retries for this model → try fallback
+          // Exhausted retries for this model → try next in chain
           break
         }
       }

@@ -1,12 +1,12 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
-import { runAgent } from './loop.ts'
+import { EMPTY_MODEL_REPLY, runAgent } from './loop.ts'
 import { buildSystemPrompt } from './prompt.ts'
 import { TOOL_DEFINITIONS, executeTool } from './tools.ts'
 import { buildSeedFixture } from '../rules/fixtures/seedFixture.ts'
 import { analyzeRepasse } from '../rules/index.ts'
 import type { LoadedRestaurantData } from './db.ts'
-import type { ChatMessage, LlmClient, LlmResult } from './types.ts'
+import type { ChatMessage, LlmClient, LlmCompleteOptions, LlmResult } from './types.ts'
 
 const TODAY = '2026-11-11'
 
@@ -133,5 +133,108 @@ describe('agent loop (mocked LLM)', () => {
 
     assert.equal(result.tool_calls[0]!.name, 'rascunhar_contestacao')
     assert.match(result.resposta, /80\.00/)
+  })
+
+  it('retries once when the final message is empty, then succeeds', async () => {
+    const data = fixtureData()
+    let step = 0
+    const forceModels: Array<string | undefined> = []
+
+    const llm: LlmClient = {
+      async complete(
+        _messages: ChatMessage[],
+        _tools: unknown[],
+        opts?: LlmCompleteOptions,
+      ): Promise<LlmResult> {
+        step += 1
+        forceModels.push(opts?.forceModel)
+        if (step === 1) {
+          return {
+            content: null,
+            tool_calls: [
+              {
+                id: 'call_totais',
+                type: 'function',
+                function: { name: 'obter_totais', arguments: '{}' },
+              },
+            ],
+          }
+        }
+        if (step === 2) {
+          return { content: '   ', tool_calls: [] }
+        }
+        if (step === 3) {
+          return {
+            content: 'Perda total R$ 207.50 no pedido DEMO-ANOM-001.',
+            tool_calls: [],
+          }
+        }
+        throw new Error(`unexpected step ${step}`)
+      },
+    }
+
+    const result = await runAgent({
+      pergunta: 'Quanto perdi?',
+      today: TODAY,
+      llm,
+      executeTool: async (name, args) => executeTool(data, name, args),
+      toolDefinitions: TOOL_DEFINITIONS as unknown[],
+      systemPrompt: buildSystemPrompt(TODAY),
+      emptyAnswerFallbackModels: ['nvidia/nemotron-3.5-super-vl:free'],
+    })
+
+    assert.match(result.resposta, /207\.50/)
+    assert.equal(result.llm_calls, 3)
+    assert.deepEqual(forceModels, [undefined, undefined, undefined])
+  })
+
+  it('after empty+retry, tries one fallback model then "não sei"', async () => {
+    const data = fixtureData()
+    let step = 0
+    const forceModels: Array<string | undefined> = []
+
+    const llm: LlmClient = {
+      async complete(
+        _messages: ChatMessage[],
+        _tools: unknown[],
+        opts?: LlmCompleteOptions,
+      ): Promise<LlmResult> {
+        step += 1
+        forceModels.push(opts?.forceModel)
+        if (step === 1) {
+          return {
+            content: null,
+            tool_calls: [
+              {
+                id: 'call_totais',
+                type: 'function',
+                function: { name: 'obter_totais', arguments: '{}' },
+              },
+            ],
+          }
+        }
+        // final empty, same-model retry empty, fallback empty
+        return { content: '', tool_calls: [] }
+      },
+    }
+
+    const result = await runAgent({
+      pergunta: 'Quanto perdi?',
+      today: TODAY,
+      llm,
+      executeTool: async (name, args) => executeTool(data, name, args),
+      toolDefinitions: TOOL_DEFINITIONS as unknown[],
+      systemPrompt: buildSystemPrompt(TODAY),
+      emptyAnswerFallbackModels: ['nvidia/nemotron-3.5-super-vl:free'],
+    })
+
+    assert.equal(result.resposta, EMPTY_MODEL_REPLY)
+    assert.equal(result.llm_calls, 4)
+    assert.deepEqual(forceModels, [
+      undefined,
+      undefined,
+      undefined,
+      'nvidia/nemotron-3.5-super-vl:free',
+    ])
   })
 })
