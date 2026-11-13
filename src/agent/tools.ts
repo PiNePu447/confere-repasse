@@ -17,7 +17,7 @@ export const TOOL_DEFINITIONS = [
     function: {
       name: 'listar_lancamentos',
       description:
-        'Lista lançamentos do relatório de conciliação, com filtros opcionais por semana (titulo), pedido_id_ifood e descrição. Retorno: lancamentos[].lancamento_id (ID do lançamento a citar), pedido_id_ifood (ID iFood do pedido a citar), descricao_lancamento, valor, percentual_taxa, titulo/semana. UUIDs internos de pedido NÃO são expostos.',
+        'Lista lançamentos do relatório de conciliação do restaurante autenticado, com filtros opcionais por semana (titulo), pedido_id_ifood e descrição. Retorno: restaurante (nome), lancamentos[].lancamento_id (UUID do lançamento a citar), pedido_id_ifood, descricao_lancamento, valor, percentual_taxa, titulo/semana. Se filtrar por pedido inexistente: total 0 + mensagem. UUIDs internos de pedido NÃO são expostos.',
       parameters: {
         type: 'object',
         properties: {
@@ -43,7 +43,7 @@ export const TOOL_DEFINITIONS = [
     function: {
       name: 'obter_pedidos',
       description:
-        'Obtém um ou mais pedidos. Sem filtro, retorna todos os pedidos do restaurante. Retorno: pedidos[].pedido_id_ifood (ID iFood a citar), status, valor_total, metodo_pagamento, data_criacao. UUID interno do pedido NÃO é exposto.',
+        'Obtém um ou mais pedidos do restaurante autenticado. Sem filtro, retorna todos. Retorno: restaurante (nome), pedidos[].pedido_id_ifood (ID iFood a citar), status, valor_total, metodo_pagamento, data_criacao. Se filtrar por pedido inexistente: total 0 + mensagem. UUID interno do pedido NÃO é exposto.',
       parameters: {
         type: 'object',
         properties: {
@@ -62,7 +62,7 @@ export const TOOL_DEFINITIONS = [
     function: {
       name: 'obter_contrato',
       description:
-        'Retorna o contrato ativo (comissões e taxas). Retorno: plano, comissao_percentual, taxa_pagamento_online_percentual, taxa_repasse_semanal.',
+        'Retorna o contrato ativo (comissões e taxas) do restaurante autenticado. Retorno: restaurante (nome), plano, comissao_percentual, taxa_pagamento_online_percentual, taxa_repasse_semanal.',
       parameters: {
         type: 'object',
         properties: {},
@@ -75,7 +75,7 @@ export const TOOL_DEFINITIONS = [
     function: {
       name: 'obter_divergencias',
       description:
-        'Lista divergências detectadas pelo motor de regras. Retorno: divergencias[].tipo, pedido_id_ifood (ID iFood do pedido a citar — NÃO é nome da divergência), lancamento_ids (IDs de lançamento a citar), valores, semana, orientacao, data_limite/prazo_aberto quando houver. UUIDs internos de pedido NÃO são expostos.',
+        'Lista divergências detectadas pelo motor de regras do restaurante autenticado. Retorno: restaurante (nome), divergencias[].tipo, pedido_id_ifood (ID iFood do pedido a citar — NÃO é nome da divergência), lancamento_ids (IDs de lançamento a citar), valor_cobrado, valor_esperado, diferenca, semana, orientacao, data_limite/prazo_aberto quando houver. UUIDs internos de pedido NÃO são expostos.',
       parameters: {
         type: 'object',
         properties: {
@@ -94,7 +94,7 @@ export const TOOL_DEFINITIONS = [
     function: {
       name: 'obter_totais',
       description:
-        'Totais por semana (repassado vs esperado) e total perdido por tipo de divergência. Retorno: perdido_por_tipo (totais R$), perdido_por_tipo_casos (por tipo: pedido_id_ifood, diferenca, lancamento_ids a citar), perdido_total, totais_por_semana, totais_gerais.',
+        'Totais por semana (repassado vs esperado) e total perdido por tipo de divergência do restaurante autenticado. Retorno: restaurante (nome), perdido_por_tipo (totais R$), perdido_por_tipo_casos (por tipo: pedido_id_ifood, diferenca, lancamento_ids a citar), perdido_total, totais_por_semana, totais_gerais.',
       parameters: {
         type: 'object',
         properties: {},
@@ -210,19 +210,23 @@ export function executeTool(
   switch (name) {
     case 'listar_lancamentos': {
       let rows = data.lancamentos
+      const filteredPedido =
+        typeof args.pedido_id_ifood === 'string' && args.pedido_id_ifood.trim()
+          ? args.pedido_id_ifood.trim()
+          : null
       if (typeof args.semana === 'string' && args.semana.trim()) {
         const semana = args.semana.trim()
         rows = rows.filter((l) => (l.titulo ?? l.data_apuracao_inicio) === semana)
       }
-      if (typeof args.pedido_id_ifood === 'string' && args.pedido_id_ifood.trim()) {
-        const pid = args.pedido_id_ifood.trim()
-        rows = rows.filter((l) => l.pedido_id_ifood === pid)
+      if (filteredPedido) {
+        rows = rows.filter((l) => l.pedido_id_ifood === filteredPedido)
       }
       if (typeof args.descricao === 'string' && args.descricao.trim()) {
         const needle = args.descricao.trim().toLowerCase()
         rows = rows.filter((l) => l.descricao_lancamento.toLowerCase().includes(needle))
       }
-      return {
+      const payload: Record<string, unknown> = {
+        restaurante: data.restaurante.nome,
         total: rows.length,
         lancamentos: rows.map((l) => ({
           lancamento_id: l.id,
@@ -236,18 +240,27 @@ export function executeTool(
           impacto_no_repasse: l.impacto_no_repasse,
         })),
       }
+      if (filteredPedido && rows.length === 0) {
+        payload.encontrado = false
+        payload.mensagem = `não sei: nenhum lançamento encontrado para o pedido ${filteredPedido}`
+      }
+      return payload
     }
     case 'obter_pedidos': {
       let rows = data.pedidos
-      if (typeof args.pedido_id_ifood === 'string' && args.pedido_id_ifood.trim()) {
-        const pid = args.pedido_id_ifood.trim()
-        rows = rows.filter((p) => p.pedido_id_ifood === pid)
+      const filteredPedido =
+        typeof args.pedido_id_ifood === 'string' && args.pedido_id_ifood.trim()
+          ? args.pedido_id_ifood.trim()
+          : null
+      if (filteredPedido) {
+        rows = rows.filter((p) => p.pedido_id_ifood === filteredPedido)
       }
       if (typeof args.status === 'string' && args.status.trim()) {
         const status = args.status.trim().toUpperCase()
         rows = rows.filter((p) => p.status.toUpperCase() === status)
       }
-      return {
+      const payload: Record<string, unknown> = {
+        restaurante: data.restaurante.nome,
         total: rows.length,
         pedidos: rows.map((p) => ({
           pedido_id_ifood: p.pedido_id_ifood,
@@ -258,6 +271,11 @@ export function executeTool(
           motivo_cancelamento: p.motivo_cancelamento ?? null,
         })),
       }
+      if (filteredPedido && rows.length === 0) {
+        payload.encontrado = false
+        payload.mensagem = `não sei: nenhum pedido encontrado para o ID ${filteredPedido}`
+      }
+      return payload
     }
     case 'obter_contrato': {
       return {
@@ -273,18 +291,27 @@ export function executeTool(
     }
     case 'obter_divergencias': {
       let rows = data.engine.divergencias
-      if (typeof args.pedido_id_ifood === 'string' && args.pedido_id_ifood.trim()) {
-        const pid = args.pedido_id_ifood.trim()
-        rows = rows.filter((d) => d.pedido_id_ifood === pid)
+      const filteredPedido =
+        typeof args.pedido_id_ifood === 'string' && args.pedido_id_ifood.trim()
+          ? args.pedido_id_ifood.trim()
+          : null
+      if (filteredPedido) {
+        rows = rows.filter((d) => d.pedido_id_ifood === filteredPedido)
       }
       if (typeof args.tipo === 'string' && args.tipo.trim()) {
         const tipo = args.tipo.trim()
         rows = rows.filter((d) => d.tipo === tipo)
       }
-      return {
+      const payload: Record<string, unknown> = {
+        restaurante: data.restaurante.nome,
         total: rows.length,
         divergencias: rows.map(formatDivergence),
       }
+      if (filteredPedido && rows.length === 0) {
+        payload.encontrado = false
+        payload.mensagem = `não sei: nenhuma divergência encontrada para o pedido ${filteredPedido}`
+      }
+      return payload
     }
     case 'obter_totais': {
       const perdido_por_tipo_casos = {
@@ -317,6 +344,7 @@ export function executeTool(
         })
       }
       return {
+        restaurante: data.restaurante.nome,
         totais_por_semana: data.engine.totais_por_semana,
         totais_gerais: data.engine.totais_gerais,
         perdido_por_tipo: data.engine.perdido_por_tipo,

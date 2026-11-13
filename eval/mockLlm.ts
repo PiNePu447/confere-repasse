@@ -20,18 +20,24 @@ function planToolCalls(pergunta: string): Array<{ name: string; args: Record<str
   const semana = extractSemana(pergunta)
   const calls: Array<{ name: string; args: Record<string, unknown> }> = []
 
-  const wantsContrato = /contrato|comiss[aã]o|taxa|marketplace|plano/.test(q)
+  const wantsContrato = /contrato|comiss[aã]o|taxa|marketplace|plano|porcentagem/.test(q)
   const wantsTotais = /total|perdi|perda|preju[ií]zo|tipo|semana|baixa|repass/.test(q)
-  const wantsDiv = /diverg|anom|cancel|duplic|taxa online|comiss[aã]o a mais|contest/.test(q)
+  const wantsDiv =
+    /diverg|anom|cancel|duplic|taxa online|comiss[aã]o a mais|contest|porcentagem da comiss|comiss[aã]o cobrad/.test(
+      q,
+    )
   const wantsDraft = /rascunho|texto de contesta|monta.*contesta|gera.*contesta/.test(q)
   const wantsPedido = /pedido|status|consulta|lookup|aconteceu/.test(q)
-  const wantsLanc = /lan[cç]amento|porcentagem da comiss|d[eé]bito por cancel/.test(q)
+  const wantsLanc = /lan[cç]amento|porcentagem da comiss|d[eé]bito por cancel|comiss[aã]o cobrad/.test(
+    q,
+  )
+  const wantsOtherRestaurant = /restaurante\s+\w+/i.test(pergunta)
 
-  if (wantsContrato) calls.push({ name: 'obter_contrato', args: {} })
-  if (wantsTotais || (!wantsContrato && !wantsDraft && !pedido)) {
+  if (wantsContrato || wantsLanc) calls.push({ name: 'obter_contrato', args: {} })
+  if (wantsTotais || wantsOtherRestaurant || (!wantsContrato && !wantsDraft && !pedido)) {
     calls.push({ name: 'obter_totais', args: {} })
   }
-  if (wantsDiv || wantsTotais || semana) {
+  if (wantsDiv || wantsTotais || wantsLanc || semana) {
     calls.push({
       name: 'obter_divergencias',
       args: pedido ? { pedido_id_ifood: pedido } : {},
@@ -83,18 +89,36 @@ function synthesizeAnswer(pergunta: string, toolPayloads: unknown[]): string {
   const pedido = extractPedidoId(pergunta)
   const semana = extractSemana(pergunta)
 
+  const ownRestaurant = toolPayloads
+    .map((p) => (p as { restaurante?: unknown })?.restaurante)
+    .find((n): n is string => typeof n === 'string' && n.trim().length > 0)
+
   for (const payload of toolPayloads) {
     const p = payload as Record<string, unknown>
-    if (p && p.ok === false && typeof p.mensagem === 'string') {
-      return `não sei: ${p.mensagem}`
+    if (!p) continue
+    if (p.ok === false && typeof p.mensagem === 'string') {
+      return p.mensagem.startsWith('não sei:') ? p.mensagem : `não sei: ${p.mensagem}`
     }
-    if (p && typeof p.total === 'number' && p.total === 0 && (pedido || /restaurante central|inexistente|w9/i.test(pergunta))) {
-      return `não sei: isso não está nos dados disponíveis do restaurante.`
+    // Only treat explicit not-found / empty *pedido* lookups as missing IDs.
+    // An empty divergencias list for a real pedido is normal, not a miss.
+    if (pedido && (p.encontrado === false || (Array.isArray(p.pedidos) && p.total === 0))) {
+      if (typeof p.mensagem === 'string' && p.mensagem.trim()) {
+        return p.mensagem.startsWith('não sei:') ? p.mensagem : `não sei: ${p.mensagem}`
+      }
+      return `não sei: nada foi encontrado para o ID ${pedido}.`
     }
   }
 
-  if (/restaurante central|outra loja|esquina/i.test(pergunta)) {
-    return 'não sei: só tenho dados do restaurante autenticado; não há informações de outro restaurante.'
+  // Question names a restaurant other than the authenticated one.
+  if (ownRestaurant) {
+    const named = pergunta.match(/restaurante\s+[^?,.]+/i)
+    if (named) {
+      const asked = named[0]!.replace(/\s+/g, ' ').trim().toLowerCase()
+      const own = `restaurante ${ownRestaurant}`.toLowerCase()
+      if (!asked.includes(ownRestaurant.toLowerCase()) && asked !== own) {
+        return `não sei: só tenho acesso aos dados do restaurante ${ownRestaurant}; não há informações de outro restaurante.`
+      }
+    }
   }
   if (semana === 'REPASSE-W9' || /semana.*w9|ainda nem come[cç]ou/i.test(pergunta)) {
     const weeks = toolPayloads
@@ -107,11 +131,20 @@ function synthesizeAnswer(pergunta: string, toolPayloads: unknown[]): string {
       return 'não sei: a semana REPASSE-W9 não está nos dados.'
     }
   }
-  if (pedido && /DEMO-ANOM-999|PEDIDO-INEXISTENTE/i.test(pedido)) {
-    return `não sei: o pedido ${pedido} não existe nos dados.`
-  }
-  if (pedido && !joined.includes(pedido) && /pedido|valor do pedido|como est/.test(q)) {
-    return `não sei: o pedido ${pedido} não está nos dados.`
+  if (pedido && !joined.includes(`"pedido_id_ifood":"${pedido}"`) && !joined.includes(`"pedido_id_ifood": "${pedido}"`) && /pedido|valor do pedido|como est/.test(q)) {
+    // Pedido mentioned but not present as a found row (empty arrays still may echo the filter args only in tool calls, not payloads).
+    const foundInRows = toolPayloads.some((payload) => {
+      const p = payload as {
+        pedidos?: Array<{ pedido_id_ifood?: string }>
+        divergencias?: Array<{ pedido_id_ifood?: string }>
+        lancamentos?: Array<{ pedido_id_ifood?: string }>
+      }
+      const pools = [...(p.pedidos ?? []), ...(p.divergencias ?? []), ...(p.lancamentos ?? [])]
+      return pools.some((row) => row.pedido_id_ifood === pedido)
+    })
+    if (!foundInRows) {
+      return `não sei: o pedido ${pedido} não está nos dados.`
+    }
   }
 
   // Prefer draft text when present
@@ -191,8 +224,33 @@ function synthesizeAnswer(pergunta: string, toolPayloads: unknown[]): string {
     if (Array.isArray(p.lancamentos)) {
       for (const l of p.lancamentos as Array<Record<string, unknown>>) {
         parts.push(
-          `Lançamento ${l.lancamento_id ?? l.id} (${l.descricao_lancamento}) do pedido iFood ${l.pedido_id_ifood}: valor R$ ${l.valor}, percentual ${l.percentual_taxa}.`,
+          `Lançamento ${l.lancamento_id ?? l.id} (${l.descricao_lancamento}) do pedido iFood ${l.pedido_id_ifood}: valor R$ ${l.valor}, percentual cobrado ${l.percentual_taxa}%.`,
         )
+      }
+    }
+  }
+
+  // Charge of a divergence type: always surface contract rate + charged + engine difference.
+  if (/comiss[aã]o|porcentagem|taxa cobrad|lan[cç]amento/.test(q)) {
+    let contratoPct: string | null = null
+    for (const payload of toolPayloads) {
+      const c = (payload as { contrato?: { comissao_percentual?: unknown } }).contrato
+      if (c?.comissao_percentual != null) contratoPct = String(c.comissao_percentual)
+    }
+    for (const payload of toolPayloads) {
+      const divs = (payload as { divergencias?: Array<Record<string, unknown>> }).divergencias
+      if (!divs) continue
+      for (const d of divs) {
+        if (pedido && String(d.pedido_id_ifood) !== pedido) continue
+        if (contratoPct != null && d.tipo === 'comissao_acima_contrato') {
+          parts.push(
+            `Comissão contratual ${contratoPct}%; cobrado R$ ${d.valor_cobrado} (ver percentual no lançamento); diferença do motor R$ ${d.diferenca}.`,
+          )
+        } else if (d.valor_cobrado != null && d.diferenca != null) {
+          parts.push(
+            `Cobrança divergente: cobrado R$ ${d.valor_cobrado}, esperado R$ ${d.valor_esperado}, diferença R$ ${d.diferenca}.`,
+          )
+        }
       }
     }
   }

@@ -106,4 +106,23 @@ describe('tool payloads hide internal pedido UUIDs', () => {
     assert.equal(ids.has('50a8bc0f-b1d8-4622-8a51-0c3f572208bc'), false)
     assert.equal(ids.has('aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee'), false)
   })
+
+  it('obter_totais and obter_divergencias expose restaurante name', () => {
+    const data = fixtureData()
+    const totais = executeTool(data, 'obter_totais', {}) as { restaurante: string }
+    const divs = executeTool(data, 'obter_divergencias', {}) as { restaurante: string }
+    assert.equal(totais.restaurante, 'Restaurante Demo')
+    assert.equal(divs.restaurante, 'Restaurante Demo')
+  })
+
+  it('filtered empty pedido lookup returns não sei mensagem', () => {
+    const data = fixtureData()
+    const result = executeTool(data, 'obter_pedidos', {
+      pedido_id_ifood: 'PEDIDO-AUSENTE-1',
+    }) as { total: number; encontrado: boolean; mensagem: string }
+    assert.equal(result.total, 0)
+    assert.equal(result.encontrado, false)
+    assert.match(result.mensagem, /^não sei:/)
+    assert.match(result.mensagem, /PEDIDO-AUSENTE-1/)
+  })
 })
