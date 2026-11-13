@@ -1,29 +1,30 @@
 {
-  "generated_at": "2026-11-11T03:21:37.825Z",
-  "today": "2026-11-11",
-  "model": "mock-tool-answerer",
-  "mock": true,
-  "eval_only": null,
+  "generated_at": "2026-11-13T00:21:09.656Z",
+  "today": "2026-11-12",
+  "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+  "mock": false,
+  "eval_only": "q08,q11,q12,q13,q14,q21-q30",
   "run_dates": [
-    "2026-11-11T03:21:37.825Z"
+    "2026-11-12T21:48:15.727Z",
+    "2026-11-13T00:21:09.656Z"
   ],
   "llm_calls": {
-    "total": 60,
-    "average_per_question": 2
+    "total": 66,
+    "average_per_question": 2.2
   },
   "totals": {
     "questions": 30,
-    "pass": 30,
-    "fail": 0,
+    "pass": 26,
+    "fail": 4,
     "error": 0,
     "answered": 30
   },
   "accuracy": {
-    "value_answered": 1,
-    "id_answered": 1,
-    "value_all_30": 1,
-    "id_all_30": 1,
-    "pass_count": 30
+    "value_answered": 0.8667,
+    "id_answered": 0.9,
+    "value_all_30": 0.8667,
+    "id_all_30": 0.9,
+    "pass_count": 26
   },
   "results": [
     {
@@ -34,14 +35,10 @@
       "value_ok": true,
       "id_ok": true,
       "details": [],
-      "resposta": "Perda total por divergências: R$ 207.50. Por tipo: comissão acima R$ 16.50, duplicada R$ 12.00, cancelamento R$ 175.00, taxa online em entrega R$ 4.00. Caso comissao_acima_contrato: pedido iFood DEMO-ANOM-001, diferença R$ 16.50, lançamentos e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Caso cobranca_duplicada: pedido iFood DEMO-ANOM-002, diferença R$ 12.00, lançamentos 934a099a-2129-4dc9-a076-5e24f1088ee3. Caso cancelamento_debitado: pedido iFood DEMO-ANOM-003, diferença R$ 80.00, lançamentos 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Caso cancelamento_debitado: pedido iFood DEMO-ANOM-004, diferença R$ 95.00, lançamentos db39be5c-aea1-4508-bfb9-5b823de15269. Caso taxa_online_em_pago_na_entrega: pedido iFood DEMO-ANOM-005, diferença R$ 4.00, lançamentos 18c994c5-46f9-4159-823b-e78db4ca5fe2. Semana REPASSE-W3: repassado R$ -175.00, esperado R$ -80.00, diferença R$ 95.00. Semana REPASSE-W2: repassado R$ -127.57, esperado R$ -99.07, diferença R$ 28.50. Semana REPASSE-W1: repassado R$ -55.66, esperado R$ -55.66, diferença R$ 0.00. Semana REPASSE-W0: repassado R$ -161.91, esperado R$ -77.91, diferença R$ 84.00. Divergência comissao_acima_contrato no pedido iFood DEMO-ANOM-001: cobrado R$ 34.50, esperado R$ 18.00, diferença R$ 16.50. Lançamentos: e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cobranca_duplicada no pedido iFood DEMO-ANOM-002: cobrado R$ 12.00, esperado R$ 0.00, diferença R$ 12.00. Lançamentos: 934a099a-2129-4dc9-a076-5e24f1088ee3. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cancelamento_debitado no pedido iFood DEMO-ANOM-003: cobrado R$ 80.00, esperado R$ 0.00, diferença R$ 80.00. Lançamentos: 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Orientação: contestar cancelamento até 2026-11-15 (prazo de 7 dias a partir da data do pedido). Data limite: 2026-11-15. Prazo aberto: sim. Divergência cancelamento_debitado no pedido iFood DEMO-ANOM-004: cobrado R$ 95.00, esperado R$ 0.00, diferença R$ 95.00. Lançamentos: db39be5c-aea1-4508-bfb9-5b823de15269. Orientação: prazo de 7 dias expirado em 2026-10-25; abrir chamado no suporte. Data limite: 2026-10-25. Prazo aberto: não. Divergência taxa_online_em_pago_na_entrega no pedido iFood DEMO-ANOM-005: cobrado R$ 4.00, esperado R$ 0.00, diferença R$ 4.00. Lançamentos: 18c994c5-46f9-4159-823b-e78db4ca5fe2. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada.",
+      "resposta": "O total perdido com as divergências detectadas no repasse é **R$ 207,50**.\n\nDetalhamento por tipo de divergência (cada caso com o **ID iFood do pedido** e a **diferença em R$**):\n\n| Tipo de divergência | Pedido (ID iFood) | Diferença (R$) |\n|---------------------|-------------------|----------------|\n| Comissão acima do contrato | DEMO-ANOM-001 | 16,50 |\n| Cobrança duplicada | DEMO-ANOM-002 | 12,00 |\n| Cancelamento debitado | DEMO-ANOM-003 | 80,00 |\n| Cancelamento debitado | DEMO-ANOM-004 | 95,00 |\n| Taxa online em pagamento na entrega | DEMO-ANOM-005 | 4,00 |\n| **Total** | | **207,50** |\n\nOs valores vêm do motor de conciliação (campo `perdido_por_tipo_casos` do `obter_totais`).",
       "tool_calls": [
         {
           "name": "obter_totais",
-          "args": {}
-        },
-        {
-          "name": "obter_divergencias",
           "args": {}
         }
       ],
@@ -57,9 +54,9 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 882,
+      "latency_ms": 11826,
       "llm_calls": 2,
-      "graded_at": "2026-11-11T03:21:37.825Z"
+      "graded_at": "2026-11-12T21:48:15.727Z"
     },
     {
       "id": "q02",
@@ -69,14 +66,10 @@
       "value_ok": true,
       "id_ok": true,
       "details": [],
-      "resposta": "Perda total por divergências: R$ 207.50. Por tipo: comissão acima R$ 16.50, duplicada R$ 12.00, cancelamento R$ 175.00, taxa online em entrega R$ 4.00. Caso comissao_acima_contrato: pedido iFood DEMO-ANOM-001, diferença R$ 16.50, lançamentos e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Caso cobranca_duplicada: pedido iFood DEMO-ANOM-002, diferença R$ 12.00, lançamentos 934a099a-2129-4dc9-a076-5e24f1088ee3. Caso cancelamento_debitado: pedido iFood DEMO-ANOM-003, diferença R$ 80.00, lançamentos 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Caso cancelamento_debitado: pedido iFood DEMO-ANOM-004, diferença R$ 95.00, lançamentos db39be5c-aea1-4508-bfb9-5b823de15269. Caso taxa_online_em_pago_na_entrega: pedido iFood DEMO-ANOM-005, diferença R$ 4.00, lançamentos 18c994c5-46f9-4159-823b-e78db4ca5fe2. Semana REPASSE-W3: repassado R$ -175.00, esperado R$ -80.00, diferença R$ 95.00. Semana REPASSE-W2: repassado R$ -127.57, esperado R$ -99.07, diferença R$ 28.50. Semana REPASSE-W1: repassado R$ -55.66, esperado R$ -55.66, diferença R$ 0.00. Semana REPASSE-W0: repassado R$ -161.91, esperado R$ -77.91, diferença R$ 84.00. Divergência comissao_acima_contrato no pedido iFood DEMO-ANOM-001: cobrado R$ 34.50, esperado R$ 18.00, diferença R$ 16.50. Lançamentos: e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cobranca_duplicada no pedido iFood DEMO-ANOM-002: cobrado R$ 12.00, esperado R$ 0.00, diferença R$ 12.00. Lançamentos: 934a099a-2129-4dc9-a076-5e24f1088ee3. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cancelamento_debitado no pedido iFood DEMO-ANOM-003: cobrado R$ 80.00, esperado R$ 0.00, diferença R$ 80.00. Lançamentos: 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Orientação: contestar cancelamento até 2026-11-15 (prazo de 7 dias a partir da data do pedido). Data limite: 2026-11-15. Prazo aberto: sim. Divergência cancelamento_debitado no pedido iFood DEMO-ANOM-004: cobrado R$ 95.00, esperado R$ 0.00, diferença R$ 95.00. Lançamentos: db39be5c-aea1-4508-bfb9-5b823de15269. Orientação: prazo de 7 dias expirado em 2026-10-25; abrir chamado no suporte. Data limite: 2026-10-25. Prazo aberto: não. Divergência taxa_online_em_pago_na_entrega no pedido iFood DEMO-ANOM-005: cobrado R$ 4.00, esperado R$ 0.00, diferença R$ 4.00. Lançamentos: 18c994c5-46f9-4159-823b-e78db4ca5fe2. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada.",
+      "resposta": "Aqui está o valor perdido separado por tipo de divergência, com o ID iFood do pedido e a diferença em R$ de cada caso (dados do motor de conciliação):\n\n## Resumo por tipo\n- **cancelamento_debitado**: R$ 175,00\n- **comissao_acima_contrato**: R$ 16,50\n- **cobranca_duplicada**: R$ 12,00\n- **taxa_online_em_pago_na_entrega**: R$ 4,00\n\n**Total perdido: R$ 207,50**\n\n## Detalhe por caso\n| Tipo de divergência | Pedido iFood | Diferença (R$) | Lançamento(s) |\n|---|---|---|---|\n| cancelamento_debitado | DEMO-ANOM-003 | 80,00 | 5202df13-0d83-4d2e-a21f-b3407fe16347 |\n| cancelamento_debitado | DEMO-ANOM-004 | 95,00 | 8aec26e5-f83a-43fa-aa3b-a2492c827914 |\n| comissao_acima_contrato | DEMO-ANOM-001 | 16,50 | 44fb5011-2ad0-4d2e-a943-1a1f070aa380 |\n| cobranca_duplicada | DEMO-ANOM-002 | 12,00 | 594d07cd-0600-4163-83a5-4b394f5ddf53 |\n| taxa_online_em_pago_na_entrega | DEMO-ANOM-005 | 4,00 | c303be0b-d6eb-4ed2-859f-2ee5c9811821 |\n\n> **Nota:** Para divergências do tipo **cancelamento_debitado**, há prazo de 7 dias (data limite) para contestação. Para os demais tipos, a orientação é abrir chamado no suporte do iFood (sem prazo documentado nos dados).",
       "tool_calls": [
         {
           "name": "obter_totais",
-          "args": {}
-        },
-        {
-          "name": "obter_divergencias",
           "args": {}
         }
       ],
@@ -95,9 +88,9 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 833,
+      "latency_ms": 13890,
       "llm_calls": 2,
-      "graded_at": "2026-11-11T03:21:37.825Z"
+      "graded_at": "2026-11-12T21:48:15.727Z"
     },
     {
       "id": "q03",
@@ -107,14 +100,10 @@
       "value_ok": true,
       "id_ok": true,
       "details": [],
-      "resposta": "Perda total por divergências: R$ 207.50. Por tipo: comissão acima R$ 16.50, duplicada R$ 12.00, cancelamento R$ 175.00, taxa online em entrega R$ 4.00. Caso comissao_acima_contrato: pedido iFood DEMO-ANOM-001, diferença R$ 16.50, lançamentos e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Caso cobranca_duplicada: pedido iFood DEMO-ANOM-002, diferença R$ 12.00, lançamentos 934a099a-2129-4dc9-a076-5e24f1088ee3. Caso cancelamento_debitado: pedido iFood DEMO-ANOM-003, diferença R$ 80.00, lançamentos 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Caso cancelamento_debitado: pedido iFood DEMO-ANOM-004, diferença R$ 95.00, lançamentos db39be5c-aea1-4508-bfb9-5b823de15269. Caso taxa_online_em_pago_na_entrega: pedido iFood DEMO-ANOM-005, diferença R$ 4.00, lançamentos 18c994c5-46f9-4159-823b-e78db4ca5fe2. Semana REPASSE-W3: repassado R$ -175.00, esperado R$ -80.00, diferença R$ 95.00. Semana REPASSE-W2: repassado R$ -127.57, esperado R$ -99.07, diferença R$ 28.50. Semana REPASSE-W1: repassado R$ -55.66, esperado R$ -55.66, diferença R$ 0.00. Semana REPASSE-W0: repassado R$ -161.91, esperado R$ -77.91, diferença R$ 84.00. Divergência comissao_acima_contrato no pedido iFood DEMO-ANOM-001: cobrado R$ 34.50, esperado R$ 18.00, diferença R$ 16.50. Lançamentos: e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cobranca_duplicada no pedido iFood DEMO-ANOM-002: cobrado R$ 12.00, esperado R$ 0.00, diferença R$ 12.00. Lançamentos: 934a099a-2129-4dc9-a076-5e24f1088ee3. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cancelamento_debitado no pedido iFood DEMO-ANOM-003: cobrado R$ 80.00, esperado R$ 0.00, diferença R$ 80.00. Lançamentos: 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Orientação: contestar cancelamento até 2026-11-15 (prazo de 7 dias a partir da data do pedido). Data limite: 2026-11-15. Prazo aberto: sim. Divergência cancelamento_debitado no pedido iFood DEMO-ANOM-004: cobrado R$ 95.00, esperado R$ 0.00, diferença R$ 95.00. Lançamentos: db39be5c-aea1-4508-bfb9-5b823de15269. Orientação: prazo de 7 dias expirado em 2026-10-25; abrir chamado no suporte. Data limite: 2026-10-25. Prazo aberto: não. Divergência taxa_online_em_pago_na_entrega no pedido iFood DEMO-ANOM-005: cobrado R$ 4.00, esperado R$ 0.00, diferença R$ 4.00. Lançamentos: 18c994c5-46f9-4159-823b-e78db4ca5fe2. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada.",
+      "resposta": "O prejuízo total por **comissão acima do contrato** é **R$ 16,50**.\n\nDetalhe do caso detectado:\n- **Pedido iFood:** DEMO-ANOM-001  \n- **Diferença:** R$ 16,50  \n- **Lançamento relacionado:** 44fb5011-2ad0-4d2e-a943-1a1f070aa380  \n\nEsse valor já está incluído no total perdido geral de R$ 207,50.",
       "tool_calls": [
         {
           "name": "obter_totais",
-          "args": {}
-        },
-        {
-          "name": "obter_divergencias",
           "args": {}
         }
       ],
@@ -130,9 +119,9 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 827,
+      "latency_ms": 8286,
       "llm_calls": 2,
-      "graded_at": "2026-11-11T03:21:37.825Z"
+      "graded_at": "2026-11-12T21:48:15.727Z"
     },
     {
       "id": "q04",
@@ -142,14 +131,10 @@
       "value_ok": true,
       "id_ok": true,
       "details": [],
-      "resposta": "Perda total por divergências: R$ 207.50. Por tipo: comissão acima R$ 16.50, duplicada R$ 12.00, cancelamento R$ 175.00, taxa online em entrega R$ 4.00. Caso comissao_acima_contrato: pedido iFood DEMO-ANOM-001, diferença R$ 16.50, lançamentos e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Caso cobranca_duplicada: pedido iFood DEMO-ANOM-002, diferença R$ 12.00, lançamentos 934a099a-2129-4dc9-a076-5e24f1088ee3. Caso cancelamento_debitado: pedido iFood DEMO-ANOM-003, diferença R$ 80.00, lançamentos 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Caso cancelamento_debitado: pedido iFood DEMO-ANOM-004, diferença R$ 95.00, lançamentos db39be5c-aea1-4508-bfb9-5b823de15269. Caso taxa_online_em_pago_na_entrega: pedido iFood DEMO-ANOM-005, diferença R$ 4.00, lançamentos 18c994c5-46f9-4159-823b-e78db4ca5fe2. Semana REPASSE-W3: repassado R$ -175.00, esperado R$ -80.00, diferença R$ 95.00. Semana REPASSE-W2: repassado R$ -127.57, esperado R$ -99.07, diferença R$ 28.50. Semana REPASSE-W1: repassado R$ -55.66, esperado R$ -55.66, diferença R$ 0.00. Semana REPASSE-W0: repassado R$ -161.91, esperado R$ -77.91, diferença R$ 84.00. Divergência comissao_acima_contrato no pedido iFood DEMO-ANOM-001: cobrado R$ 34.50, esperado R$ 18.00, diferença R$ 16.50. Lançamentos: e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cobranca_duplicada no pedido iFood DEMO-ANOM-002: cobrado R$ 12.00, esperado R$ 0.00, diferença R$ 12.00. Lançamentos: 934a099a-2129-4dc9-a076-5e24f1088ee3. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cancelamento_debitado no pedido iFood DEMO-ANOM-003: cobrado R$ 80.00, esperado R$ 0.00, diferença R$ 80.00. Lançamentos: 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Orientação: contestar cancelamento até 2026-11-15 (prazo de 7 dias a partir da data do pedido). Data limite: 2026-11-15. Prazo aberto: sim. Divergência cancelamento_debitado no pedido iFood DEMO-ANOM-004: cobrado R$ 95.00, esperado R$ 0.00, diferença R$ 95.00. Lançamentos: db39be5c-aea1-4508-bfb9-5b823de15269. Orientação: prazo de 7 dias expirado em 2026-10-25; abrir chamado no suporte. Data limite: 2026-10-25. Prazo aberto: não. Divergência taxa_online_em_pago_na_entrega no pedido iFood DEMO-ANOM-005: cobrado R$ 4.00, esperado R$ 0.00, diferença R$ 4.00. Lançamentos: 18c994c5-46f9-4159-823b-e78db4ca5fe2. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada.",
+      "resposta": "O total perdido com **cancelamentos debitados** no repasse é **R$ 175,00**.\n\nDetalhe dos casos (conforme o motor de divergências):\n\n| Pedido iFood | Diferença (R$) | Lançamento(s) |\n|---|---|---|\n| DEMO-ANOM-003 | 80,00 | 5202df13-0d83-4d2e-a21f-b3407fe16347 |\n| DEMO-ANOM-004 | 95,00 | 8aec26e5-f83a-43fa-aa3b-a2492c827914 |\n\n**Soma: R$ 175,00** (campo `perdido_por_tipo.cancelamento_debitado` do relatório).\n\nLembre-se: para esse tipo de divergência (cancelamento debitado) há prazo de **7 dias** a partir da data do repasse para contestar. Os demais tipos (comissão acima do contrato, cobrança duplicada, taxa online em pago na entrega) devem ser tratados via **chamado no suporte do iFood**, sem prazo documentado.",
       "tool_calls": [
         {
           "name": "obter_totais",
-          "args": {}
-        },
-        {
-          "name": "obter_divergencias",
           "args": {}
         }
       ],
@@ -165,9 +150,9 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 862,
+      "latency_ms": 12706,
       "llm_calls": 2,
-      "graded_at": "2026-11-11T03:21:37.825Z"
+      "graded_at": "2026-11-12T21:48:15.727Z"
     },
     {
       "id": "q05",
@@ -177,14 +162,10 @@
       "value_ok": true,
       "id_ok": true,
       "details": [],
-      "resposta": "Perda total por divergências: R$ 207.50. Por tipo: comissão acima R$ 16.50, duplicada R$ 12.00, cancelamento R$ 175.00, taxa online em entrega R$ 4.00. Caso comissao_acima_contrato: pedido iFood DEMO-ANOM-001, diferença R$ 16.50, lançamentos e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Caso cobranca_duplicada: pedido iFood DEMO-ANOM-002, diferença R$ 12.00, lançamentos 934a099a-2129-4dc9-a076-5e24f1088ee3. Caso cancelamento_debitado: pedido iFood DEMO-ANOM-003, diferença R$ 80.00, lançamentos 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Caso cancelamento_debitado: pedido iFood DEMO-ANOM-004, diferença R$ 95.00, lançamentos db39be5c-aea1-4508-bfb9-5b823de15269. Caso taxa_online_em_pago_na_entrega: pedido iFood DEMO-ANOM-005, diferença R$ 4.00, lançamentos 18c994c5-46f9-4159-823b-e78db4ca5fe2. Semana REPASSE-W3: repassado R$ -175.00, esperado R$ -80.00, diferença R$ 95.00. Semana REPASSE-W2: repassado R$ -127.57, esperado R$ -99.07, diferença R$ 28.50. Semana REPASSE-W1: repassado R$ -55.66, esperado R$ -55.66, diferença R$ 0.00. Semana REPASSE-W0: repassado R$ -161.91, esperado R$ -77.91, diferença R$ 84.00. Divergência comissao_acima_contrato no pedido iFood DEMO-ANOM-001: cobrado R$ 34.50, esperado R$ 18.00, diferença R$ 16.50. Lançamentos: e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cobranca_duplicada no pedido iFood DEMO-ANOM-002: cobrado R$ 12.00, esperado R$ 0.00, diferença R$ 12.00. Lançamentos: 934a099a-2129-4dc9-a076-5e24f1088ee3. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cancelamento_debitado no pedido iFood DEMO-ANOM-003: cobrado R$ 80.00, esperado R$ 0.00, diferença R$ 80.00. Lançamentos: 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Orientação: contestar cancelamento até 2026-11-15 (prazo de 7 dias a partir da data do pedido). Data limite: 2026-11-15. Prazo aberto: sim. Divergência cancelamento_debitado no pedido iFood DEMO-ANOM-004: cobrado R$ 95.00, esperado R$ 0.00, diferença R$ 95.00. Lançamentos: db39be5c-aea1-4508-bfb9-5b823de15269. Orientação: prazo de 7 dias expirado em 2026-10-25; abrir chamado no suporte. Data limite: 2026-10-25. Prazo aberto: não. Divergência taxa_online_em_pago_na_entrega no pedido iFood DEMO-ANOM-005: cobrado R$ 4.00, esperado R$ 0.00, diferença R$ 4.00. Lançamentos: 18c994c5-46f9-4159-823b-e78db4ca5fe2. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada.",
+      "resposta": "O valor total perdido por **cobrança duplicada** é **R$ 12,00**.\n\nDetalhe do caso identificado:\n- **Pedido iFood:** DEMO-ANOM-002  \n- **Diferença (valor perdido):** R$ 12,00  \n- **Lançamento(s) relacionado(s):** 594d07cd-0600-4163-83a5-4b394f5ddf53  \n\nEsse valor já está contemplado no total geral de divergências (R$ 207,50).",
       "tool_calls": [
         {
           "name": "obter_totais",
-          "args": {}
-        },
-        {
-          "name": "obter_divergencias",
           "args": {}
         }
       ],
@@ -202,9 +183,9 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 866,
+      "latency_ms": 10786,
       "llm_calls": 2,
-      "graded_at": "2026-11-11T03:21:37.825Z"
+      "graded_at": "2026-11-12T21:48:15.727Z"
     },
     {
       "id": "q06",
@@ -214,22 +195,14 @@
       "value_ok": true,
       "id_ok": true,
       "details": [],
-      "resposta": "Contrato Marketplace: comissão 12%, taxa online 3.2%, taxa de repasse semanal R$ 1.99. Perda total por divergências: R$ 207.50. Por tipo: comissão acima R$ 16.50, duplicada R$ 12.00, cancelamento R$ 175.00, taxa online em entrega R$ 4.00. Caso comissao_acima_contrato: pedido iFood DEMO-ANOM-001, diferença R$ 16.50, lançamentos e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Caso cobranca_duplicada: pedido iFood DEMO-ANOM-002, diferença R$ 12.00, lançamentos 934a099a-2129-4dc9-a076-5e24f1088ee3. Caso cancelamento_debitado: pedido iFood DEMO-ANOM-003, diferença R$ 80.00, lançamentos 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Caso cancelamento_debitado: pedido iFood DEMO-ANOM-004, diferença R$ 95.00, lançamentos db39be5c-aea1-4508-bfb9-5b823de15269. Caso taxa_online_em_pago_na_entrega: pedido iFood DEMO-ANOM-005, diferença R$ 4.00, lançamentos 18c994c5-46f9-4159-823b-e78db4ca5fe2. Semana REPASSE-W3: repassado R$ -175.00, esperado R$ -80.00, diferença R$ 95.00. Semana REPASSE-W2: repassado R$ -127.57, esperado R$ -99.07, diferença R$ 28.50. Semana REPASSE-W1: repassado R$ -55.66, esperado R$ -55.66, diferença R$ 0.00. Semana REPASSE-W0: repassado R$ -161.91, esperado R$ -77.91, diferença R$ 84.00. Divergência comissao_acima_contrato no pedido iFood DEMO-ANOM-001: cobrado R$ 34.50, esperado R$ 18.00, diferença R$ 16.50. Lançamentos: e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cobranca_duplicada no pedido iFood DEMO-ANOM-002: cobrado R$ 12.00, esperado R$ 0.00, diferença R$ 12.00. Lançamentos: 934a099a-2129-4dc9-a076-5e24f1088ee3. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cancelamento_debitado no pedido iFood DEMO-ANOM-003: cobrado R$ 80.00, esperado R$ 0.00, diferença R$ 80.00. Lançamentos: 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Orientação: contestar cancelamento até 2026-11-15 (prazo de 7 dias a partir da data do pedido). Data limite: 2026-11-15. Prazo aberto: sim. Divergência cancelamento_debitado no pedido iFood DEMO-ANOM-004: cobrado R$ 95.00, esperado R$ 0.00, diferença R$ 95.00. Lançamentos: db39be5c-aea1-4508-bfb9-5b823de15269. Orientação: prazo de 7 dias expirado em 2026-10-25; abrir chamado no suporte. Data limite: 2026-10-25. Prazo aberto: não. Divergência taxa_online_em_pago_na_entrega no pedido iFood DEMO-ANOM-005: cobrado R$ 4.00, esperado R$ 0.00, diferença R$ 4.00. Lançamentos: 18c994c5-46f9-4159-823b-e78db4ca5fe2. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Pedido iFood DEMO-PED-W3-N1: status ENTREGUE, valor R$ 74.50, pagamento ONLINE. Pedido iFood DEMO-PED-W3-N2: status ENTREGUE, valor R$ 83.00, pagamento ONLINE. Pedido iFood DEMO-PED-W3-N3: status ENTREGUE, valor R$ 91.50, pagamento PAGO_NA_ENTREGA. Pedido iFood DEMO-PED-W3-N4: status ENTREGUE, valor R$ 100.00, pagamento ONLINE. Pedido iFood DEMO-ANOM-004: status CANCELADO, valor R$ 95.00, pagamento ONLINE. Pedido iFood DEMO-PED-W3-N5: status ENTREGUE, valor R$ 108.50, pagamento ONLINE. Pedido iFood DEMO-PED-W2-N1: status ENTREGUE, valor R$ 67.50, pagamento PAGO_NA_ENTREGA. Pedido iFood DEMO-PED-W2-N2: status ENTREGUE, valor R$ 76.00, pagamento ONLINE. Pedido iFood DEMO-PED-W2-N3: status ENTREGUE, valor R$ 84.50, pagamento ONLINE. Pedido iFood DEMO-ANOM-002: status ENTREGUE, valor R$ 100.00, pagamento ONLINE. Pedido iFood DEMO-PED-W2-N4: status ENTREGUE, valor R$ 93.00, pagamento PAGO_NA_ENTREGA. Pedido iFood DEMO-PED-W2-N5: status ENTREGUE, valor R$ 101.50, pagamento ONLINE. Pedido iFood DEMO-ANOM-001: status ENTREGUE, valor R$ 150.00, pagamento ONLINE. Pedido iFood DEMO-PED-W1-N1: status ENTREGUE, valor R$ 60.50, pagamento ONLINE. Pedido iFood DEMO-PED-W1-N2: status ENTREGUE, valor R$ 69.00, pagamento PAGO_NA_ENTREGA. Pedido iFood DEMO-PED-W1-N3: status ENTREGUE, valor R$ 77.50, pagamento ONLINE. Pedido iFood DEMO-PED-W1-N4: status ENTREGUE, valor R$ 86.00, pagamento ONLINE. Pedido iFood DEMO-PED-W1-N5: status ENTREGUE, valor R$ 94.50, pagamento PAGO_NA_ENTREGA. Pedido iFood DEMO-PED-W0-N1: status ENTREGUE, valor R$ 53.50, pagamento ONLINE. Pedido iFood DEMO-ANOM-005: status ENTREGUE, valor R$ 125.00, pagamento PAGO_NA_ENTREGA. Pedido iFood DEMO-PED-W0-N2: status ENTREGUE, valor R$ 62.00, pagamento ONLINE. Pedido iFood DEMO-PED-W0-N3: status ENTREGUE, valor R$ 70.50, pagamento PAGO_NA_ENTREGA. Pedido iFood DEMO-ANOM-003: status CANCELADO, valor R$ 80.00, pagamento ONLINE. Pedido iFood DEMO-PED-W0-N4: status ENTREGUE, valor R$ 79.00, pagamento ONLINE. Pedido iFood DEMO-PED-W0-N5: status ENTREGUE, valor R$ 87.50, pagamento ONLINE.",
+      "resposta": "Sim. Há **1 divergência do tipo \"taxa_online_em_pago_na_entrega\"**:\n\n| Pedido iFood | Diferença (R$) | Lançamento | Semana | Orientação |\n|---|---|---|---|---|\n| **DEMO-ANOM-005** | **4,00** | `c303be0b-d6eb-4ed2-859f-2ee5c9811821` | REPASSE-W0 | Abrir chamado no suporte, sem prazo documentado |\n\n**Total perdido por esse tipo:** R$ 4,00 (confere com o totalizador de perdas por tipo).",
       "tool_calls": [
-        {
-          "name": "obter_contrato",
-          "args": {}
-        },
-        {
-          "name": "obter_totais",
-          "args": {}
-        },
         {
           "name": "obter_divergencias",
           "args": {}
         },
         {
-          "name": "obter_pedidos",
+          "name": "obter_totais",
           "args": {}
         }
       ],
@@ -247,9 +220,9 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 830,
-      "llm_calls": 2,
-      "graded_at": "2026-11-11T03:21:37.825Z"
+      "latency_ms": 15679,
+      "llm_calls": 3,
+      "graded_at": "2026-11-12T21:48:15.727Z"
     },
     {
       "id": "q07",
@@ -259,7 +232,7 @@
       "value_ok": true,
       "id_ok": true,
       "details": [],
-      "resposta": "Perda total por divergências: R$ 207.50. Por tipo: comissão acima R$ 16.50, duplicada R$ 12.00, cancelamento R$ 175.00, taxa online em entrega R$ 4.00. Caso comissao_acima_contrato: pedido iFood DEMO-ANOM-001, diferença R$ 16.50, lançamentos e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Caso cobranca_duplicada: pedido iFood DEMO-ANOM-002, diferença R$ 12.00, lançamentos 934a099a-2129-4dc9-a076-5e24f1088ee3. Caso cancelamento_debitado: pedido iFood DEMO-ANOM-003, diferença R$ 80.00, lançamentos 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Caso cancelamento_debitado: pedido iFood DEMO-ANOM-004, diferença R$ 95.00, lançamentos db39be5c-aea1-4508-bfb9-5b823de15269. Caso taxa_online_em_pago_na_entrega: pedido iFood DEMO-ANOM-005, diferença R$ 4.00, lançamentos 18c994c5-46f9-4159-823b-e78db4ca5fe2. Semana REPASSE-W0: repassado R$ -161.91, esperado R$ -77.91, diferença R$ 84.00. Divergência comissao_acima_contrato no pedido iFood DEMO-ANOM-001: cobrado R$ 34.50, esperado R$ 18.00, diferença R$ 16.50. Lançamentos: e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cobranca_duplicada no pedido iFood DEMO-ANOM-002: cobrado R$ 12.00, esperado R$ 0.00, diferença R$ 12.00. Lançamentos: 934a099a-2129-4dc9-a076-5e24f1088ee3. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cancelamento_debitado no pedido iFood DEMO-ANOM-003: cobrado R$ 80.00, esperado R$ 0.00, diferença R$ 80.00. Lançamentos: 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Orientação: contestar cancelamento até 2026-11-15 (prazo de 7 dias a partir da data do pedido). Data limite: 2026-11-15. Prazo aberto: sim. Divergência cancelamento_debitado no pedido iFood DEMO-ANOM-004: cobrado R$ 95.00, esperado R$ 0.00, diferença R$ 95.00. Lançamentos: db39be5c-aea1-4508-bfb9-5b823de15269. Orientação: prazo de 7 dias expirado em 2026-10-25; abrir chamado no suporte. Data limite: 2026-10-25. Prazo aberto: não. Divergência taxa_online_em_pago_na_entrega no pedido iFood DEMO-ANOM-005: cobrado R$ 4.00, esperado R$ 0.00, diferença R$ 4.00. Lançamentos: 18c994c5-46f9-4159-823b-e78db4ca5fe2. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada.",
+      "resposta": "A semana **REPASSE-W0** (05/11 a 11/11) ficou **R$ 84,00** abaixo do esperado (repassado: **‑R$ 161,91** vs. esperado: **‑R$ 77,91**).\n\nEssa diferença de **R$ 84,00** é explicada por duas divergências detectadas nessa semana:\n\n| Pedido (ID iFood) | Tipo de divergência | Diferença (R$) | Lançamento(s) | Orientação / Prazo |\n|-------------------|---------------------|----------------|---------------|---------------------|\n| **DEMO-ANOM-003** | cancelamento_debitado | **80,00** | `5202df13-0d83-4d2e-a21f-b3407fe16347` | Contestar cancelamento até **2026-11-15** (prazo de 7 dias a partir da data do pedido) — **prazo aberto** |\n| **DEMO-ANOM-005** | taxa_online_em_pago_na_entrega | **4,00** | `c303be0b-d6eb-4ed2-859f-2ee5c9811821` | Abrir chamado no suporte — **sem prazo documentado** |\n\n**Resumo:**  \n- **DEMO-ANOM-003** (cancelamento debitado indevidamente) responde por **R$ 80,00** e tem prazo para contestação até **15/11/2026**.  \n- **DEMO-ANOM-005** (taxa de pagamento online cobrada em pedido “pago na entrega”) responde por **R$ 4,00** e não tem prazo definido — deve-se abrir chamado no suporte do iFood.\n\nSomando as duas: **80,00 + 4,00 = 84,00**, que é exatamente a diferença da semana.",
       "tool_calls": [
         {
           "name": "obter_totais",
@@ -287,9 +260,9 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 854,
-      "llm_calls": 2,
-      "graded_at": "2026-11-11T03:21:37.825Z"
+      "latency_ms": 28156,
+      "llm_calls": 3,
+      "graded_at": "2026-11-12T21:48:15.727Z"
     },
     {
       "id": "q08",
@@ -299,7 +272,7 @@
       "value_ok": true,
       "id_ok": true,
       "details": [],
-      "resposta": "Perda total por divergências: R$ 207.50. Por tipo: comissão acima R$ 16.50, duplicada R$ 12.00, cancelamento R$ 175.00, taxa online em entrega R$ 4.00. Caso comissao_acima_contrato: pedido iFood DEMO-ANOM-001, diferença R$ 16.50, lançamentos e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Caso cobranca_duplicada: pedido iFood DEMO-ANOM-002, diferença R$ 12.00, lançamentos 934a099a-2129-4dc9-a076-5e24f1088ee3. Caso cancelamento_debitado: pedido iFood DEMO-ANOM-003, diferença R$ 80.00, lançamentos 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Caso cancelamento_debitado: pedido iFood DEMO-ANOM-004, diferença R$ 95.00, lançamentos db39be5c-aea1-4508-bfb9-5b823de15269. Caso taxa_online_em_pago_na_entrega: pedido iFood DEMO-ANOM-005, diferença R$ 4.00, lançamentos 18c994c5-46f9-4159-823b-e78db4ca5fe2. Semana REPASSE-W2: repassado R$ -127.57, esperado R$ -99.07, diferença R$ 28.50. Divergência comissao_acima_contrato no pedido iFood DEMO-ANOM-001: cobrado R$ 34.50, esperado R$ 18.00, diferença R$ 16.50. Lançamentos: e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cobranca_duplicada no pedido iFood DEMO-ANOM-002: cobrado R$ 12.00, esperado R$ 0.00, diferença R$ 12.00. Lançamentos: 934a099a-2129-4dc9-a076-5e24f1088ee3. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cancelamento_debitado no pedido iFood DEMO-ANOM-003: cobrado R$ 80.00, esperado R$ 0.00, diferença R$ 80.00. Lançamentos: 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Orientação: contestar cancelamento até 2026-11-15 (prazo de 7 dias a partir da data do pedido). Data limite: 2026-11-15. Prazo aberto: sim. Divergência cancelamento_debitado no pedido iFood DEMO-ANOM-004: cobrado R$ 95.00, esperado R$ 0.00, diferença R$ 95.00. Lançamentos: db39be5c-aea1-4508-bfb9-5b823de15269. Orientação: prazo de 7 dias expirado em 2026-10-25; abrir chamado no suporte. Data limite: 2026-10-25. Prazo aberto: não. Divergência taxa_online_em_pago_na_entrega no pedido iFood DEMO-ANOM-005: cobrado R$ 4.00, esperado R$ 0.00, diferença R$ 4.00. Lançamentos: 18c994c5-46f9-4159-823b-e78db4ca5fe2. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada.",
+      "resposta": "Na **REPASSE-W2** você deixou de receber **R$ 28,50** no total por causa das divergências detectadas nessa semana.\n\nDetalhamento por divergência (todas da semana REPASSE-W2):\n\n| Pedido iFood | Tipo de divergência | Diferença (R$) | Lançamento(s) |\n|---|---|---|---|\n| **DEMO-ANOM-001** | comissão acima do contrato | **16,50** | `44fb5011-2ad0-4d2e-a943-1a1f070aa380` |\n| **DEMO-ANOM-002** | cobrança duplicada | **12,00** | `594d07cd-0600-4163-83a5-4b394f5ddf53` |\n\n**Total da semana: R$ 28,50** (16,50 + 12,00).\n\n> Observação: ambas as divergências têm a orientação “abrir chamado no suporte, sem prazo documentado”.",
       "tool_calls": [
         {
           "name": "obter_totais",
@@ -322,9 +295,9 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 897,
-      "llm_calls": 2,
-      "graded_at": "2026-11-11T03:21:37.825Z"
+      "latency_ms": 21396,
+      "llm_calls": 3,
+      "graded_at": "2026-11-13T00:21:09.656Z"
     },
     {
       "id": "q09",
@@ -334,11 +307,17 @@
       "value_ok": true,
       "id_ok": true,
       "details": [],
-      "resposta": "Perda total por divergências: R$ 207.50. Por tipo: comissão acima R$ 16.50, duplicada R$ 12.00, cancelamento R$ 175.00, taxa online em entrega R$ 4.00. Caso comissao_acima_contrato: pedido iFood DEMO-ANOM-001, diferença R$ 16.50, lançamentos e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Caso cobranca_duplicada: pedido iFood DEMO-ANOM-002, diferença R$ 12.00, lançamentos 934a099a-2129-4dc9-a076-5e24f1088ee3. Caso cancelamento_debitado: pedido iFood DEMO-ANOM-003, diferença R$ 80.00, lançamentos 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Caso cancelamento_debitado: pedido iFood DEMO-ANOM-004, diferença R$ 95.00, lançamentos db39be5c-aea1-4508-bfb9-5b823de15269. Caso taxa_online_em_pago_na_entrega: pedido iFood DEMO-ANOM-005, diferença R$ 4.00, lançamentos 18c994c5-46f9-4159-823b-e78db4ca5fe2. Semana REPASSE-W1: repassado R$ -55.66, esperado R$ -55.66, diferença R$ 0.00. Divergência comissao_acima_contrato no pedido iFood DEMO-ANOM-001: cobrado R$ 34.50, esperado R$ 18.00, diferença R$ 16.50. Lançamentos: e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cobranca_duplicada no pedido iFood DEMO-ANOM-002: cobrado R$ 12.00, esperado R$ 0.00, diferença R$ 12.00. Lançamentos: 934a099a-2129-4dc9-a076-5e24f1088ee3. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cancelamento_debitado no pedido iFood DEMO-ANOM-003: cobrado R$ 80.00, esperado R$ 0.00, diferença R$ 80.00. Lançamentos: 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Orientação: contestar cancelamento até 2026-11-15 (prazo de 7 dias a partir da data do pedido). Data limite: 2026-11-15. Prazo aberto: sim. Divergência cancelamento_debitado no pedido iFood DEMO-ANOM-004: cobrado R$ 95.00, esperado R$ 0.00, diferença R$ 95.00. Lançamentos: db39be5c-aea1-4508-bfb9-5b823de15269. Orientação: prazo de 7 dias expirado em 2026-10-25; abrir chamado no suporte. Data limite: 2026-10-25. Prazo aberto: não. Divergência taxa_online_em_pago_na_entrega no pedido iFood DEMO-ANOM-005: cobrado R$ 4.00, esperado R$ 0.00, diferença R$ 4.00. Lançamentos: 18c994c5-46f9-4159-823b-e78db4ca5fe2. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada.",
+      "resposta": "**Não.** A semana **REPASSE-W1** (29/10/2026 a 04/11/2026) não teve perda por divergência:\n\n- Nos totais por semana, a diferença entre repassado e esperado é **R$ 0,00** (diferenca_centavos: 0)【obter_totais → totais_por_semana[2]】.\n- Nenhuma das 5 divergências detectadas pertence a essa semana — todas estão em REPASSE-W0, REPASSE-W2 ou REPASSE-W3【obter_divergencias】.\n- Os lançamentos da semana são apenas comissões e taxas de pagamento online normais, sem flags de anomalia【listar_lancamentos】.\n\nO total perdido por divergências no período todo é **R$ 207,50**, mas 100% desse valor concentra‑se nas outras semanas.",
       "tool_calls": [
         {
           "name": "obter_totais",
           "args": {}
+        },
+        {
+          "name": "listar_lancamentos",
+          "args": {
+            "semana": "REPASSE-W1"
+          }
         },
         {
           "name": "obter_divergencias",
@@ -357,9 +336,9 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 829,
-      "llm_calls": 2,
-      "graded_at": "2026-11-11T03:21:37.825Z"
+      "latency_ms": 27779,
+      "llm_calls": 4,
+      "graded_at": "2026-11-12T21:48:15.727Z"
     },
     {
       "id": "q10",
@@ -369,16 +348,10 @@
       "value_ok": true,
       "id_ok": true,
       "details": [],
-      "resposta": "Divergência cancelamento_debitado no pedido iFood DEMO-ANOM-003: cobrado R$ 80.00, esperado R$ 0.00, diferença R$ 80.00. Lançamentos: 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Orientação: contestar cancelamento até 2026-11-15 (prazo de 7 dias a partir da data do pedido). Data limite: 2026-11-15. Prazo aberto: sim. Pedido iFood DEMO-ANOM-003: status CANCELADO, valor R$ 80.00, pagamento ONLINE.",
+      "resposta": "Sim, ainda dá tempo.  \n\n- **Pedido iFood:** DEMO-ANOM-003  \n- **Diferença (valor debitado indevidamente):** R$ 80,00  \n- **Data limite para contestação:** **2026-11-15** (prazo de 7 dias a partir da data do pedido)  \n- **Status do prazo:** aberto (`prazo_aberto: true`)  \n\nComo hoje é 2026-11-12, você tem até **2026-11-15** para contestar esse cancelamento debitado.",
       "tool_calls": [
         {
           "name": "obter_divergencias",
-          "args": {
-            "pedido_id_ifood": "DEMO-ANOM-003"
-          }
-        },
-        {
-          "name": "obter_pedidos",
           "args": {
             "pedido_id_ifood": "DEMO-ANOM-003"
           }
@@ -398,9 +371,9 @@
         "prazoAberto": true,
         "forbidDataLimite": false
       },
-      "latency_ms": 832,
+      "latency_ms": 19109,
       "llm_calls": 2,
-      "graded_at": "2026-11-11T03:21:37.825Z"
+      "graded_at": "2026-11-12T21:48:15.727Z"
     },
     {
       "id": "q11",
@@ -410,16 +383,10 @@
       "value_ok": true,
       "id_ok": true,
       "details": [],
-      "resposta": "Divergência cancelamento_debitado no pedido iFood DEMO-ANOM-004: cobrado R$ 95.00, esperado R$ 0.00, diferença R$ 95.00. Lançamentos: db39be5c-aea1-4508-bfb9-5b823de15269. Orientação: prazo de 7 dias expirado em 2026-10-25; abrir chamado no suporte. Data limite: 2026-10-25. Prazo aberto: não. Pedido iFood DEMO-ANOM-004: status CANCELADO, valor R$ 95.00, pagamento ONLINE.",
+      "resposta": "Não. A divergência do pedido **DEMO-ANOM-004** (tipo *cancelamento_debitado*, diferença de **R$ 95,00**) tem data limite de **2026-10-25**. Como hoje é 2026-11-12, o prazo de 7 dias **já expirou**.\n\nOrientação do motor: “prazo de 7 dias expirado em 2026-10-25; abrir chamado no suporte”.",
       "tool_calls": [
         {
           "name": "obter_divergencias",
-          "args": {
-            "pedido_id_ifood": "DEMO-ANOM-004"
-          }
-        },
-        {
-          "name": "obter_pedidos",
           "args": {
             "pedido_id_ifood": "DEMO-ANOM-004"
           }
@@ -439,9 +406,9 @@
         "prazoAberto": false,
         "forbidDataLimite": false
       },
-      "latency_ms": 876,
+      "latency_ms": 13918,
       "llm_calls": 2,
-      "graded_at": "2026-11-11T03:21:37.825Z"
+      "graded_at": "2026-11-13T00:21:09.656Z"
     },
     {
       "id": "q12",
@@ -451,15 +418,13 @@
       "value_ok": true,
       "id_ok": true,
       "details": [],
-      "resposta": "Ainda pode contestar o pedido iFood DEMO-ANOM-003 (diferença R$ 80.00) até 2026-11-15.",
+      "resposta": "Com base nas divergências do tipo **cancelamento_debitado**, apenas **um** pedido ainda está dentro do prazo de 7 dias para contestação:\n\n| Pedido iFood | Diferença (R$) | Lançamento | Prazo (data limite) | Status do prazo |\n|--------------|----------------|------------|---------------------|-----------------|\n| **DEMO-ANOM-003** | **80,00** | `5202df13-0d83-4d2e-a21f-b3407fe16347` | 2026-11-15 | **Aberto** (3 dias restantes) |\n| DEMO-ANOM-004 | 95,00 | `8aec26e5-f83a-43fa-aa3b-a2492c827914` | 2026-10-25 | **Expirado** |\n\n**Resumo:**\n- **DEMO-ANOM-003** — ainda pode ser contestado (prazo até **2026-11-15**).\n- **DEMO-ANOM-004** — prazo de 7 dias já expirou em 2026-10-25; a orientação é **abrir chamado no suporte, sem prazo documentado**.\n\nSe quiser, posso gerar um rascunho de contestação local para o **DEMO-ANOM-003** (não envia nada a ninguém).",
       "tool_calls": [
         {
-          "name": "obter_totais",
-          "args": {}
-        },
-        {
           "name": "obter_divergencias",
-          "args": {}
+          "args": {
+            "tipo": "cancelamento_debitado"
+          }
         }
       ],
       "expected": {
@@ -476,9 +441,9 @@
         "prazoAberto": true,
         "forbidDataLimite": false
       },
-      "latency_ms": 827,
+      "latency_ms": 26022,
       "llm_calls": 2,
-      "graded_at": "2026-11-11T03:21:37.825Z"
+      "graded_at": "2026-11-13T00:21:09.656Z"
     },
     {
       "id": "q13",
@@ -488,16 +453,10 @@
       "value_ok": true,
       "id_ok": true,
       "details": [],
-      "resposta": "Divergência cancelamento_debitado no pedido iFood DEMO-ANOM-003: cobrado R$ 80.00, esperado R$ 0.00, diferença R$ 80.00. Lançamentos: 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Orientação: contestar cancelamento até 2026-11-15 (prazo de 7 dias a partir da data do pedido). Data limite: 2026-11-15. Prazo aberto: sim. Pedido iFood DEMO-ANOM-003: status CANCELADO, valor R$ 80.00, pagamento ONLINE.",
+      "resposta": "**Prazo para contestar o cancelamento debitado do pedido DEMO-ANOM-003**\n\n- **Data limite:** 2026-11-15 (próximo domingo)\n- **Tipo de divergência:** cancelamento_debitado\n- **Diferença (valor debitado indevidamente):** R$ 80,00\n- **Lançamento relacionado:** 5202df13-0d83-4d2e-a21f-b3407fe16347\n- **Semana do repasse:** REPASSE-W0\n\nEssa divergência tem prazo de 7 dias a partir da data do pedido para contestação, conforme a orientação do motor de regras. Após 2026-11-15, o prazo se encerra.",
       "tool_calls": [
         {
           "name": "obter_divergencias",
-          "args": {
-            "pedido_id_ifood": "DEMO-ANOM-003"
-          }
-        },
-        {
-          "name": "obter_pedidos",
           "args": {
             "pedido_id_ifood": "DEMO-ANOM-003"
           }
@@ -512,12 +471,12 @@
         "texts": [],
         "textGroups": [],
         "dataLimite": "2026-11-15",
-        "prazoAberto": true,
+        "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 861,
+      "latency_ms": 8777,
       "llm_calls": 2,
-      "graded_at": "2026-11-11T03:21:37.825Z"
+      "graded_at": "2026-11-13T00:21:09.656Z"
     },
     {
       "id": "q14",
@@ -527,20 +486,10 @@
       "value_ok": true,
       "id_ok": true,
       "details": [],
-      "resposta": "Contrato Marketplace: comissão 12%, taxa online 3.2%, taxa de repasse semanal R$ 1.99. Divergência comissao_acima_contrato no pedido iFood DEMO-ANOM-001: cobrado R$ 34.50, esperado R$ 18.00, diferença R$ 16.50. Lançamentos: e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Pedido iFood DEMO-ANOM-001: status ENTREGUE, valor R$ 150.00, pagamento ONLINE.",
+      "resposta": "Não. A divergência do pedido **DEMO-ANOM-001** é do tipo **comissão acima do contrato** (valor a mais de **R$ 16,50**), e o motor de regras orienta: “abrir chamado no suporte, sem prazo documentado”. O prazo de 7 dias (data limite) só se aplica a divergências do tipo **cancelamento debitado**. Para este caso, não há prazo de 7 dias — deve-se abrir chamado no suporte do iFood.",
       "tool_calls": [
         {
-          "name": "obter_contrato",
-          "args": {}
-        },
-        {
           "name": "obter_divergencias",
-          "args": {
-            "pedido_id_ifood": "DEMO-ANOM-001"
-          }
-        },
-        {
-          "name": "obter_pedidos",
           "args": {
             "pedido_id_ifood": "DEMO-ANOM-001"
           }
@@ -562,9 +511,9 @@
         "prazoAberto": null,
         "forbidDataLimite": true
       },
-      "latency_ms": 1006,
+      "latency_ms": 13019,
       "llm_calls": 2,
-      "graded_at": "2026-11-11T03:21:37.825Z"
+      "graded_at": "2026-11-13T00:21:09.656Z"
     },
     {
       "id": "q15",
@@ -574,12 +523,8 @@
       "value_ok": true,
       "id_ok": true,
       "details": [],
-      "resposta": "Perda total por divergências: R$ 207.50. Por tipo: comissão acima R$ 16.50, duplicada R$ 12.00, cancelamento R$ 175.00, taxa online em entrega R$ 4.00. Caso comissao_acima_contrato: pedido iFood DEMO-ANOM-001, diferença R$ 16.50, lançamentos e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Caso cobranca_duplicada: pedido iFood DEMO-ANOM-002, diferença R$ 12.00, lançamentos 934a099a-2129-4dc9-a076-5e24f1088ee3. Caso cancelamento_debitado: pedido iFood DEMO-ANOM-003, diferença R$ 80.00, lançamentos 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Caso cancelamento_debitado: pedido iFood DEMO-ANOM-004, diferença R$ 95.00, lançamentos db39be5c-aea1-4508-bfb9-5b823de15269. Caso taxa_online_em_pago_na_entrega: pedido iFood DEMO-ANOM-005, diferença R$ 4.00, lançamentos 18c994c5-46f9-4159-823b-e78db4ca5fe2. Semana REPASSE-W3: repassado R$ -175.00, esperado R$ -80.00, diferença R$ 95.00. Semana REPASSE-W2: repassado R$ -127.57, esperado R$ -99.07, diferença R$ 28.50. Semana REPASSE-W1: repassado R$ -55.66, esperado R$ -55.66, diferença R$ 0.00. Semana REPASSE-W0: repassado R$ -161.91, esperado R$ -77.91, diferença R$ 84.00. Divergência comissao_acima_contrato no pedido iFood DEMO-ANOM-001: cobrado R$ 34.50, esperado R$ 18.00, diferença R$ 16.50. Lançamentos: e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cobranca_duplicada no pedido iFood DEMO-ANOM-002: cobrado R$ 12.00, esperado R$ 0.00, diferença R$ 12.00. Lançamentos: 934a099a-2129-4dc9-a076-5e24f1088ee3. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cancelamento_debitado no pedido iFood DEMO-ANOM-003: cobrado R$ 80.00, esperado R$ 0.00, diferença R$ 80.00. Lançamentos: 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Orientação: contestar cancelamento até 2026-11-15 (prazo de 7 dias a partir da data do pedido). Data limite: 2026-11-15. Prazo aberto: sim. Divergência cancelamento_debitado no pedido iFood DEMO-ANOM-004: cobrado R$ 95.00, esperado R$ 0.00, diferença R$ 95.00. Lançamentos: db39be5c-aea1-4508-bfb9-5b823de15269. Orientação: prazo de 7 dias expirado em 2026-10-25; abrir chamado no suporte. Data limite: 2026-10-25. Prazo aberto: não. Divergência taxa_online_em_pago_na_entrega no pedido iFood DEMO-ANOM-005: cobrado R$ 4.00, esperado R$ 0.00, diferença R$ 4.00. Lançamentos: 18c994c5-46f9-4159-823b-e78db4ca5fe2. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada.",
+      "resposta": "Não. Para a divergência do tipo **cobrança duplicada** (pedido **DEMO-ANOM-002**, diferença de **R$ 12,00**), a orientação do motor é **“abrir chamado no suporte, sem prazo documentado”** — não há `data_limite` nem prazo de 7 dias (o prazo de 7 dias só se aplica a *cancelamento debitado*).",
       "tool_calls": [
-        {
-          "name": "obter_totais",
-          "args": {}
-        },
         {
           "name": "obter_divergencias",
           "args": {}
@@ -599,9 +544,9 @@
         "prazoAberto": null,
         "forbidDataLimite": true
       },
-      "latency_ms": 872,
+      "latency_ms": 12829,
       "llm_calls": 2,
-      "graded_at": "2026-11-11T03:21:37.825Z"
+      "graded_at": "2026-11-12T21:48:15.727Z"
     },
     {
       "id": "q16",
@@ -611,18 +556,10 @@
       "value_ok": true,
       "id_ok": true,
       "details": [],
-      "resposta": "Contrato Marketplace: comissão 12%, taxa online 3.2%, taxa de repasse semanal R$ 1.99. Divergência comissao_acima_contrato no pedido iFood DEMO-ANOM-001: cobrado R$ 34.50, esperado R$ 18.00, diferença R$ 16.50. Lançamentos: e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cobranca_duplicada no pedido iFood DEMO-ANOM-002: cobrado R$ 12.00, esperado R$ 0.00, diferença R$ 12.00. Lançamentos: 934a099a-2129-4dc9-a076-5e24f1088ee3. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cancelamento_debitado no pedido iFood DEMO-ANOM-003: cobrado R$ 80.00, esperado R$ 0.00, diferença R$ 80.00. Lançamentos: 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Orientação: contestar cancelamento até 2026-11-15 (prazo de 7 dias a partir da data do pedido). Data limite: 2026-11-15. Prazo aberto: sim. Divergência cancelamento_debitado no pedido iFood DEMO-ANOM-004: cobrado R$ 95.00, esperado R$ 0.00, diferença R$ 95.00. Lançamentos: db39be5c-aea1-4508-bfb9-5b823de15269. Orientação: prazo de 7 dias expirado em 2026-10-25; abrir chamado no suporte. Data limite: 2026-10-25. Prazo aberto: não. Divergência taxa_online_em_pago_na_entrega no pedido iFood DEMO-ANOM-005: cobrado R$ 4.00, esperado R$ 0.00, diferença R$ 4.00. Lançamentos: 18c994c5-46f9-4159-823b-e78db4ca5fe2. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Pedido iFood DEMO-PED-W3-N1: status ENTREGUE, valor R$ 74.50, pagamento ONLINE. Pedido iFood DEMO-PED-W3-N2: status ENTREGUE, valor R$ 83.00, pagamento ONLINE. Pedido iFood DEMO-PED-W3-N3: status ENTREGUE, valor R$ 91.50, pagamento PAGO_NA_ENTREGA. Pedido iFood DEMO-PED-W3-N4: status ENTREGUE, valor R$ 100.00, pagamento ONLINE. Pedido iFood DEMO-ANOM-004: status CANCELADO, valor R$ 95.00, pagamento ONLINE. Pedido iFood DEMO-PED-W3-N5: status ENTREGUE, valor R$ 108.50, pagamento ONLINE. Pedido iFood DEMO-PED-W2-N1: status ENTREGUE, valor R$ 67.50, pagamento PAGO_NA_ENTREGA. Pedido iFood DEMO-PED-W2-N2: status ENTREGUE, valor R$ 76.00, pagamento ONLINE. Pedido iFood DEMO-PED-W2-N3: status ENTREGUE, valor R$ 84.50, pagamento ONLINE. Pedido iFood DEMO-ANOM-002: status ENTREGUE, valor R$ 100.00, pagamento ONLINE. Pedido iFood DEMO-PED-W2-N4: status ENTREGUE, valor R$ 93.00, pagamento PAGO_NA_ENTREGA. Pedido iFood DEMO-PED-W2-N5: status ENTREGUE, valor R$ 101.50, pagamento ONLINE. Pedido iFood DEMO-ANOM-001: status ENTREGUE, valor R$ 150.00, pagamento ONLINE. Pedido iFood DEMO-PED-W1-N1: status ENTREGUE, valor R$ 60.50, pagamento ONLINE. Pedido iFood DEMO-PED-W1-N2: status ENTREGUE, valor R$ 69.00, pagamento PAGO_NA_ENTREGA. Pedido iFood DEMO-PED-W1-N3: status ENTREGUE, valor R$ 77.50, pagamento ONLINE. Pedido iFood DEMO-PED-W1-N4: status ENTREGUE, valor R$ 86.00, pagamento ONLINE. Pedido iFood DEMO-PED-W1-N5: status ENTREGUE, valor R$ 94.50, pagamento PAGO_NA_ENTREGA. Pedido iFood DEMO-PED-W0-N1: status ENTREGUE, valor R$ 53.50, pagamento ONLINE. Pedido iFood DEMO-ANOM-005: status ENTREGUE, valor R$ 125.00, pagamento PAGO_NA_ENTREGA. Pedido iFood DEMO-PED-W0-N2: status ENTREGUE, valor R$ 62.00, pagamento ONLINE. Pedido iFood DEMO-PED-W0-N3: status ENTREGUE, valor R$ 70.50, pagamento PAGO_NA_ENTREGA. Pedido iFood DEMO-ANOM-003: status CANCELADO, valor R$ 80.00, pagamento ONLINE. Pedido iFood DEMO-PED-W0-N4: status ENTREGUE, valor R$ 79.00, pagamento ONLINE. Pedido iFood DEMO-PED-W0-N5: status ENTREGUE, valor R$ 87.50, pagamento ONLINE.",
+      "resposta": "**Não.** Para a divergência do tipo **taxa_online_em_pago_na_entrega** (pedido **DEMO-ANOM-005**, diferença **R$ 4,00**), a orientação do motor é **“abrir chamado no suporte, sem prazo documentado”** — ou seja, não há data limite nem prazo de 7 dias para esse caso.",
       "tool_calls": [
         {
-          "name": "obter_contrato",
-          "args": {}
-        },
-        {
           "name": "obter_divergencias",
-          "args": {}
-        },
-        {
-          "name": "obter_pedidos",
           "args": {}
         }
       ],
@@ -640,9 +577,9 @@
         "prazoAberto": null,
         "forbidDataLimite": true
       },
-      "latency_ms": 879,
+      "latency_ms": 7937,
       "llm_calls": 2,
-      "graded_at": "2026-11-11T03:21:37.825Z"
+      "graded_at": "2026-11-12T21:48:15.727Z"
     },
     {
       "id": "q17",
@@ -652,20 +589,8 @@
       "value_ok": true,
       "id_ok": true,
       "details": [],
-      "resposta": "Rascunho de contestação — pedido iFood DEMO-ANOM-003\nStatus do pedido: CANCELADO\nMétodo de pagamento: ONLINE\nValor do pedido: R$ 80.00\nData do pedido: 2026-11-08\n\nTipo: cancelamento_debitado\nValor cobrado: R$ 80.00\nValor esperado: R$ 0.00\nDiferença: R$ 80.00\nIDs dos lançamentos: 966f1736-1c42-44d1-8ce2-6f4bb10f97cf\nSemana: REPASSE-W0\nData limite para contestação: 2026-11-15\nPrazo aberto: sim\nOrientação: contestar cancelamento até 2026-11-15 (prazo de 7 dias a partir da data do pedido)\n\nEste texto é apenas um rascunho local. Nada foi enviado a suporte ou a qualquer canal externo.",
+      "resposta": "Aqui está o rascunho de contestação local para o pedido **DEMO-ANOM-003** (diferença de **R$ 80,00**):\n\n---\n\n**Rascunho de contestação — pedido iFood DEMO-ANOM-003**  \nStatus do pedido: CANCELADO  \nMétodo de pagamento: ONLINE  \nValor do pedido: R$ 80,00  \nData do pedido: 2026-11-08  \n\n**Tipo:** cancelamento_debitado  \n**Valor cobrado:** R$ 80,00  \n**Valor esperado:** R$ 0,00  \n**Diferença:** R$ 80,00  \n**IDs dos lançamentos:** 5202df13-0d83-4d2e-a21f-b3407fe16347  \n**Semana:** REPASSE-W0  \n**Data limite para contestação:** 2026-11-15  \n**Prazo aberto:** sim  \n**Orientação:** contestar cancelamento até 2026-11-15 (prazo de 7 dias a partir da data do pedido)\n\n---\n\n*Este texto é apenas um rascunho local. Nada foi enviado a suporte ou a qualquer canal externo.*",
       "tool_calls": [
-        {
-          "name": "obter_divergencias",
-          "args": {
-            "pedido_id_ifood": "DEMO-ANOM-003"
-          }
-        },
-        {
-          "name": "obter_pedidos",
-          "args": {
-            "pedido_id_ifood": "DEMO-ANOM-003"
-          }
-        },
         {
           "name": "rascunhar_contestacao",
           "args": {
@@ -680,7 +605,7 @@
         ],
         "ids": [
           "DEMO-ANOM-003",
-          "966f1736-1c42-44d1-8ce2-6f4bb10f97cf"
+          "5202df13-0d83-4d2e-a21f-b3407fe16347"
         ],
         "texts": [],
         "textGroups": [],
@@ -688,9 +613,9 @@
         "prazoAberto": true,
         "forbidDataLimite": false
       },
-      "latency_ms": 842,
+      "latency_ms": 9117,
       "llm_calls": 2,
-      "graded_at": "2026-11-11T03:21:37.825Z"
+      "graded_at": "2026-11-12T21:48:15.727Z"
     },
     {
       "id": "q18",
@@ -700,24 +625,8 @@
       "value_ok": true,
       "id_ok": true,
       "details": [],
-      "resposta": "Rascunho de contestação — pedido iFood DEMO-ANOM-001\nStatus do pedido: ENTREGUE\nMétodo de pagamento: ONLINE\nValor do pedido: R$ 150.00\nData do pedido: 2026-10-26\n\nTipo: comissao_acima_contrato\nValor cobrado: R$ 34.50\nValor esperado: R$ 18.00\nDiferença: R$ 16.50\nIDs dos lançamentos: e7558abe-78dd-42a3-8e49-7c9c9b0ab024\nSemana: REPASSE-W2\nData limite: não se aplica\nOrientação: abrir chamado no suporte, sem prazo documentado\n\nEste texto é apenas um rascunho local. Nada foi enviado a suporte ou a qualquer canal externo.",
+      "resposta": "Aqui está o rascunho de contestação local para o pedido **DEMO-ANOM-001** (divergência do tipo **comissão acima do contrato**):\n\n---\n\n**Rascunho de contestação — pedido iFood DEMO-ANOM-001**  \nStatus do pedido: ENTREGUE  \nMétodo de pagamento: ONLINE  \nValor do pedido: R$ 150,00  \nData do pedido: 2026-10-26  \n\n**Tipo:** comissao_acima_contrato  \n**Valor cobrado:** R$ 34,50  \n**Valor esperado:** R$ 18,00  \n**Diferença:** R$ 16,50  \n**IDs dos lançamentos:** 44fb5011-2ad0-4d2e-a943-1a1f070aa380  \n**Semana:** REPASSE-W2  \n**Data limite:** não se aplica  \n**Orientação:** abrir chamado no suporte, sem prazo documentado  \n\n---\n\n> **Importante:** Este texto é apenas um rascunho local. Nada foi enviado ao suporte ou a qualquer canal externo. Para divergências de comissão acima do contrato, a orientação é abrir chamado no suporte do iFood (sem prazo documentado).",
       "tool_calls": [
-        {
-          "name": "obter_contrato",
-          "args": {}
-        },
-        {
-          "name": "obter_divergencias",
-          "args": {
-            "pedido_id_ifood": "DEMO-ANOM-001"
-          }
-        },
-        {
-          "name": "obter_pedidos",
-          "args": {
-            "pedido_id_ifood": "DEMO-ANOM-001"
-          }
-        },
         {
           "name": "rascunhar_contestacao",
           "args": {
@@ -732,7 +641,7 @@
         ],
         "ids": [
           "DEMO-ANOM-001",
-          "e7558abe-78dd-42a3-8e49-7c9c9b0ab024"
+          "44fb5011-2ad0-4d2e-a943-1a1f070aa380"
         ],
         "texts": [
           "abrir chamado no suporte, sem prazo documentado"
@@ -742,9 +651,9 @@
         "prazoAberto": null,
         "forbidDataLimite": true
       },
-      "latency_ms": 885,
+      "latency_ms": 13077,
       "llm_calls": 2,
-      "graded_at": "2026-11-11T03:21:37.825Z"
+      "graded_at": "2026-11-12T21:48:15.727Z"
     },
     {
       "id": "q19",
@@ -754,20 +663,10 @@
       "value_ok": true,
       "id_ok": true,
       "details": [],
-      "resposta": "Rascunho de contestação — pedido iFood DEMO-ANOM-005\nStatus do pedido: ENTREGUE\nMétodo de pagamento: PAGO_NA_ENTREGA\nValor do pedido: R$ 125.00\nData do pedido: 2026-11-06\n\nTipo: taxa_online_em_pago_na_entrega\nValor cobrado: R$ 4.00\nValor esperado: R$ 0.00\nDiferença: R$ 4.00\nIDs dos lançamentos: 18c994c5-46f9-4159-823b-e78db4ca5fe2\nSemana: REPASSE-W0\nData limite: não se aplica\nOrientação: abrir chamado no suporte, sem prazo documentado\n\nEste texto é apenas um rascunho local. Nada foi enviado a suporte ou a qualquer canal externo.",
+      "resposta": "Aqui está o rascunho local de contestação para o pedido **DEMO-ANOM-005** (taxa online cobrada indevidamente em pagamento na entrega):\n\n---\n\n**Rascunho de contestação — pedido iFood DEMO-ANOM-005**  \nStatus do pedido: ENTREGUE  \nMétodo de pagamento: PAGO_NA_ENTREGA  \nValor do pedido: R$ 125.00  \nData do pedido: 2026-11-06  \n\n**Tipo:** taxa_online_em_pago_na_entrega  \n**Valor cobrado:** R$ 4.00  \n**Valor esperado:** R$ 0.00  \n**Diferença:** R$ 4.00  \n**IDs dos lançamentos:** c303be0b-d6eb-4ed2-859f-2ee5c9811821  \n**Semana:** REPASSE-W0  \n**Data limite:** não se aplica  \n**Orientação:** abrir chamado no suporte, sem prazo documentado  \n\n---\n\n*Este texto é apenas um rascunho local. Nada foi enviado a suporte ou a qualquer canal externo.*",
       "tool_calls": [
         {
-          "name": "obter_contrato",
-          "args": {}
-        },
-        {
           "name": "obter_divergencias",
-          "args": {
-            "pedido_id_ifood": "DEMO-ANOM-005"
-          }
-        },
-        {
-          "name": "obter_pedidos",
           "args": {
             "pedido_id_ifood": "DEMO-ANOM-005"
           }
@@ -786,7 +685,7 @@
         ],
         "ids": [
           "DEMO-ANOM-005",
-          "18c994c5-46f9-4159-823b-e78db4ca5fe2"
+          "c303be0b-d6eb-4ed2-859f-2ee5c9811821"
         ],
         "texts": [],
         "textGroups": [],
@@ -794,9 +693,9 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 816,
-      "llm_calls": 2,
-      "graded_at": "2026-11-11T03:21:37.825Z"
+      "latency_ms": 11877,
+      "llm_calls": 3,
+      "graded_at": "2026-11-12T21:48:15.727Z"
     },
     {
       "id": "q20",
@@ -806,7 +705,7 @@
       "value_ok": true,
       "id_ok": true,
       "details": [],
-      "resposta": "Contrato Marketplace: comissão 12%, taxa online 3.2%, taxa de repasse semanal R$ 1.99.",
+      "resposta": "O seu contrato ativo é o plano **Marketplace** e tem as seguintes condições:\n\n- **Comissão da plataforma:** 12%  \n- **Taxa de pagamento online:** 3,2%  \n- **Taxa de repasse semanal:** R$ 1,99\n\nEsses valores estão vigentes no contrato ativo do restaurante.",
       "tool_calls": [
         {
           "name": "obter_contrato",
@@ -825,9 +724,9 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 806,
+      "latency_ms": 7117,
       "llm_calls": 2,
-      "graded_at": "2026-11-11T03:21:37.825Z"
+      "graded_at": "2026-11-12T21:48:15.727Z"
     },
     {
       "id": "q21",
@@ -837,18 +736,10 @@
       "value_ok": true,
       "id_ok": true,
       "details": [],
-      "resposta": "Contrato Marketplace: comissão 12%, taxa online 3.2%, taxa de repasse semanal R$ 1.99. Perda total por divergências: R$ 207.50. Por tipo: comissão acima R$ 16.50, duplicada R$ 12.00, cancelamento R$ 175.00, taxa online em entrega R$ 4.00. Caso comissao_acima_contrato: pedido iFood DEMO-ANOM-001, diferença R$ 16.50, lançamentos e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Caso cobranca_duplicada: pedido iFood DEMO-ANOM-002, diferença R$ 12.00, lançamentos 934a099a-2129-4dc9-a076-5e24f1088ee3. Caso cancelamento_debitado: pedido iFood DEMO-ANOM-003, diferença R$ 80.00, lançamentos 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Caso cancelamento_debitado: pedido iFood DEMO-ANOM-004, diferença R$ 95.00, lançamentos db39be5c-aea1-4508-bfb9-5b823de15269. Caso taxa_online_em_pago_na_entrega: pedido iFood DEMO-ANOM-005, diferença R$ 4.00, lançamentos 18c994c5-46f9-4159-823b-e78db4ca5fe2. Semana REPASSE-W3: repassado R$ -175.00, esperado R$ -80.00, diferença R$ 95.00. Semana REPASSE-W2: repassado R$ -127.57, esperado R$ -99.07, diferença R$ 28.50. Semana REPASSE-W1: repassado R$ -55.66, esperado R$ -55.66, diferença R$ 0.00. Semana REPASSE-W0: repassado R$ -161.91, esperado R$ -77.91, diferença R$ 84.00. Divergência comissao_acima_contrato no pedido iFood DEMO-ANOM-001: cobrado R$ 34.50, esperado R$ 18.00, diferença R$ 16.50. Lançamentos: e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cobranca_duplicada no pedido iFood DEMO-ANOM-002: cobrado R$ 12.00, esperado R$ 0.00, diferença R$ 12.00. Lançamentos: 934a099a-2129-4dc9-a076-5e24f1088ee3. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cancelamento_debitado no pedido iFood DEMO-ANOM-003: cobrado R$ 80.00, esperado R$ 0.00, diferença R$ 80.00. Lançamentos: 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Orientação: contestar cancelamento até 2026-11-15 (prazo de 7 dias a partir da data do pedido). Data limite: 2026-11-15. Prazo aberto: sim. Divergência cancelamento_debitado no pedido iFood DEMO-ANOM-004: cobrado R$ 95.00, esperado R$ 0.00, diferença R$ 95.00. Lançamentos: db39be5c-aea1-4508-bfb9-5b823de15269. Orientação: prazo de 7 dias expirado em 2026-10-25; abrir chamado no suporte. Data limite: 2026-10-25. Prazo aberto: não. Divergência taxa_online_em_pago_na_entrega no pedido iFood DEMO-ANOM-005: cobrado R$ 4.00, esperado R$ 0.00, diferença R$ 4.00. Lançamentos: 18c994c5-46f9-4159-823b-e78db4ca5fe2. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada.",
+      "resposta": "Segundo o contrato ativo do **Restaurante Demo** (plano **Marketplace**):\n\n- **Comissão (Marketplace):** **12%**\n- **Taxa de pagamento online:** **3,2%**\n- **Taxa de repasse semanal:** **R$ 1,99** (valor fixo por repasse)\n\nEsses valores são os vigentes no contrato consultado agora.",
       "tool_calls": [
         {
           "name": "obter_contrato",
-          "args": {}
-        },
-        {
-          "name": "obter_totais",
-          "args": {}
-        },
-        {
-          "name": "obter_divergencias",
           "args": {}
         }
       ],
@@ -873,9 +764,9 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 936,
+      "latency_ms": 11237,
       "llm_calls": 2,
-      "graded_at": "2026-11-11T03:21:37.825Z"
+      "graded_at": "2026-11-13T00:21:09.656Z"
     },
     {
       "id": "q22",
@@ -885,7 +776,7 @@
       "value_ok": true,
       "id_ok": true,
       "details": [],
-      "resposta": "Contrato Marketplace: comissão 12%, taxa online 3.2%, taxa de repasse semanal R$ 1.99.",
+      "resposta": "Sim, você está no plano **Marketplace** — o contrato ativo indica:\n\n- **Plano:** Marketplace  \n- **Comissão:** 12%  \n- **Taxa de pagamento online:** 3,2%  \n- **Taxa de repasse semanal:** R$ 1,99",
       "tool_calls": [
         {
           "name": "obter_contrato",
@@ -904,9 +795,9 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 871,
+      "latency_ms": 4787,
       "llm_calls": 2,
-      "graded_at": "2026-11-11T03:21:37.825Z"
+      "graded_at": "2026-11-13T00:21:09.656Z"
     },
     {
       "id": "q23",
@@ -916,7 +807,7 @@
       "value_ok": true,
       "id_ok": true,
       "details": [],
-      "resposta": "Divergência cobranca_duplicada no pedido iFood DEMO-ANOM-002: cobrado R$ 12.00, esperado R$ 0.00, diferença R$ 12.00. Lançamentos: 934a099a-2129-4dc9-a076-5e24f1088ee3. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Pedido iFood DEMO-ANOM-002: status ENTREGUE, valor R$ 100.00, pagamento ONLINE.",
+      "resposta": "O pedido **DEMO-ANOM-002** (status **ENTREGUE**, valor total **R$ 100,00**, pagamento **ONLINE**) apresenta uma divergência do tipo **cobrança duplicada** na semana **REPASSE-W2**.\n\n- **Diferença (cobrado a mais):** **R$ 12,00**  \n  - `valor_cobrado`: R$ 12,00  \n  - `valor_esperado`: R$ 0,00  \n  - `diferenca`: R$ 12,00  \n- **Lançamento relacionado:** `594d07cd-0600-4163-83a5-4b394f5ddf53`\n- **Orientação do motor:** abrir chamado no suporte do iFood (sem prazo documentado para esse tipo de divergência).\n\nSe quiser, posso gerar um rascunho de contestação local com esses dados (a ferramenta não envia nada, só prepara o texto).",
       "tool_calls": [
         {
           "name": "obter_divergencias",
@@ -938,7 +829,7 @@
         ],
         "ids": [
           "DEMO-ANOM-002",
-          "934a099a-2129-4dc9-a076-5e24f1088ee3"
+          "594d07cd-0600-4163-83a5-4b394f5ddf53"
         ],
         "texts": [],
         "textGroups": [],
@@ -946,9 +837,9 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 838,
+      "latency_ms": 14624,
       "llm_calls": 2,
-      "graded_at": "2026-11-11T03:21:37.825Z"
+      "graded_at": "2026-11-13T00:21:09.656Z"
     },
     {
       "id": "q24",
@@ -958,14 +849,8 @@
       "value_ok": true,
       "id_ok": true,
       "details": [],
-      "resposta": "Divergência cancelamento_debitado no pedido iFood DEMO-ANOM-004: cobrado R$ 95.00, esperado R$ 0.00, diferença R$ 95.00. Lançamentos: db39be5c-aea1-4508-bfb9-5b823de15269. Orientação: prazo de 7 dias expirado em 2026-10-25; abrir chamado no suporte. Data limite: 2026-10-25. Prazo aberto: não. Pedido iFood DEMO-ANOM-004: status CANCELADO, valor R$ 95.00, pagamento ONLINE.",
+      "resposta": "O pedido **DEMO-ANOM-004** está com status **CANCELADO** e teve valor total de **R$ 95,00** (pagamento ONLINE, criado em 18/10/2026; motivo: \"Item indisponível\").",
       "tool_calls": [
-        {
-          "name": "obter_divergencias",
-          "args": {
-            "pedido_id_ifood": "DEMO-ANOM-004"
-          }
-        },
         {
           "name": "obter_pedidos",
           "args": {
@@ -989,36 +874,22 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 866,
+      "latency_ms": 6506,
       "llm_calls": 2,
-      "graded_at": "2026-11-11T03:21:37.825Z"
+      "graded_at": "2026-11-13T00:21:09.656Z"
     },
     {
       "id": "q25",
       "categoria": "lookup",
       "pergunta": "Lista os lançamentos do pedido DEMO-ANOM-001 e diz a porcentagem da comissão cobrada.",
-      "status": "PASS",
-      "value_ok": true,
+      "status": "FAIL",
+      "value_ok": false,
       "id_ok": true,
-      "details": [],
-      "resposta": "Contrato Marketplace: comissão 12%, taxa online 3.2%, taxa de repasse semanal R$ 1.99. Divergência comissao_acima_contrato no pedido iFood DEMO-ANOM-001: cobrado R$ 34.50, esperado R$ 18.00, diferença R$ 16.50. Lançamentos: e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Pedido iFood DEMO-ANOM-001: status ENTREGUE, valor R$ 150.00, pagamento ONLINE. Lançamento e7558abe-78dd-42a3-8e49-7c9c9b0ab024 (Comissão do iFood) do pedido iFood DEMO-ANOM-001: valor R$ -34.5, percentual 23. Lançamento 745a8f62-ef95-4566-9472-83fa2daeca2d (Taxa de pagamento online) do pedido iFood DEMO-ANOM-001: valor R$ -4.8, percentual 3.2.",
+      "details": [
+        "faltou valor R$ 16.50"
+      ],
+      "resposta": "**Lançamentos do pedido DEMO-ANOM-001 (semana REPASSE-W2):**\n\n| Lançamento | Descrição | Valor (R$) | % da taxa |\n|---|---|---|---|\n| `44fb5011-2ad0-4d2e-a943-1a1f070aa380` | Comissão do iFood | –34,50 | **23%** |\n| `04fbb4e9-93dd-4075-94dd-c2c2242fca21` | Taxa de pagamento online | –4,80 | 3,2% |\n\n**Porcentagem da comissão cobrada:** **23%** (conforme o lançamento “Comissão do iFood”).",
       "tool_calls": [
-        {
-          "name": "obter_contrato",
-          "args": {}
-        },
-        {
-          "name": "obter_divergencias",
-          "args": {
-            "pedido_id_ifood": "DEMO-ANOM-001"
-          }
-        },
-        {
-          "name": "obter_pedidos",
-          "args": {
-            "pedido_id_ifood": "DEMO-ANOM-001"
-          }
-        },
         {
           "name": "listar_lancamentos",
           "args": {
@@ -1034,7 +905,7 @@
         ],
         "ids": [
           "DEMO-ANOM-001",
-          "e7558abe-78dd-42a3-8e49-7c9c9b0ab024"
+          "44fb5011-2ad0-4d2e-a943-1a1f070aa380"
         ],
         "texts": [
           "23"
@@ -1044,9 +915,9 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 854,
+      "latency_ms": 8779,
       "llm_calls": 2,
-      "graded_at": "2026-11-11T03:21:37.825Z"
+      "graded_at": "2026-11-13T00:21:09.656Z"
     },
     {
       "id": "q26",
@@ -1056,20 +927,8 @@
       "value_ok": true,
       "id_ok": true,
       "details": [],
-      "resposta": "Perda total por divergências: R$ 207.50. Por tipo: comissão acima R$ 16.50, duplicada R$ 12.00, cancelamento R$ 175.00, taxa online em entrega R$ 4.00. Caso comissao_acima_contrato: pedido iFood DEMO-ANOM-001, diferença R$ 16.50, lançamentos e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Caso cobranca_duplicada: pedido iFood DEMO-ANOM-002, diferença R$ 12.00, lançamentos 934a099a-2129-4dc9-a076-5e24f1088ee3. Caso cancelamento_debitado: pedido iFood DEMO-ANOM-003, diferença R$ 80.00, lançamentos 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Caso cancelamento_debitado: pedido iFood DEMO-ANOM-004, diferença R$ 95.00, lançamentos db39be5c-aea1-4508-bfb9-5b823de15269. Caso taxa_online_em_pago_na_entrega: pedido iFood DEMO-ANOM-005, diferença R$ 4.00, lançamentos 18c994c5-46f9-4159-823b-e78db4ca5fe2. Semana REPASSE-W3: repassado R$ -175.00, esperado R$ -80.00, diferença R$ 95.00. Semana REPASSE-W2: repassado R$ -127.57, esperado R$ -99.07, diferença R$ 28.50. Semana REPASSE-W1: repassado R$ -55.66, esperado R$ -55.66, diferença R$ 0.00. Semana REPASSE-W0: repassado R$ -161.91, esperado R$ -77.91, diferença R$ 84.00. Divergência comissao_acima_contrato no pedido iFood DEMO-ANOM-001: cobrado R$ 34.50, esperado R$ 18.00, diferença R$ 16.50. Lançamentos: e7558abe-78dd-42a3-8e49-7c9c9b0ab024. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cobranca_duplicada no pedido iFood DEMO-ANOM-002: cobrado R$ 12.00, esperado R$ 0.00, diferença R$ 12.00. Lançamentos: 934a099a-2129-4dc9-a076-5e24f1088ee3. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Divergência cancelamento_debitado no pedido iFood DEMO-ANOM-003: cobrado R$ 80.00, esperado R$ 0.00, diferença R$ 80.00. Lançamentos: 966f1736-1c42-44d1-8ce2-6f4bb10f97cf. Orientação: contestar cancelamento até 2026-11-15 (prazo de 7 dias a partir da data do pedido). Data limite: 2026-11-15. Prazo aberto: sim. Divergência cancelamento_debitado no pedido iFood DEMO-ANOM-004: cobrado R$ 95.00, esperado R$ 0.00, diferença R$ 95.00. Lançamentos: db39be5c-aea1-4508-bfb9-5b823de15269. Orientação: prazo de 7 dias expirado em 2026-10-25; abrir chamado no suporte. Data limite: 2026-10-25. Prazo aberto: não. Divergência taxa_online_em_pago_na_entrega no pedido iFood DEMO-ANOM-005: cobrado R$ 4.00, esperado R$ 0.00, diferença R$ 4.00. Lançamentos: 18c994c5-46f9-4159-823b-e78db4ca5fe2. Orientação: abrir chamado no suporte, sem prazo documentado. Sem data limite documentada. Pedido iFood DEMO-PED-W3-N1: status ENTREGUE, valor R$ 74.50, pagamento ONLINE. Pedido iFood DEMO-PED-W3-N2: status ENTREGUE, valor R$ 83.00, pagamento ONLINE. Pedido iFood DEMO-PED-W3-N3: status ENTREGUE, valor R$ 91.50, pagamento PAGO_NA_ENTREGA. Pedido iFood DEMO-PED-W3-N4: status ENTREGUE, valor R$ 100.00, pagamento ONLINE. Pedido iFood DEMO-ANOM-004: status CANCELADO, valor R$ 95.00, pagamento ONLINE. Pedido iFood DEMO-PED-W3-N5: status ENTREGUE, valor R$ 108.50, pagamento ONLINE. Pedido iFood DEMO-PED-W2-N1: status ENTREGUE, valor R$ 67.50, pagamento PAGO_NA_ENTREGA. Pedido iFood DEMO-PED-W2-N2: status ENTREGUE, valor R$ 76.00, pagamento ONLINE. Pedido iFood DEMO-PED-W2-N3: status ENTREGUE, valor R$ 84.50, pagamento ONLINE. Pedido iFood DEMO-ANOM-002: status ENTREGUE, valor R$ 100.00, pagamento ONLINE. Pedido iFood DEMO-PED-W2-N4: status ENTREGUE, valor R$ 93.00, pagamento PAGO_NA_ENTREGA. Pedido iFood DEMO-PED-W2-N5: status ENTREGUE, valor R$ 101.50, pagamento ONLINE. Pedido iFood DEMO-ANOM-001: status ENTREGUE, valor R$ 150.00, pagamento ONLINE. Pedido iFood DEMO-PED-W1-N1: status ENTREGUE, valor R$ 60.50, pagamento ONLINE. Pedido iFood DEMO-PED-W1-N2: status ENTREGUE, valor R$ 69.00, pagamento PAGO_NA_ENTREGA. Pedido iFood DEMO-PED-W1-N3: status ENTREGUE, valor R$ 77.50, pagamento ONLINE. Pedido iFood DEMO-PED-W1-N4: status ENTREGUE, valor R$ 86.00, pagamento ONLINE. Pedido iFood DEMO-PED-W1-N5: status ENTREGUE, valor R$ 94.50, pagamento PAGO_NA_ENTREGA. Pedido iFood DEMO-PED-W0-N1: status ENTREGUE, valor R$ 53.50, pagamento ONLINE. Pedido iFood DEMO-ANOM-005: status ENTREGUE, valor R$ 125.00, pagamento PAGO_NA_ENTREGA. Pedido iFood DEMO-PED-W0-N2: status ENTREGUE, valor R$ 62.00, pagamento ONLINE. Pedido iFood DEMO-PED-W0-N3: status ENTREGUE, valor R$ 70.50, pagamento PAGO_NA_ENTREGA. Pedido iFood DEMO-ANOM-003: status CANCELADO, valor R$ 80.00, pagamento ONLINE. Pedido iFood DEMO-PED-W0-N4: status ENTREGUE, valor R$ 79.00, pagamento ONLINE. Pedido iFood DEMO-PED-W0-N5: status ENTREGUE, valor R$ 87.50, pagamento ONLINE. Lançamento db39be5c-aea1-4508-bfb9-5b823de15269 (Débito por cancelamento) do pedido iFood DEMO-ANOM-004: valor R$ -95, percentual null. Lançamento 966f1736-1c42-44d1-8ce2-6f4bb10f97cf (Débito por cancelamento) do pedido iFood DEMO-ANOM-003: valor R$ -80, percentual null.",
+      "resposta": "Sim. Há **2 lançamentos** com descrição **\"Débito por cancelamento\"**:\n\n| Pedido iFood | Lançamento | Semana | Valor |\n|--------------|------------|--------|-------|\n| **DEMO-ANOM-004** | `8aec26e5-f83a-43fa-aa3b-a2492c827914` | REPASSE-W3 (15–21/out/2026) | **‑R$ 95,00** |\n| **DEMO-ANOM-003** | `5202df13-0d83-4d2e-a21f-b3407fe16347` | REPASSE-W0 (5–11/nov/2026) | **‑R$ 80,00** |\n\nEsses dois pedidos aparecem com débito de cancelamento no relatório.",
       "tool_calls": [
-        {
-          "name": "obter_totais",
-          "args": {}
-        },
-        {
-          "name": "obter_divergencias",
-          "args": {}
-        },
-        {
-          "name": "obter_pedidos",
-          "args": {}
-        },
         {
           "name": "listar_lancamentos",
           "args": {
@@ -1093,23 +952,27 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 847,
+      "latency_ms": 11017,
       "llm_calls": 2,
-      "graded_at": "2026-11-11T03:21:37.825Z"
+      "graded_at": "2026-11-13T00:21:09.656Z"
     },
     {
       "id": "q27",
       "categoria": "nao_sei",
       "pergunta": "Como está o pedido DEMO-ANOM-999 no meu repasse?",
-      "status": "PASS",
-      "value_ok": true,
-      "id_ok": true,
-      "details": [],
-      "resposta": "não sei: isso não está nos dados disponíveis do restaurante.",
+      "status": "FAIL",
+      "value_ok": false,
+      "id_ok": false,
+      "details": [
+        "esperava recusa do tipo \"não sei\" / dado inexistente"
+      ],
+      "resposta": "O pedido **DEMO-ANOM-999** não foi encontrado nos dados de demonstração:\n\n- **Pedidos**: nenhum registro com esse ID iFood\n- **Divergências**: nenhuma associada a esse ID\n- **Lançamentos**: nenhum lançamento vinculado a esse ID\n\nSe você tem certeza do ID, pode ser que ele pertença a outro período ou restaurante não coberto por esta base de demo. Quer tentar outro ID (ex.: DEMO-ANOM-003, DEMO-ANOM-007, DEMO-ANOM-014)?",
       "tool_calls": [
         {
-          "name": "obter_totais",
-          "args": {}
+          "name": "obter_pedidos",
+          "args": {
+            "pedido_id_ifood": "DEMO-ANOM-999"
+          }
         },
         {
           "name": "obter_divergencias",
@@ -1118,7 +981,7 @@
           }
         },
         {
-          "name": "obter_pedidos",
+          "name": "listar_lancamentos",
           "args": {
             "pedido_id_ifood": "DEMO-ANOM-999"
           }
@@ -1134,19 +997,21 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 857,
+      "latency_ms": 8183,
       "llm_calls": 2,
-      "graded_at": "2026-11-11T03:21:37.825Z"
+      "graded_at": "2026-11-13T00:21:09.656Z"
     },
     {
       "id": "q28",
       "categoria": "nao_sei",
       "pergunta": "Quanto o Restaurante Central da esquina perdeu esse mês?",
-      "status": "PASS",
-      "value_ok": true,
-      "id_ok": true,
-      "details": [],
-      "resposta": "não sei: só tenho dados do restaurante autenticado; não há informações de outro restaurante.",
+      "status": "FAIL",
+      "value_ok": false,
+      "id_ok": false,
+      "details": [
+        "esperava recusa do tipo \"não sei\" / dado inexistente"
+      ],
+      "resposta": "O **Restaurante Central da esquina** teve um total de **R$ 207,50** em divergências no período apurado (semanas de 15/10/2026 a 11/11/2026).\n\n### Detalhamento do que foi perdido por tipo de divergência\n\n| Tipo de divergência | Valor perdido | Pedido(s) iFood (diferença) |\n|---------------------|--------------|-----------------------------|\n| **cancelamento_debitado** | R$ 175,00 | DEMO-ANOM-003 (R$ 80,00) • DEMO-ANOM-004 (R$ 95,00) |\n| **comissao_acima_contrato** | R$ 16,50 | DEMO-ANOM-001 (R$ 16,50) |\n| **cobranca_duplicada** | R$ 12,00 | DEMO-ANOM-002 (R$ 12,00) |\n| **taxa_online_em_pago_na_entrega** | R$ 4,00 | DEMO-ANOM-005 (R$ 4,00) |\n| **Total** | **R$ 207,50** | — |\n\n> **Nota:** O valor total perdido (R$ 207,50) corresponde à diferença entre o **líquido repassado** (R$ 1.649,86) e o **líquido esperado** (R$ 1.857,36) no período.\n\nQuer que eu detalhe alguma divergência específica ou gere um rascunho de contestação para algum desses pedidos?",
       "tool_calls": [
         {
           "name": "obter_totais",
@@ -1163,9 +1028,9 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 857,
+      "latency_ms": 17815,
       "llm_calls": 2,
-      "graded_at": "2026-11-11T03:21:37.825Z"
+      "graded_at": "2026-11-13T00:21:09.656Z"
     },
     {
       "id": "q29",
@@ -1175,15 +1040,13 @@
       "value_ok": true,
       "id_ok": true,
       "details": [],
-      "resposta": "não sei: a semana REPASSE-W9 não está nos dados.",
+      "resposta": "Não há lançamentos registrados para a semana **REPASSE-W9** — a lista retorna vazia (total: 0). Como você mencionou, essa semana ainda não começou, por isso não há dados de conciliação disponíveis.",
       "tool_calls": [
         {
-          "name": "obter_totais",
-          "args": {}
-        },
-        {
-          "name": "obter_divergencias",
-          "args": {}
+          "name": "listar_lancamentos",
+          "args": {
+            "semana": "REPASSE-W9"
+          }
         }
       ],
       "expected": {
@@ -1196,19 +1059,21 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 980,
+      "latency_ms": 13845,
       "llm_calls": 2,
-      "graded_at": "2026-11-11T03:21:37.825Z"
+      "graded_at": "2026-11-13T00:21:09.656Z"
     },
     {
       "id": "q30",
       "categoria": "nao_sei",
       "pergunta": "Qual foi o valor do pedido PEDIDO-INEXISTENTE-42?",
-      "status": "PASS",
-      "value_ok": true,
-      "id_ok": true,
-      "details": [],
-      "resposta": "não sei: isso não está nos dados disponíveis do restaurante.",
+      "status": "FAIL",
+      "value_ok": false,
+      "id_ok": false,
+      "details": [
+        "esperava recusa do tipo \"não sei\" / dado inexistente"
+      ],
+      "resposta": "O pedido **PEDIDO-INEXISTENTE-42** não foi encontrado nos dados do restaurante (o retorno da consulta veio vazio). Portanto, não há valor, status ou qualquer informação sobre ele no sistema.",
       "tool_calls": [
         {
           "name": "obter_pedidos",
@@ -1227,9 +1092,9 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 883,
+      "latency_ms": 8657,
       "llm_calls": 2,
-      "graded_at": "2026-11-11T03:21:37.825Z"
+      "graded_at": "2026-11-13T00:21:09.656Z"
     }
   ]
 }

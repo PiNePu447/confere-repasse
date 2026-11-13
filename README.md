@@ -62,19 +62,20 @@ A tabela abaixo é atualizada pelo harness (`npm run eval`). Não edite à mão 
 
 | | |
 | --- | --- |
-| Model | `mock-tool-answerer` |
-| Date (UTC) | 2026-11-12T21:56:45.641Z |
-| Run dates (merged) | 2026-11-12T21:56:45.641Z |
-| Pass count | **30/30** |
-| Value accuracy (answered) | 100.0% |
-| ID accuracy (answered) | 100.0% |
-| Value accuracy (all 30) | 100.0% |
-| ID accuracy (all 30) | 100.0% |
-| FAIL / ERROR | 0 / 0 |
-| Avg LLM calls / question | 2 |
+| Model | `nvidia/nemotron-3-ultra-550b-a55b:free` |
+| Date (UTC) | 2026-11-13T00:21:09.656Z |
+| Run dates (merged) | 2026-11-12T21:48:15.727Z, 2026-11-13T00:21:09.656Z |
+| Pass count | **26/30** |
+| Value accuracy (answered) | 86.7% |
+| ID accuracy (answered) | 90.0% |
+| Value accuracy (all 30) | 86.7% |
+| ID accuracy (all 30) | 90.0% |
+| FAIL / ERROR | 4 / 0 |
+| Avg LLM calls / question | 2.2 |
 
-_Run with `EVAL_MOCK=1` (tool-based mock LLM). Re-run with `OPENROUTER_API_KEY` for the live model. Partial: `EVAL_ONLY=19-30`._
+_Summary from merged per-question results (this run: `EVAL_ONLY=q08,q11,q12,q13,q14,q21-q30`)._
 <!-- EVAL:END -->
+
 
 Comandos úteis:
 
