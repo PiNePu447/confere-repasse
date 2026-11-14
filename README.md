@@ -63,18 +63,19 @@ A tabela abaixo é atualizada pelo harness (`npm run eval`). Não edite à mão 
 | | |
 | --- | --- |
 | Model | `nvidia/nemotron-3-ultra-550b-a55b:free` |
-| Date (UTC) | 2026-11-13T00:21:09.656Z |
-| Run dates (merged) | 2026-11-12T21:48:15.727Z, 2026-11-13T00:21:09.656Z |
-| Pass count | **26/30** |
-| Value accuracy (answered) | 86.7% |
-| ID accuracy (answered) | 90.0% |
-| Value accuracy (all 30) | 86.7% |
-| ID accuracy (all 30) | 90.0% |
-| FAIL / ERROR | 4 / 0 |
+| Date (UTC) | 2026-11-14T00:36:48.033Z |
+| Run dates (merged) | 2026-11-12T21:48:15.727Z, 2026-11-13T00:21:09.656Z, 2026-11-14T00:36:19.190Z, 2026-11-14T00:36:48.033Z |
+| Pass count | **29/30** |
+| Value accuracy (answered) | 96.7% |
+| ID accuracy (answered) | 100.0% |
+| Value accuracy (all 30) | 96.7% |
+| ID accuracy (all 30) | 100.0% |
+| FAIL / ERROR | 1 / 0 |
 | Avg LLM calls / question | 2.2 |
 
-_Summary from merged per-question results (this run: `EVAL_ONLY=q08,q11,q12,q13,q14,q21-q30`)._
+_Summary from merged per-question results (this run: `EVAL_ONLY=q25,q27,q28`)._
 <!-- EVAL:END -->
+
 
 
 Comandos úteis:

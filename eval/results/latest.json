@@ -1,12 +1,14 @@
 {
-  "generated_at": "2026-11-13T00:21:09.656Z",
-  "today": "2026-11-12",
+  "generated_at": "2026-11-14T00:36:48.033Z",
+  "today": "2026-11-13",
   "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
   "mock": false,
-  "eval_only": "q08,q11,q12,q13,q14,q21-q30",
+  "eval_only": "q25,q27,q28",
   "run_dates": [
     "2026-11-12T21:48:15.727Z",
-    "2026-11-13T00:21:09.656Z"
+    "2026-11-13T00:21:09.656Z",
+    "2026-11-14T00:36:19.190Z",
+    "2026-11-14T00:36:48.033Z"
   ],
   "llm_calls": {
     "total": 66,
@@ -14,17 +16,17 @@
   },
   "totals": {
     "questions": 30,
-    "pass": 26,
-    "fail": 4,
+    "pass": 29,
+    "fail": 1,
     "error": 0,
     "answered": 30
   },
   "accuracy": {
-    "value_answered": 0.8667,
-    "id_answered": 0.9,
-    "value_all_30": 0.8667,
-    "id_all_30": 0.9,
-    "pass_count": 26
+    "value_answered": 0.9667,
+    "id_answered": 1,
+    "value_all_30": 0.9667,
+    "id_all_30": 1,
+    "pass_count": 29
   },
   "results": [
     {
@@ -888,7 +890,7 @@
       "details": [
         "faltou valor R$ 16.50"
       ],
-      "resposta": "**Lançamentos do pedido DEMO-ANOM-001 (semana REPASSE-W2):**\n\n| Lançamento | Descrição | Valor (R$) | % da taxa |\n|---|---|---|---|\n| `44fb5011-2ad0-4d2e-a943-1a1f070aa380` | Comissão do iFood | –34,50 | **23%** |\n| `04fbb4e9-93dd-4075-94dd-c2c2242fca21` | Taxa de pagamento online | –4,80 | 3,2% |\n\n**Porcentagem da comissão cobrada:** **23%** (conforme o lançamento “Comissão do iFood”).",
+      "resposta": "**Lançamentos do pedido DEMO-ANOM-001 (Restaurante Demo)**\n\n| Lançamento | Descrição | Valor (R$) | Percentual da taxa | Semana |\n|------------|-----------|------------|-------------------|--------|\n| `44fb5011-2ad0-4d2e-a943-1a1f070aa380` | Comissão do iFood | -34,50 | **23%** | REPASSE-W2 |\n| `04fbb4e9-93dd-4075-94dd-c2c2242fca21` | Taxa de pagamento online | -4,80 | 3,2% | REPASSE-W2 |\n\n**Porcentagem da comissão cobrada:** **23%** (lançamento `44fb5011-2ad0-4d2e-a943-1a1f070aa380`).",
       "tool_calls": [
         {
           "name": "listar_lancamentos",
@@ -915,9 +917,9 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 8779,
+      "latency_ms": 62548,
       "llm_calls": 2,
-      "graded_at": "2026-11-13T00:21:09.656Z"
+      "graded_at": "2026-11-14T00:36:48.033Z"
     },
     {
       "id": "q26",
@@ -960,22 +962,14 @@
       "id": "q27",
       "categoria": "nao_sei",
       "pergunta": "Como está o pedido DEMO-ANOM-999 no meu repasse?",
-      "status": "FAIL",
-      "value_ok": false,
-      "id_ok": false,
-      "details": [
-        "esperava recusa do tipo \"não sei\" / dado inexistente"
-      ],
-      "resposta": "O pedido **DEMO-ANOM-999** não foi encontrado nos dados de demonstração:\n\n- **Pedidos**: nenhum registro com esse ID iFood\n- **Divergências**: nenhuma associada a esse ID\n- **Lançamentos**: nenhum lançamento vinculado a esse ID\n\nSe você tem certeza do ID, pode ser que ele pertença a outro período ou restaurante não coberto por esta base de demo. Quer tentar outro ID (ex.: DEMO-ANOM-003, DEMO-ANOM-007, DEMO-ANOM-014)?",
+      "status": "PASS",
+      "value_ok": true,
+      "id_ok": true,
+      "details": [],
+      "resposta": "não sei: nenhum pedido ou lançamento encontrado para o ID DEMO-ANOM-999 no restaurante Restaurante Demo.",
       "tool_calls": [
         {
           "name": "obter_pedidos",
-          "args": {
-            "pedido_id_ifood": "DEMO-ANOM-999"
-          }
-        },
-        {
-          "name": "obter_divergencias",
           "args": {
             "pedido_id_ifood": "DEMO-ANOM-999"
           }
@@ -997,21 +991,19 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 8183,
+      "latency_ms": 21808,
       "llm_calls": 2,
-      "graded_at": "2026-11-13T00:21:09.656Z"
+      "graded_at": "2026-11-14T00:36:48.033Z"
     },
     {
       "id": "q28",
       "categoria": "nao_sei",
       "pergunta": "Quanto o Restaurante Central da esquina perdeu esse mês?",
-      "status": "FAIL",
-      "value_ok": false,
-      "id_ok": false,
-      "details": [
-        "esperava recusa do tipo \"não sei\" / dado inexistente"
-      ],
-      "resposta": "O **Restaurante Central da esquina** teve um total de **R$ 207,50** em divergências no período apurado (semanas de 15/10/2026 a 11/11/2026).\n\n### Detalhamento do que foi perdido por tipo de divergência\n\n| Tipo de divergência | Valor perdido | Pedido(s) iFood (diferença) |\n|---------------------|--------------|-----------------------------|\n| **cancelamento_debitado** | R$ 175,00 | DEMO-ANOM-003 (R$ 80,00) • DEMO-ANOM-004 (R$ 95,00) |\n| **comissao_acima_contrato** | R$ 16,50 | DEMO-ANOM-001 (R$ 16,50) |\n| **cobranca_duplicada** | R$ 12,00 | DEMO-ANOM-002 (R$ 12,00) |\n| **taxa_online_em_pago_na_entrega** | R$ 4,00 | DEMO-ANOM-005 (R$ 4,00) |\n| **Total** | **R$ 207,50** | — |\n\n> **Nota:** O valor total perdido (R$ 207,50) corresponde à diferença entre o **líquido repassado** (R$ 1.649,86) e o **líquido esperado** (R$ 1.857,36) no período.\n\nQuer que eu detalhe alguma divergência específica ou gere um rascunho de contestação para algum desses pedidos?",
+      "status": "PASS",
+      "value_ok": true,
+      "id_ok": true,
+      "details": [],
+      "resposta": "não sei: só tenho acesso aos dados do **Restaurante Demo** (restaurante do usuário autenticado). Não possuo informações sobre \"Restaurante Central da esquina\".",
       "tool_calls": [
         {
           "name": "obter_totais",
@@ -1028,9 +1020,9 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 17815,
+      "latency_ms": 32998,
       "llm_calls": 2,
-      "graded_at": "2026-11-13T00:21:09.656Z"
+      "graded_at": "2026-11-14T00:36:48.033Z"
     },
     {
       "id": "q29",
@@ -1067,13 +1059,11 @@
       "id": "q30",
       "categoria": "nao_sei",
       "pergunta": "Qual foi o valor do pedido PEDIDO-INEXISTENTE-42?",
-      "status": "FAIL",
-      "value_ok": false,
-      "id_ok": false,
-      "details": [
-        "esperava recusa do tipo \"não sei\" / dado inexistente"
-      ],
-      "resposta": "O pedido **PEDIDO-INEXISTENTE-42** não foi encontrado nos dados do restaurante (o retorno da consulta veio vazio). Portanto, não há valor, status ou qualquer informação sobre ele no sistema.",
+      "status": "PASS",
+      "value_ok": true,
+      "id_ok": true,
+      "details": [],
+      "resposta": "não sei: nenhum pedido encontrado para o ID PEDIDO-INEXISTENTE-42.",
       "tool_calls": [
         {
           "name": "obter_pedidos",
@@ -1092,9 +1082,9 @@
         "prazoAberto": null,
         "forbidDataLimite": false
       },
-      "latency_ms": 8657,
+      "latency_ms": 7619,
       "llm_calls": 2,
-      "graded_at": "2026-11-13T00:21:09.656Z"
+      "graded_at": "2026-11-14T00:36:19.190Z"
     }
   ]
 }
